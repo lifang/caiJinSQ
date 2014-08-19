@@ -10,12 +10,20 @@
 
 @implementation CJAppDelegate
 
++ (CJAppDelegate *)shareCJAppDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    _rootController = [[CJRootViewController alloc] init];
+    self.window.rootViewController = _rootController;
+    
     return YES;
 }
 

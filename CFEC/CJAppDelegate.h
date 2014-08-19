@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CJRootViewController.h"
+
 @interface CJAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (nonatomic, strong) CJRootViewController *rootController;
+
+
++ (CJAppDelegate *)shareCJAppDelegate;
 
 @end

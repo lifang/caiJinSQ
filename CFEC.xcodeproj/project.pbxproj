@@ -19,6 +19,16 @@
 		771AA7CB19A2E22A005B9AAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771AA7B319A2E22A005B9AAE /* UIKit.framework */; };
 		771AA7D319A2E22A005B9AAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 771AA7D119A2E22A005B9AAE /* InfoPlist.strings */; };
 		771AA7D519A2E22A005B9AAE /* CFECTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7D419A2E22A005B9AAE /* CFECTests.m */; };
+		771AA7E019A2E2B9005B9AAE /* CJRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7DF19A2E2B9005B9AAE /* CJRootViewController.m */; };
+		771AA7E319A2E378005B9AAE /* CJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7E219A2E378005B9AAE /* CJLoginViewController.m */; };
+		771AA7EF19A2E4C0005B9AAE /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7E719A2E4C0005B9AAE /* MMDrawerBarButtonItem.m */; };
+		771AA7F019A2E4C0005B9AAE /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7EA19A2E4C0005B9AAE /* MMDrawerController.m */; };
+		771AA7F119A2E4C0005B9AAE /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7EC19A2E4C0005B9AAE /* MMDrawerVisualState.m */; };
+		771AA7F219A2E4C0005B9AAE /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7EE19A2E4C0005B9AAE /* UIViewController+MMDrawerController.m */; };
+		771AA7F619A2E7C1005B9AAE /* CJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7F519A2E7C1005B9AAE /* CJHomeViewController.m */; };
+		771AA7F919A2E8D4005B9AAE /* CJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7F819A2E8D4005B9AAE /* CJMainViewController.m */; };
+		771AA7FC19A2EA44005B9AAE /* CJLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771AA7FB19A2EA44005B9AAE /* CJLeftViewController.m */; };
+		771AA80119A2F063005B9AAE /* tabbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 771AA80019A2F063005B9AAE /* tabbar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +58,26 @@
 		771AA7D019A2E22A005B9AAE /* CFECTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CFECTests-Info.plist"; sourceTree = "<group>"; };
 		771AA7D219A2E22A005B9AAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		771AA7D419A2E22A005B9AAE /* CFECTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CFECTests.m; sourceTree = "<group>"; };
+		771AA7DE19A2E2B9005B9AAE /* CJRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRootViewController.h; sourceTree = "<group>"; };
+		771AA7DF19A2E2B9005B9AAE /* CJRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRootViewController.m; sourceTree = "<group>"; };
+		771AA7E119A2E378005B9AAE /* CJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJLoginViewController.h; sourceTree = "<group>"; };
+		771AA7E219A2E378005B9AAE /* CJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJLoginViewController.m; sourceTree = "<group>"; };
+		771AA7E619A2E4C0005B9AAE /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		771AA7E719A2E4C0005B9AAE /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		771AA7E819A2E4C0005B9AAE /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		771AA7E919A2E4C0005B9AAE /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		771AA7EA19A2E4C0005B9AAE /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		771AA7EB19A2E4C0005B9AAE /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		771AA7EC19A2E4C0005B9AAE /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		771AA7ED19A2E4C0005B9AAE /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		771AA7EE19A2E4C0005B9AAE /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		771AA7F419A2E7C1005B9AAE /* CJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJHomeViewController.h; sourceTree = "<group>"; };
+		771AA7F519A2E7C1005B9AAE /* CJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJHomeViewController.m; sourceTree = "<group>"; };
+		771AA7F719A2E8D4005B9AAE /* CJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMainViewController.h; sourceTree = "<group>"; };
+		771AA7F819A2E8D4005B9AAE /* CJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMainViewController.m; sourceTree = "<group>"; };
+		771AA7FA19A2EA44005B9AAE /* CJLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJLeftViewController.h; sourceTree = "<group>"; };
+		771AA7FB19A2EA44005B9AAE /* CJLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJLeftViewController.m; sourceTree = "<group>"; };
+		771AA80019A2F063005B9AAE /* tabbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +139,17 @@
 			children = (
 				771AA7BE19A2E22A005B9AAE /* CJAppDelegate.h */,
 				771AA7BF19A2E22A005B9AAE /* CJAppDelegate.m */,
+				771AA7DE19A2E2B9005B9AAE /* CJRootViewController.h */,
+				771AA7DF19A2E2B9005B9AAE /* CJRootViewController.m */,
+				771AA7E119A2E378005B9AAE /* CJLoginViewController.h */,
+				771AA7E219A2E378005B9AAE /* CJLoginViewController.m */,
+				771AA7F719A2E8D4005B9AAE /* CJMainViewController.h */,
+				771AA7F819A2E8D4005B9AAE /* CJMainViewController.m */,
+				771AA7FA19A2EA44005B9AAE /* CJLeftViewController.h */,
+				771AA7FB19A2EA44005B9AAE /* CJLeftViewController.m */,
+				771AA7F319A2E79A005B9AAE /* Controller */,
+				771AA7E419A2E4B6005B9AAE /* Library */,
+				771AA7FD19A2EFAA005B9AAE /* Image */,
 				771AA7C119A2E22A005B9AAE /* Images.xcassets */,
 				771AA7B619A2E22A005B9AAE /* Supporting Files */,
 			);
@@ -142,6 +183,47 @@
 				771AA7D119A2E22A005B9AAE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		771AA7E419A2E4B6005B9AAE /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				771AA7E519A2E4C0005B9AAE /* MMDrawerController */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		771AA7E519A2E4C0005B9AAE /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				771AA7E619A2E4C0005B9AAE /* MMDrawerBarButtonItem.h */,
+				771AA7E719A2E4C0005B9AAE /* MMDrawerBarButtonItem.m */,
+				771AA7E819A2E4C0005B9AAE /* MMDrawerController+Subclass.h */,
+				771AA7E919A2E4C0005B9AAE /* MMDrawerController.h */,
+				771AA7EA19A2E4C0005B9AAE /* MMDrawerController.m */,
+				771AA7EB19A2E4C0005B9AAE /* MMDrawerVisualState.h */,
+				771AA7EC19A2E4C0005B9AAE /* MMDrawerVisualState.m */,
+				771AA7ED19A2E4C0005B9AAE /* UIViewController+MMDrawerController.h */,
+				771AA7EE19A2E4C0005B9AAE /* UIViewController+MMDrawerController.m */,
+			);
+			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
+		771AA7F319A2E79A005B9AAE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				771AA7F419A2E7C1005B9AAE /* CJHomeViewController.h */,
+				771AA7F519A2E7C1005B9AAE /* CJHomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		771AA7FD19A2EFAA005B9AAE /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				771AA80019A2F063005B9AAE /* tabbar@2x.png */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +304,7 @@
 			files = (
 				771AA7BA19A2E22A005B9AAE /* InfoPlist.strings in Resources */,
 				771AA7C219A2E22A005B9AAE /* Images.xcassets in Resources */,
+				771AA80119A2F063005B9AAE /* tabbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,8 +323,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				771AA7F919A2E8D4005B9AAE /* CJMainViewController.m in Sources */,
 				771AA7BC19A2E22A005B9AAE /* main.m in Sources */,
+				771AA7E019A2E2B9005B9AAE /* CJRootViewController.m in Sources */,
+				771AA7EF19A2E4C0005B9AAE /* MMDrawerBarButtonItem.m in Sources */,
+				771AA7F219A2E4C0005B9AAE /* UIViewController+MMDrawerController.m in Sources */,
 				771AA7C019A2E22A005B9AAE /* CJAppDelegate.m in Sources */,
+				771AA7F019A2E4C0005B9AAE /* MMDrawerController.m in Sources */,
+				771AA7E319A2E378005B9AAE /* CJLoginViewController.m in Sources */,
+				771AA7F119A2E4C0005B9AAE /* MMDrawerVisualState.m in Sources */,
+				771AA7FC19A2EA44005B9AAE /* CJLeftViewController.m in Sources */,
+				771AA7F619A2E7C1005B9AAE /* CJHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +453,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CFEC/CFEC-Prefix.pch";
 				INFOPLIST_FILE = "CFEC/CFEC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -374,6 +467,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CFEC/CFEC-Prefix.pch";
 				INFOPLIST_FILE = "CFEC/CFEC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
