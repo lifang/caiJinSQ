@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7709E13719A73C6600E11FC6 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7709E13619A73C6600E11FC6 /* back@2x.png */; };
 		771AA7B019A2E22A005B9AAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771AA7AF19A2E22A005B9AAE /* Foundation.framework */; };
 		771AA7B219A2E22A005B9AAE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771AA7B119A2E22A005B9AAE /* CoreGraphics.framework */; };
 		771AA7B419A2E22A005B9AAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771AA7B319A2E22A005B9AAE /* UIKit.framework */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7709E13619A73C6600E11FC6 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		771AA7AC19A2E22A005B9AAE /* CFEC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CFEC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		771AA7AF19A2E22A005B9AAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		771AA7B119A2E22A005B9AAE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -221,6 +223,7 @@
 		771AA7FD19A2EFAA005B9AAE /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				7709E13619A73C6600E11FC6 /* back@2x.png */,
 				771AA80019A2F063005B9AAE /* tabbar@2x.png */,
 			);
 			path = Image;
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				771AA7BA19A2E22A005B9AAE /* InfoPlist.strings in Resources */,
+				7709E13719A73C6600E11FC6 /* back@2x.png in Resources */,
 				771AA7C219A2E22A005B9AAE /* Images.xcassets in Resources */,
 				771AA80119A2F063005B9AAE /* tabbar@2x.png in Resources */,
 			);
@@ -532,6 +536,7 @@
 				771AA7DA19A2E22A005B9AAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		771AA7DB19A2E22A005B9AAE /* Build configuration list for PBXNativeTarget "CFECTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +545,7 @@
 				771AA7DD19A2E22A005B9AAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

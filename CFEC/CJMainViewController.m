@@ -15,6 +15,11 @@
 
 @implementation CJMainViewController
 
+- (void)dealloc {
+    NSLog(@"main dealloc");
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,6 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tabBar.barTintColor = [UIColor blackColor];
     [self initControllers];
 }
 
@@ -44,6 +50,8 @@
     vc1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
                                                    image:[UIImage imageNamed:@"tabbar.png"]
                                                      tag:1];
+    [vc1.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -30)];
+    [vc1.tabBarItem setImageInsets:UIEdgeInsetsMake(15, 0, -15, 0)];
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
     
     CJHomeViewController *vc2 = [[CJHomeViewController alloc] init];
