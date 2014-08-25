@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CJLoginViewController : UIViewController
-
+@interface CJLoginViewController : UIViewController<UITextFieldDelegate>
+@property (nonatomic, strong) UITextField *usernameField;
+@property (nonatomic, strong) UITextField *passwordField;
+@property (nonatomic, assign) BOOL isShow; //判断登陆界面是否显示
 @end

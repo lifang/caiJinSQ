@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CJHomeViewController : UIViewController
-
+@interface CJHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) UITableView *mainTable;
 @end

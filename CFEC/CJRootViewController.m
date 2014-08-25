@@ -10,6 +10,7 @@
 #import "CJLoginViewController.h"
 #import "CJMainViewController.h"
 #import "CJLeftViewController.h"
+#import "CJAppDelegate.h"
 
 @interface CJRootViewController ()
 
@@ -44,6 +45,8 @@
 - (void)setLoginController {
     CJLoginViewController *loginC = [[CJLoginViewController alloc] init];
     _loginNav = [[UINavigationController alloc] initWithRootViewController:loginC];
+    [CJAppDelegate setNavigationBarTinColor:_loginNav];
+
     _loginNav.view.frame = self.view.bounds;
     [self.view addSubview:_loginNav.view];
 }

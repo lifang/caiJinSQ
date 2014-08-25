@@ -3,6 +3,11 @@
 //
 //  The contents of this file are implicitly included at the beginning of every source file.
 //
+//颜色转换浮点型显示
+#define kColor(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+
+//屏幕高度
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #import <Availability.h>
 

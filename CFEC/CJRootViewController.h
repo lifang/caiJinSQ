@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 
 #import "MMDrawerController.h"
+#import "CJLoginViewController.h"
+
 
 @interface CJRootViewController : UIViewController
 
 @property (nonatomic, strong) UINavigationController *loginNav;
+
+@property (nonatomic, strong) CJLoginViewController *loginC;
+
 
 @property (nonatomic, strong) MMDrawerController *navController;
 

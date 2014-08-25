@@ -18,5 +18,5 @@
 
 
 + (CJAppDelegate *)shareCJAppDelegate;
-
++ (void)setNavigationBarTinColor:(UINavigationController *)nav;
 @end
