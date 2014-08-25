@@ -50,6 +50,7 @@
     [seg addSubview:label];
     [self.view addSubview:seg];
     [seg addTarget:self action:@selector(touch:) forControlEvents:UIControlEventValueChanged];
+    NSLog(@"");
 //    seg.selectedSegmentIndex = 0;
     
     UITextField *text = [[UITextField alloc] initWithFrame:CGRectMake(120, 400, 80, 40)];
