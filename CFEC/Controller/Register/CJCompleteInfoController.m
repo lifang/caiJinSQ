@@ -17,9 +17,6 @@
 #import "CJRootViewController.h"
 
 @interface CJCompleteInfoController ()
-{
-    NSArray *arr;
-}
 @end
 
 @implementation CJCompleteInfoController
@@ -38,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    arr = [[NSArray alloc] initWithObjects:@"1",@"2",@"3", nil];
     self.title = @"完善资料";
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];

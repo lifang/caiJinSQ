@@ -8,6 +8,7 @@
 
 #import "CJActivityController.h"
 #import "KxMenu.h"
+#import "CJActivityCell.h"
 @interface CJActivityController ()
 
 @end
@@ -51,7 +52,10 @@
     [_filtrateSegment addTarget:self action:@selector(selectIndex:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_filtrateSegment];
     _activityTable = [[UITableView alloc] initWithFrame:CGRectMake(0 , 104 + 10, self.view.frame.size.width, self.view.frame.size.height - 80) style:UITableViewStyleGrouped];
-    
+    _activityTable.delegate = self;
+    _activityTable.dataSource = self;
+    _activityTable.backgroundColor = [UIColor whiteColor];
+    _activityTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_activityTable];
 }
 -(void)selectIndex:(UISegmentedControl *)segment {
@@ -59,7 +63,6 @@
     NSMutableArray *listArray;
     
     _filtrateSegment.momentary = YES;
-//    _filtrateSegment.momentary = NO;
 
     if (segment.selectedSegmentIndex == 0) {
         NSLog(@"时间");
@@ -84,8 +87,33 @@
     first.foreColor = [UIColor greenColor];
     first.alignment = NSTextAlignmentNatural;
     [KxMenu showMenuInView:self.view fromRect:rect menuItems:listArray];
-
-//    [KxMenu showMenuInView:self.view fromRect:rect menuItems:listArray];
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *ID = @"id";
+    CJActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[CJActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    cell.mainContentLabel.text = @"2014中国财务精英高峰论坛 - 北京站";
+    cell.holdLable.text = @"CFEC主办";
+    cell.spendLabel.text = @"20.000";
+    cell.holdImage.image = [UIImage imageNamed:@"活动1_06@2x.png"];
+    cell.spendImage.image = [UIImage imageNamed:@"活动_03@2x.png"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1;
 }
 /*
 #pragma mark - Navigation

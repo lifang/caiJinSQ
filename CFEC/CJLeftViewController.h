@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CJLeftViewController : UIViewController
-
+@interface CJLeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic, strong) UITableView *listTable;
+@property (nonatomic, strong) UIButton *userHeadImage;
 @end

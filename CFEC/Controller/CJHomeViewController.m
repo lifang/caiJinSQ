@@ -10,6 +10,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "CJCompleteInfoCell.h"
 #import "CJAppDelegate.h"
+#import "CJActivityDetailController.h"
 
 @interface CJHomeViewController ()
 @end
@@ -92,5 +93,10 @@
     headImage.image = [UIImage imageNamed:@"首页_06.png"];
     [headView addSubview:headImage];
     return headView;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CJActivityDetailController *detailControl = [[CJActivityDetailController alloc] init];
+    [self.navigationController pushViewController:detailControl animated:YES];
 }
 @end
