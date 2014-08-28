@@ -62,7 +62,8 @@
     _infoTable.delegate = self;
     _infoTable.dataSource = self;
     _infoTable.backgroundColor = [UIColor whiteColor];
-    _infoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _infoTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _infoTable.separatorInset = UIEdgeInsetsMake(0, -5, 0, 5);
     [self.view addSubview:_infoTable];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

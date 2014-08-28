@@ -55,7 +55,8 @@
     _activityTable.delegate = self;
     _activityTable.dataSource = self;
     _activityTable.backgroundColor = [UIColor whiteColor];
-    _activityTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _activityTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _activityTable.separatorInset = UIEdgeInsetsMake(0, -2, 0, 2);
     [self.view addSubview:_activityTable];
 }
 -(void)selectIndex:(UISegmentedControl *)segment {
@@ -94,7 +95,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 4;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
