@@ -985,12 +985,10 @@
 				771C0E7F19AB07370065D46F /* ASIDownloadCache.m in Sources */,
 				3A7C515219AAFD7C00EBFDE9 /* CJActivityCell.m in Sources */,
 				3A7C512519AAFD0300EBFDE9 /* CJMainViewController.m in Sources */,
-<<<<<<< HEAD
+
 				3A66EED519AF2040007A1558 /* CJEmailshareController.m in Sources */,
 				3A6B8DCC19B01F3800CF7E9E /* CJMyordersController.m in Sources */,
-=======
 				771C0E8119AB07370065D46F /* ASIHTTPRequest.m in Sources */,
->>>>>>> e6c6c7db2d8376d1574dc4dd8883be2c04e45074
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
