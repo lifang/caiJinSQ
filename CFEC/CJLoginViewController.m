@@ -10,8 +10,10 @@
 #import "CJForgotPasswordController.h"
 #import "CJRegisterController.h"
 #import "CJAppDelegate.h"
+#import "CJRequestFormat.h"
+#import "GDataXMLNode.h"
 
-@interface CJLoginViewController ()
+@interface CJLoginViewController ()<ASIHTTPRequestDelegate>
 @property (nonatomic, assign) CGRect focusRect;
 @end
 
@@ -171,6 +173,10 @@
 }
 #pragma mark - 登陆
 -(void)userLogin:(id)sender {
+    [CJRequestFormat loginWithEmail:@"1234444@.com" password:@"123" finished:^(ResponseStatus status,NSString *response) {
+        NSLog(@"%d,%@",status,response);
+    }];
+
     //登陆成功记住密码,根据bool值判断是否要记住密码
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"savePWD"];
@@ -182,7 +188,6 @@
 
     CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
     [rootC showMainController];
-
 }
 
 #pragma mark - 找回密码
