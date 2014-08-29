@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>115C3FBC-BAA6-4E33-AF1E-7DA5B63A5243</string>
+	<string>09A8A1F1-B3C6-472E-B088-A596586A2DE4</string>
 	<key>IDESourceControlProjectName</key>
 	<string>CFEC</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6B05F477-1741-4FC2-88BB-4DCB8FA23371</key>
+		<key>24F83B91-A8A2-4137-A15E-7D0145E18C88</key>
 		<string>ssh://github.com/lifang/caiJinSQ.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CFEC.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6B05F477-1741-4FC2-88BB-4DCB8FA23371</key>
+		<key>24F83B91-A8A2-4137-A15E-7D0145E18C88</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,16 +25,16 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6B05F477-1741-4FC2-88BB-4DCB8FA23371</string>
+	<string>24F83B91-A8A2-4137-A15E-7D0145E18C88</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6B05F477-1741-4FC2-88BB-4DCB8FA23371</string>
+			<string>24F83B91-A8A2-4137-A15E-7D0145E18C88</string>
 			<key>IDESourceControlWCCName</key>
-			<string>caiJinSQ</string>
+			<string>CFEC</string>
 		</dict>
 	</array>
 </dict>
