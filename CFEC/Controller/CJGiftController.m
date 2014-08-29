@@ -7,7 +7,7 @@
 //
 
 #import "CJGiftController.h"
-
+#import "CJAllgiftController.h"
 @interface CJGiftController ()
 @property (nonatomic, strong) UIButton *allGiftBt;//全部礼物
 @property (nonatomic, strong) UIButton *applianceBt;//数码家电
@@ -91,6 +91,8 @@
 }
 #pragma mark -Actions
 -(void)allGiftAction:(id)sender {
+    CJAllgiftController *giftControl = [[CJAllgiftController alloc] init];
+    [self.navigationController pushViewController:giftControl animated:YES];
 }
 -(void)applianceAction:(id)sender {
 }

@@ -7,8 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A49C3F919AF453100FFA307 /* CJAllgiftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3F819AF453100FFA307 /* CJAllgiftController.m */; };
+		3A49C3FC19AF46DF00FFA307 /* CJGiftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3FB19AF46DF00FFA307 /* CJGiftCell.m */; };
 		3A4BCE4919AC2B2C0027C023 /* CJActivityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4BCE4819AC2B2C0027C023 /* CJActivityDetailController.m */; };
 		3A4BCE4B19AC7A090027C023 /* 活动2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4BCE4A19AC7A090027C023 /* 活动2@2x.png */; };
+		3A66EECB19AEC19E007A1558 /* CJPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66EECA19AEC19E007A1558 /* CJPayController.m */; };
+		3A66EECF19AED388007A1558 /* CJAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66EECE19AED388007A1558 /* CJAddressController.m */; };
+		3A66EED519AF2040007A1558 /* CJEmailshareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66EED419AF2040007A1558 /* CJEmailshareController.m */; };
+		3A6B8DC919B0114F00CF7E9E /* CJPersonaldataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DC819B0114F00CF7E9E /* CJPersonaldataController.m */; };
+		3A6B8DCC19B01F3800CF7E9E /* CJMyordersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DCB19B01F3800CF7E9E /* CJMyordersController.m */; };
+		3A6B8DCF19B0272F00CF7E9E /* CJPayedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DCE19B0272F00CF7E9E /* CJPayedCell.m */; };
+		3A6B8DD219B0582600CF7E9E /* CJIntegralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DD119B0582600CF7E9E /* CJIntegralController.m */; };
+		3A6B8DD519B0632A00CF7E9E /* CJContactusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DD419B0632A00CF7E9E /* CJContactusController.m */; };
+		3A6B8DD819B0686600CF7E9E /* CJVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DD719B0686600CF7E9E /* CJVersionController.m */; };
+		3A6B8DDB19B06C5500CF7E9E /* CJTermsofserviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DDA19B06C5500CF7E9E /* CJTermsofserviceController.m */; };
+		3A6B8DDE19B06DA900CF7E9E /* CJAboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DDD19B06DA900CF7E9E /* CJAboutUsController.m */; };
+		3A6B8DE119B06F0600CF7E9E /* CJInboxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DE019B06F0600CF7E9E /* CJInboxController.m */; };
 		3A73E09C19AD89BD00DD8A15 /* CJSupplyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A73E09B19AD89BD00DD8A15 /* CJSupplyController.m */; };
 		3A73E09F19ADA89600DD8A15 /* CJSupplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A73E09E19ADA89600DD8A15 /* CJSupplyCell.m */; };
 		3A7C511F19AAFCC800EBFDE9 /* CJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C511E19AAFCC800EBFDE9 /* CJLoginViewController.m */; };
@@ -113,9 +127,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A49C3F719AF453100FFA307 /* CJAllgiftController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAllgiftController.h; sourceTree = "<group>"; };
+		3A49C3F819AF453100FFA307 /* CJAllgiftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAllgiftController.m; sourceTree = "<group>"; };
+		3A49C3FA19AF46DF00FFA307 /* CJGiftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftCell.h; sourceTree = "<group>"; };
+		3A49C3FB19AF46DF00FFA307 /* CJGiftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGiftCell.m; sourceTree = "<group>"; };
 		3A4BCE4719AC2B2C0027C023 /* CJActivityDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJActivityDetailController.h; sourceTree = "<group>"; };
 		3A4BCE4819AC2B2C0027C023 /* CJActivityDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJActivityDetailController.m; sourceTree = "<group>"; };
 		3A4BCE4A19AC7A090027C023 /* 活动2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "活动2@2x.png"; path = "活动/活动2@2x.png"; sourceTree = "<group>"; };
+		3A66EEC919AEC19E007A1558 /* CJPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPayController.h; sourceTree = "<group>"; };
+		3A66EECA19AEC19E007A1558 /* CJPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPayController.m; sourceTree = "<group>"; };
+		3A66EECD19AED388007A1558 /* CJAddressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAddressController.h; sourceTree = "<group>"; };
+		3A66EECE19AED388007A1558 /* CJAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAddressController.m; sourceTree = "<group>"; };
+		3A66EED319AF2040007A1558 /* CJEmailshareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEmailshareController.h; sourceTree = "<group>"; };
+		3A66EED419AF2040007A1558 /* CJEmailshareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEmailshareController.m; sourceTree = "<group>"; };
+		3A6B8DC719B0114F00CF7E9E /* CJPersonaldataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPersonaldataController.h; sourceTree = "<group>"; };
+		3A6B8DC819B0114F00CF7E9E /* CJPersonaldataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPersonaldataController.m; sourceTree = "<group>"; };
+		3A6B8DCA19B01F3800CF7E9E /* CJMyordersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMyordersController.h; sourceTree = "<group>"; };
+		3A6B8DCB19B01F3800CF7E9E /* CJMyordersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMyordersController.m; sourceTree = "<group>"; };
+		3A6B8DCD19B0272F00CF7E9E /* CJPayedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPayedCell.h; sourceTree = "<group>"; };
+		3A6B8DCE19B0272F00CF7E9E /* CJPayedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPayedCell.m; sourceTree = "<group>"; };
+		3A6B8DD019B0582600CF7E9E /* CJIntegralController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJIntegralController.h; sourceTree = "<group>"; };
+		3A6B8DD119B0582600CF7E9E /* CJIntegralController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJIntegralController.m; sourceTree = "<group>"; };
+		3A6B8DD319B0632A00CF7E9E /* CJContactusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJContactusController.h; sourceTree = "<group>"; };
+		3A6B8DD419B0632A00CF7E9E /* CJContactusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJContactusController.m; sourceTree = "<group>"; };
+		3A6B8DD619B0686600CF7E9E /* CJVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJVersionController.h; sourceTree = "<group>"; };
+		3A6B8DD719B0686600CF7E9E /* CJVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJVersionController.m; sourceTree = "<group>"; };
+		3A6B8DD919B06C5500CF7E9E /* CJTermsofserviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJTermsofserviceController.h; sourceTree = "<group>"; };
+		3A6B8DDA19B06C5500CF7E9E /* CJTermsofserviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJTermsofserviceController.m; sourceTree = "<group>"; };
+		3A6B8DDC19B06DA900CF7E9E /* CJAboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAboutUsController.h; sourceTree = "<group>"; };
+		3A6B8DDD19B06DA900CF7E9E /* CJAboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAboutUsController.m; sourceTree = "<group>"; };
+		3A6B8DDF19B06F0600CF7E9E /* CJInboxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJInboxController.h; sourceTree = "<group>"; };
+		3A6B8DE019B06F0600CF7E9E /* CJInboxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJInboxController.m; sourceTree = "<group>"; };
 		3A73E09A19AD89BD00DD8A15 /* CJSupplyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSupplyController.h; sourceTree = "<group>"; };
 		3A73E09B19AD89BD00DD8A15 /* CJSupplyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSupplyController.m; sourceTree = "<group>"; };
 		3A73E09D19ADA89600DD8A15 /* CJSupplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSupplyCell.h; sourceTree = "<group>"; };
@@ -264,6 +306,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A49C3F619AF451000FFA307 /* 礼品 */ = {
+			isa = PBXGroup;
+			children = (
+				3A49C3F719AF453100FFA307 /* CJAllgiftController.h */,
+				3A49C3F819AF453100FFA307 /* CJAllgiftController.m */,
+			);
+			path = "礼品";
+			sourceTree = "<group>";
+		};
 		3A4BCE4619AC2AFB0027C023 /* 主页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,13 +322,52 @@
 				3A4BCE4819AC2B2C0027C023 /* CJActivityDetailController.m */,
 				3A73E09A19AD89BD00DD8A15 /* CJSupplyController.h */,
 				3A73E09B19AD89BD00DD8A15 /* CJSupplyController.m */,
+				3A66EEC919AEC19E007A1558 /* CJPayController.h */,
+				3A66EECA19AEC19E007A1558 /* CJPayController.m */,
 			);
 			path = "主页";
+			sourceTree = "<group>";
+		};
+		3A66EECC19AED344007A1558 /* 分享 */ = {
+			isa = PBXGroup;
+			children = (
+				3A66EECD19AED388007A1558 /* CJAddressController.h */,
+				3A66EECE19AED388007A1558 /* CJAddressController.m */,
+				3A66EED319AF2040007A1558 /* CJEmailshareController.h */,
+				3A66EED419AF2040007A1558 /* CJEmailshareController.m */,
+			);
+			path = "分享";
+			sourceTree = "<group>";
+		};
+		3A6B8DC619B0111900CF7E9E /* 侧边栏选项 */ = {
+			isa = PBXGroup;
+			children = (
+				3A6B8DC719B0114F00CF7E9E /* CJPersonaldataController.h */,
+				3A6B8DC819B0114F00CF7E9E /* CJPersonaldataController.m */,
+				3A6B8DCA19B01F3800CF7E9E /* CJMyordersController.h */,
+				3A6B8DCB19B01F3800CF7E9E /* CJMyordersController.m */,
+				3A6B8DD019B0582600CF7E9E /* CJIntegralController.h */,
+				3A6B8DD119B0582600CF7E9E /* CJIntegralController.m */,
+				3A6B8DD319B0632A00CF7E9E /* CJContactusController.h */,
+				3A6B8DD419B0632A00CF7E9E /* CJContactusController.m */,
+				3A6B8DD619B0686600CF7E9E /* CJVersionController.h */,
+				3A6B8DD719B0686600CF7E9E /* CJVersionController.m */,
+				3A6B8DD919B06C5500CF7E9E /* CJTermsofserviceController.h */,
+				3A6B8DDA19B06C5500CF7E9E /* CJTermsofserviceController.m */,
+				3A6B8DDC19B06DA900CF7E9E /* CJAboutUsController.h */,
+				3A6B8DDD19B06DA900CF7E9E /* CJAboutUsController.m */,
+				3A6B8DDF19B06F0600CF7E9E /* CJInboxController.h */,
+				3A6B8DE019B06F0600CF7E9E /* CJInboxController.m */,
+			);
+			path = "侧边栏选项";
 			sourceTree = "<group>";
 		};
 		3A7C512619AAFD3E00EBFDE9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3A6B8DC619B0111900CF7E9E /* 侧边栏选项 */,
+				3A49C3F619AF451000FFA307 /* 礼品 */,
+				3A66EECC19AED344007A1558 /* 分享 */,
 				3A4BCE4619AC2AFB0027C023 /* 主页 */,
 				3A7C512719AAFD3E00EBFDE9 /* CJActivityController.h */,
 				3A7C512819AAFD3E00EBFDE9 /* CJActivityController.m */,
@@ -334,6 +424,10 @@
 				3A7C51B919AB1C3300EBFDE9 /* CJleftListCell.m */,
 				3A73E09D19ADA89600DD8A15 /* CJSupplyCell.h */,
 				3A73E09E19ADA89600DD8A15 /* CJSupplyCell.m */,
+				3A49C3FA19AF46DF00FFA307 /* CJGiftCell.h */,
+				3A49C3FB19AF46DF00FFA307 /* CJGiftCell.m */,
+				3A6B8DCD19B0272F00CF7E9E /* CJPayedCell.h */,
+				3A6B8DCE19B0272F00CF7E9E /* CJPayedCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -736,28 +830,42 @@
 				3A7C514919AAFD3E00EBFDE9 /* CJJobController.m in Sources */,
 				3A7C514A19AAFD3E00EBFDE9 /* CJNameController.m in Sources */,
 				3A7C511F19AAFCC800EBFDE9 /* CJLoginViewController.m in Sources */,
+				3A6B8DD819B0686600CF7E9E /* CJVersionController.m in Sources */,
 				771AA7BC19A2E22A005B9AAE /* main.m in Sources */,
 				3A7C512419AAFD0300EBFDE9 /* CJLeftViewController.m in Sources */,
 				771AA7E019A2E2B9005B9AAE /* CJRootViewController.m in Sources */,
+				3A6B8DCF19B0272F00CF7E9E /* CJPayedCell.m in Sources */,
+				3A6B8DC919B0114F00CF7E9E /* CJPersonaldataController.m in Sources */,
 				3A4BCE4919AC2B2C0027C023 /* CJActivityDetailController.m in Sources */,
+				3A6B8DDE19B06DA900CF7E9E /* CJAboutUsController.m in Sources */,
 				771AA7EF19A2E4C0005B9AAE /* MMDrawerBarButtonItem.m in Sources */,
 				3A7C514319AAFD3E00EBFDE9 /* CJHomeViewController.m in Sources */,
 				3A7C514619AAFD3E00EBFDE9 /* CJCompanyController.m in Sources */,
+				3A6B8DD219B0582600CF7E9E /* CJIntegralController.m in Sources */,
+				3A6B8DDB19B06C5500CF7E9E /* CJTermsofserviceController.m in Sources */,
 				3A7C514519AAFD3E00EBFDE9 /* CJForgotPasswordController.m in Sources */,
 				3A7C514B19AAFD3E00EBFDE9 /* CJRegisterController.m in Sources */,
+				3A49C3FC19AF46DF00FFA307 /* CJGiftCell.m in Sources */,
 				771AA7F219A2E4C0005B9AAE /* UIViewController+MMDrawerController.m in Sources */,
+				3A66EECF19AED388007A1558 /* CJAddressController.m in Sources */,
 				3A73E09C19AD89BD00DD8A15 /* CJSupplyController.m in Sources */,
 				3A7C514119AAFD3E00EBFDE9 /* CJActivityController.m in Sources */,
 				771AA7C019A2E22A005B9AAE /* CJAppDelegate.m in Sources */,
 				3A73E09F19ADA89600DD8A15 /* CJSupplyCell.m in Sources */,
+				3A49C3F919AF453100FFA307 /* CJAllgiftController.m in Sources */,
+				3A6B8DD519B0632A00CF7E9E /* CJContactusController.m in Sources */,
 				3A7C515719AAFDC100EBFDE9 /* KxMenu.m in Sources */,
 				3A7C514C19AAFD3F00EBFDE9 /* CJTelController.m in Sources */,
+				3A6B8DE119B06F0600CF7E9E /* CJInboxController.m in Sources */,
+				3A66EECB19AEC19E007A1558 /* CJPayController.m in Sources */,
 				3A7C514819AAFD3E00EBFDE9 /* CJEmailController.m in Sources */,
 				771AA7F019A2E4C0005B9AAE /* MMDrawerController.m in Sources */,
 				3A7C514719AAFD3E00EBFDE9 /* CJCompleteInfoController.m in Sources */,
 				771AA7F119A2E4C0005B9AAE /* MMDrawerVisualState.m in Sources */,
 				3A7C515219AAFD7C00EBFDE9 /* CJActivityCell.m in Sources */,
 				3A7C512519AAFD0300EBFDE9 /* CJMainViewController.m in Sources */,
+				3A66EED519AF2040007A1558 /* CJEmailshareController.m in Sources */,
+				3A6B8DCC19B01F3800CF7E9E /* CJMyordersController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

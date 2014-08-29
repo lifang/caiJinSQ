@@ -7,6 +7,7 @@
 //
 
 #import "CJSupplyController.h"
+#import "CJPayController.h"
 #import "CJSupplyCell.h"
 @interface CJSupplyController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *supplyTable;
@@ -54,7 +55,12 @@
     }else {
         _number--;
     }
+    if (_number < 0) {
+        _number = 0;
+        return;
+    }
     _numberLabel.text = [NSString stringWithFormat:@"%i",_number];
+    [_supplyTable reloadData];
 
 }
 - (void)didReceiveMemoryWarning
@@ -114,6 +120,7 @@
     textview.textAlignment = NSTextAlignmentLeft;
     textview.text = @"您正在参加2014中国财务精英高峰论坛活动，请确认您的个人信息";
     textview.backgroundColor = [UIColor clearColor];
+    textview.userInteractionEnabled = NO;
     [headView addSubview:textview];
     return headView;
 }
@@ -138,7 +145,7 @@
     [footview addSubview:label2];
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 200, 30)];
     _priceLabel.font = [UIFont systemFontOfSize:12.0f];
-    _priceLabel.text = @"20.000$";
+    _priceLabel.text = [NSString stringWithFormat:@"%d$",_number*20000];
     [footview addSubview:_priceLabel];
     UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 60, 30)];
     label3.font = [UIFont systemFontOfSize:13.0f];
@@ -159,7 +166,7 @@
     _numberLabel.font = [UIFont systemFontOfSize:12.0f];
     _numberLabel.layer.cornerRadius = 10.0f;
     _numberLabel.layer.backgroundColor = [UIColor whiteColor].CGColor;
-    _numberLabel.text = @"0";
+    _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
     [footview addSubview:_numberLabel];
     _minBt = [UIButton buttonWithType:UIButtonTypeCustom];
     _minBt.frame = CGRectMake(175, 90, 40, 30);
@@ -193,6 +200,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"message" object:@"0"];
 }
 -(void)pay:(id)sender {
+    CJPayController *payControl = [[CJPayController alloc] init];
+    [self.navigationController pushViewController:payControl animated:YES];
+}
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 /*
 #pragma mark - Navigation
