@@ -1,19 +1,16 @@
 //
-//  CJCompleteInfoCell.m
+//  CJSupplyCell.m
 //  CFEC
 //
-//  Created by SumFlower on 14-8-21.
+//  Created by SumFlower on 14-8-27.
 //  Copyright (c) 2014年 ___MyCompanyName___. All rights reserved.
 //
 
-#import "CJCompleteInfoCell.h"
+#import "CJSupplyCell.h"
 
-@implementation CJCompleteInfoCell
-
-@synthesize headImage = _headImage;
+@implementation CJSupplyCell
 @synthesize infoName = _infoName;
-@synthesize peopleInfo = _peopleInfo;
-
+@synthesize info = _info;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -36,17 +33,13 @@
     // Configure the view for the selected state
 }
 -(void)initUI {
-    _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(27, 12, 20, 20)];
-    [self.contentView addSubview:_headImage];
-    
-    _infoName = [[UILabel alloc] initWithFrame:CGRectMake(60, 8, 150, 30)];
+    _infoName = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 100, 30)];
     _infoName.font = [UIFont systemFontOfSize:13.0f];
     [self.contentView addSubview:_infoName];
     
-    _peopleInfo = [[UILabel alloc] initWithFrame:CGRectMake(140, 8, 150, 30)];
-    _peopleInfo.textAlignment = NSTextAlignmentRight;
-    _peopleInfo.font = [UIFont systemFontOfSize:13.0f];
-//    _peopleInfo.backgroundColor = [UIColor blueColor];
-    [self.contentView addSubview:_peopleInfo];
+    _info = [[UILabel alloc] initWithFrame:CGRectMake(70, 5, self.contentView.frame.size.width - 80, 30)];
+    _info.textAlignment = NSTextAlignmentRight;
+    _info.font = [UIFont systemFontOfSize:13.0f];
+    [self.contentView addSubview:_info];
 }
 @end

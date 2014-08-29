@@ -58,7 +58,7 @@
     CJMainViewController *mainC = [[CJMainViewController alloc] init];
     
     _navController = [[MMDrawerController alloc] initWithCenterViewController:mainC
-                                                     leftDrawerViewController:navL];
+                                                     leftDrawerViewController:leftC];
     [_navController setMaximumLeftDrawerWidth:220];
     [_navController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [_navController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeTapCenterView | MMCloseDrawerGestureModePanningCenterView];

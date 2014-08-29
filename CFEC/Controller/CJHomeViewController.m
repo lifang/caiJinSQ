@@ -10,6 +10,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "CJCompleteInfoCell.h"
 #import "CJAppDelegate.h"
+#import "CJActivityDetailController.h"
 
 @interface CJHomeViewController ()
 @end
@@ -61,7 +62,8 @@
     _mainTable.delegate = self;
     _mainTable.dataSource = self;
     _mainTable.tableHeaderView = [self setTableHeadView];
-    _mainTable.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
+    _mainTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _mainTable.separatorInset = UIEdgeInsetsMake(0, -2, 0, 2);
     [self.view addSubview:_mainTable];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -70,7 +72,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 4;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -92,5 +94,10 @@
     headImage.image = [UIImage imageNamed:@"首页_06.png"];
     [headView addSubview:headImage];
     return headView;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CJActivityDetailController *detailControl = [[CJActivityDetailController alloc] init];
+    [self.navigationController pushViewController:detailControl animated:YES];
 }
 @end

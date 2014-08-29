@@ -17,9 +17,6 @@
 #import "CJRootViewController.h"
 
 @interface CJCompleteInfoController ()
-{
-    NSArray *arr;
-}
 @end
 
 @implementation CJCompleteInfoController
@@ -38,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    arr = [[NSArray alloc] initWithObjects:@"1",@"2",@"3", nil];
     self.title = @"完善资料";
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];
@@ -66,7 +62,8 @@
     _infoTable.delegate = self;
     _infoTable.dataSource = self;
     _infoTable.backgroundColor = [UIColor whiteColor];
-    _infoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _infoTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _infoTable.separatorInset = UIEdgeInsetsMake(0, -5, 0, 5);
     [self.view addSubview:_infoTable];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
