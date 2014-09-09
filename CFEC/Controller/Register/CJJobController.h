@@ -14,4 +14,5 @@
 
 @interface CJJobController : UIViewController
 @property (nonatomic, assign) id<jobDelegate>delegate;
+@property (nonatomic, assign) BOOL isShow;
 @end

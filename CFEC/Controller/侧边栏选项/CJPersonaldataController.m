@@ -15,7 +15,11 @@
 #import "CJCompanyController.h"
 #import "CJJobController.h"
 #import "CJEmailController.h"
+#import "CJUserModel.h"
 @interface CJPersonaldataController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+{
+    CJUserModel *user;
+}
 @property (nonatomic, strong) UITableView *infoTable;
 @property (nonatomic, strong) UIActionSheet *headImageSheet;
 
@@ -41,7 +45,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -50,7 +53,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillAppear:(BOOL)animated {
+    user = [CJAppDelegate shareCJAppDelegate].user;
+    [_infoTable reloadData];
+}
 /*
 #pragma mark - Navigation
 
@@ -111,7 +117,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.infoName.text = @"姓名";
         cell.headImage.image = [UIImage imageNamed:@"首页-个人资料_03-07@2x"];
-        cell.peopleInfo.text = @"王兴胜";
+        cell.peopleInfo.text = user.name;
         return cell;
     }else if (indexPath.row == 2) {
         static NSString *ID = @"three";
@@ -122,7 +128,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.infoName.text = @"电话";
         cell.headImage.image = [UIImage imageNamed:@"首页-个人资料_03-11@2x"];
-        cell.peopleInfo.text = @"13992014456";
+        cell.peopleInfo.text = user.mobilephone;
         return cell;
     }else if (indexPath.row == 3) {
         static NSString *ID = @"four";
@@ -133,7 +139,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.infoName.text = @"公司";
         cell.headImage.image = [UIImage imageNamed:@"首页-个人资料_03-13@2x"];
-        cell.peopleInfo.text = @"德胜集团";
+        cell.peopleInfo.text = user.companyName;
         
         return cell;
     }else if (indexPath.row == 4) {
@@ -145,7 +151,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.infoName.text = @"职位";
         cell.headImage.image = [UIImage imageNamed:@"首页-个人资料_03-16@2x"];
-        cell.peopleInfo.text = @"财务总监";
+        cell.peopleInfo.text = user.position;
         
         return cell;
         
@@ -158,7 +164,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.infoName.text = @"邮箱";
         cell.headImage.image = [UIImage imageNamed:@"首页-个人资料_03-18@2x"];
-        cell.peopleInfo.text = @"wys008@desen.com";
+        cell.peopleInfo.text = user.companyEmail;
         
         return cell;
         
@@ -178,15 +184,19 @@
         [self.navigationController pushViewController:nameControl animated:YES];
     }else if (indexPath.row == 2) {
         CJTelController *telControl = [[CJTelController alloc] init];
+        telControl.isShow = YES;
         [self.navigationController pushViewController:telControl animated:YES];
     }else if (indexPath.row == 3) {
         CJCompanyController *companyControl = [[CJCompanyController alloc] init];
+        companyControl.isShow = YES;
         [self.navigationController pushViewController:companyControl animated:YES];;
     }else if (indexPath.row == 4) {
         CJJobController *jobControl = [[CJJobController alloc] init];
+        jobControl.isShow = YES;
         [self.navigationController pushViewController:jobControl animated:YES];
     }else if (indexPath.row == 5) {
         CJEmailController *emailControl = [[CJEmailController alloc] init];
+        emailControl.isShow = YES;
         [self.navigationController pushViewController:emailControl animated:YES];
     }
 }

@@ -7,6 +7,9 @@
 //
 
 #import "CJEmailController.h"
+#import "CJUserModel.h"
+#import "CJAppDelegate.h"
+#import "CJRequestFormat.h"
 
 @interface CJEmailController ()<UITextFieldDelegate>
 
@@ -50,16 +53,10 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
-    
-    if (![self isValidateEmail:_emailTextfield.text]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }else {
-        if ([self.delegate respondsToSelector:@selector(emailMessage:)]) {
+    if ([self.delegate respondsToSelector:@selector(emailMessage:)]) {
             [self.delegate emailMessage:_emailTextfield.text];
         }
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)initUI {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
@@ -101,5 +98,55 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)setIsShow:(BOOL)isShow
+{
+    if (isShow) {
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        rightButton.frame = CGRectMake(0, 0, 25, 25);
+        [rightButton setBackgroundImage:[UIImage imageNamed:@"save@2x.png"] forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.navigationItem.rightBarButtonItem = right;
+    }
+    
+}
+-(void)save:(id)sender {
+    CJUserModel *user = [CJAppDelegate shareCJAppDelegate].user;
+    NSData *jsonData;
+    NSError *error;
+    NSString *jsonStr;
+    if ([self isValidateEmail:_emailTextfield.text]) {
+        NSMutableDictionary *_commitDic = [NSMutableDictionary dictionary];
+        int camp = [user.camp intValue];
+        [CJAppDelegate shareCJAppDelegate].user.companyEmail = _emailTextfield.text;
+        if ((camp == 1||camp == 4)) {
+            [_commitDic setObject:user.name forKey:@"name"];
+            [_commitDic setObject:user.companyName forKey:@"companyName"];
+            [_commitDic setObject:user.position forKey:@"position"];
+            [_commitDic setObject:_emailTextfield.text forKey:@"companyEmail"];
+            [_commitDic setObject:user.mobilephone forKey:@"mobilephone"];
+            [_commitDic setObject:user.email forKey:@"email"];
+            
+            jsonData = [NSJSONSerialization dataWithJSONObject:_commitDic options:NSJSONWritingPrettyPrinted error:&error];
+            jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [CJRequestFormat modifyUserInformationWithUserID:user.userId userJson:jsonStr finished:^(ResponseStatus status, NSString *response) {
+                if (status == 0) {
+                    NSLog(@"保存成功");
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存成功" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                }else if (status == 1) {
+                    NSLog(@"请求失败");
+                }else {
+                    NSLog(@"返回失败");
+                }
+            }];
+        }
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+
+}
 
 @end

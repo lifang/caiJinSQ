@@ -14,4 +14,5 @@
 
 @interface CJTelController : UIViewController
 @property (nonatomic ,assign) id<telDelegate>delegate;
+@property (nonatomic, assign) BOOL isShow;
 @end

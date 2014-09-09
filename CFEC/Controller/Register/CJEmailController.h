@@ -14,4 +14,5 @@
 
 @interface CJEmailController : UIViewController
 @property (nonatomic, assign) id<emailDelegate>delegate;
+@property (nonatomic, assign) BOOL isShow;
 @end

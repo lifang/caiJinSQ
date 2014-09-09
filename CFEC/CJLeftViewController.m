@@ -80,7 +80,7 @@
         cell.leftLable.text = @"我的订单";
     }else if (indexPath.row == 2) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_15@2x.png"];
-        cell.leftLable.text = @"清楚缓存";
+        cell.leftLable.text = @"清除缓存";
         cell.rightLable.text = @"缓存 200M";
     }else if (indexPath.row == 3) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_17@2x.png"];

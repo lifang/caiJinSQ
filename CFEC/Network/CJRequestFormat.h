@@ -92,9 +92,9 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
  @abstract 注册完成后添加用户信息，先选择阵营类型，根据不同类型添加用户字段
  @param userJson 用户字段json字符串
                  type不为F时 name:姓名
-                            company_name:公司名
+                            companyName:公司名
                             position:职位
-                            company_email:公司邮箱
+                            companyEmail:公司邮箱
                             mobilephone:手机
                             email:用户注册邮箱
                  type为E时 额外字段 business_range:业务范围
@@ -102,7 +102,7 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
                  type为F时   name:姓名
                             school:学校
                             specialty:专业
-                            company_email:公司邮箱
+                            companyEmail:公司邮箱
                             email:用户注册邮箱
                             mobilephone:电话
                             graduation_time:毕业时间

@@ -7,7 +7,9 @@
 //
 
 #import "CJNameController.h"
-
+#import "CJUserModel.h"
+#import "CJAppDelegate.h"
+#import "CJRequestFormat.h"
 @interface CJNameController ()
 
 @property (nonatomic, strong) UITextField *nameTextfield;
@@ -56,7 +58,7 @@
         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightButton.frame = CGRectMake(0, 0, 25, 25);
         [rightButton setBackgroundImage:[UIImage imageNamed:@"save@2x.png"] forState:UIControlStateNormal];
-        [rightButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.navigationItem.rightBarButtonItem = right;
     }
@@ -92,6 +94,42 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+-(void)save:(id)sender {
+    CJUserModel *user = [CJAppDelegate shareCJAppDelegate].user;
+    NSData *jsonData;
+    NSError *error;
+    NSString *jsonStr;
+    if (![_nameTextfield.text isEqualToString:@""]) {
+        NSMutableDictionary *_commitDic = [NSMutableDictionary dictionary];
+        int camp = [user.camp intValue];
+        [CJAppDelegate shareCJAppDelegate].user.name = _nameTextfield.text;
+        if ((camp == 1||camp == 4)) {
+            [_commitDic setObject:_nameTextfield.text forKey:@"name"];
+            [_commitDic setObject:user.companyName forKey:@"companyName"];
+            [_commitDic setObject:user.position forKey:@"position"];
+            [_commitDic setObject:user.companyEmail forKey:@"companyEmail"];
+            [_commitDic setObject:user.mobilephone forKey:@"mobilephone"];
+            [_commitDic setObject:user.email forKey:@"email"];
+            
+            jsonData = [NSJSONSerialization dataWithJSONObject:_commitDic options:NSJSONWritingPrettyPrinted error:&error];
+            jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [CJRequestFormat modifyUserInformationWithUserID:user.userId userJson:jsonStr finished:^(ResponseStatus status, NSString *response) {
+                if (status == 0) {
+                    NSLog(@"保存成功");
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存成功" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                }else if (status == 1) {
+                    NSLog(@"请求失败");
+                }else {
+                    NSLog(@"返回失败");
+                }
+            }];
+        }
+        }else {
+            NSLog(@"不能为空");
+        }
 }
 /*
 #pragma mark - Navigation

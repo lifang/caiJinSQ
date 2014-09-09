@@ -19,6 +19,7 @@
 @property (nonatomic, strong) CJRootViewController *rootController;
 //登录用户信息 初始时从本地读取
 @property (nonatomic, strong) CJUserModel *user;
+@property (nonatomic, strong) NSMutableDictionary *userDic;
 //所有活动
 @property (nonatomic, strong) NSArray *allActivityArray;
 

@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSString *username;
 //密码
 @property (nonatomic, strong) NSString *password;
+//名称
+@property (nonatomic, strong) NSString *name;
 //阵营
 @property (nonatomic, strong) NSString *camp;
 //公司邮箱

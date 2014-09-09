@@ -198,7 +198,7 @@
 -(void)userLogin:(id)sender {
     [_passwordField resignFirstResponder];
     [_usernameField resignFirstResponder];
-    NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
+//    NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
     [CJRequestFormat loginWithEmail:_usernameField.text password:_passwordField.text finished:^(ResponseStatus status,NSString *response) {
         if (status == 0) {
             //登陆成功记住密码,根据bool值判断是否要记住密码
@@ -207,7 +207,7 @@
             [defaults setObject:[NSNumber numberWithBool:rememberBool] forKey:@"savePWD"];
             [defaults synchronize];
             
-            NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
+//            NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
             //检查是否是字典
             NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
             NSError *error;
@@ -219,6 +219,7 @@
                     //记住用户信息
                     loginUser.username = _usernameField.text;
                     loginUser.password = _passwordField.text;
+                    loginUser.name =[_userInfoDic objectForKey:@"name"];
                     loginUser.camp = [_userInfoDic objectForKey:@"camp"];
                     loginUser.companyEmail = [_userInfoDic objectForKey:@"companyEmail"];
                     loginUser.companyName = [_userInfoDic objectForKey:@"companyName"];
@@ -245,6 +246,7 @@
                             [NSKeyedArchiver archiveRootObject:loginUser toFile:savefile];
                         }
                         [CJAppDelegate shareCJAppDelegate].user = loginUser;
+                        [CJAppDelegate shareCJAppDelegate].userDic = self.userInfoDic;
                         CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
                         [rootC showMainController];
                     }

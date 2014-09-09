@@ -26,12 +26,14 @@
     [aCoder encodeObject:_position forKey:@"position"];
     [aCoder encodeObject:_specialty forKey:@"specialty"];
     [aCoder encodeObject:_userId forKey:@"userId"];
+    [aCoder encodeObject:_name forKey:@"name"];
 }
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
         _username = [aDecoder decodeObjectForKey:@"username"];
         _password = [aDecoder decodeObjectForKey:@"password"];
+        _name = [aDecoder decodeObjectForKey:@"name"];
         _camp = [aDecoder decodeObjectForKey:@"camp"];
         _companyEmail = [aDecoder decodeObjectForKey:@"companyEmail"];
         _companyName = [aDecoder decodeObjectForKey:@"companyName"];

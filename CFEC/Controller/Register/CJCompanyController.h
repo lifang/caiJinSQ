@@ -15,4 +15,5 @@
 
 @interface CJCompanyController : UIViewController
 @property (nonatomic, assign) id<companyDelegate>delegate;
+@property (nonatomic, assign) BOOL isShow;
 @end

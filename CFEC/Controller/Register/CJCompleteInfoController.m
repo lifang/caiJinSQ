@@ -393,7 +393,7 @@
     
     jsonDate = [NSJSONSerialization dataWithJSONObject:_commitDic options:NSJSONWritingPrettyPrinted error:&error];
     jsonStr = [[NSString alloc] initWithData:jsonDate encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",jsonStr);
+//    NSLog(@"%@",jsonStr);
     
     [CJRequestFormat addPersonalInformationWithJson:jsonStr groupType:type finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
