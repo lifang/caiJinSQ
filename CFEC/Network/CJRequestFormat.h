@@ -194,4 +194,75 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
 + (void)getGoodWithType:(GoodsType)goodType
                finished:(Result)result;
 
+/*!
+ @abstract 获取分类礼品
+ @param goodType 礼品类型
+ @result 请求结果
+ */
++ (void)getMobileGoodWithType:(GoodsType)goodType
+                     finished:(Result)result;
+
+/*!
+ @abstract 获取收货地址
+ @param userID 登录用户id
+ @result 请求结果
+ */
++ (void)getDeliveryAddressWithUserID:(NSString *)userID
+                            finished:(Result)result;
+
+/*!
+ @abstract 获取用户订单
+ @param userID 登录用户id
+ @result 请求结果
+ */
++ (void)getMobileOrderWithUserID:(NSString *)userID
+                        finished:(Result)result;
+
+/*!
+ @abstract 获取优惠劵
+ @param email 用户登录邮箱
+ @result 请求结果
+ */
++ (void)getAllCouponWithUserEmail:(NSString *)email
+                         finished:(Result)result;
+
+/*!
+ @abstract 获取可用优惠劵
+ @param email 用户登录邮箱
+ @param goodId 商品id
+ @result 请求结果
+ */
++ (void)getUsableCouponWithUserEmail:(NSString *)email
+                              goodID:(NSString *)goodId
+                            finished:(Result)result;
+
+/*!
+ @abstract 验证优惠劵是否存在
+ @param couponNumber 优惠劵号
+ @result 请求结果
+ */
++ (void)couponIsExistWithNumber:(NSString *)couponNumber
+                       finished:(Result)result;
+
+
+/*!
+ @abstract 支付前上传信息
+ @param userID 登录用户ID
+ @param payInfoJson 支付信息json
+                    p_delivery_address:地址
+                    p_goodId:商品ID
+                    p_quantity:商品数目
+                    p_flag:商品类型
+                    p_integral:积分
+                    p_giftTicket:礼品卡
+                    p_coupon:优惠劵
+                    p_orderAmount:价格
+                    p_total:总价
+                    order_no:礼品卡号
+ @result 请求结果
+ */
++ (void)payInfomationWithUserID:(NSString *)userID
+                        payJson:(NSString *)payInfoJson
+                       finished:(Result)result;
+
 @end

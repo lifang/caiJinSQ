@@ -205,10 +205,78 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
     }];
 }
 
+//获取分类礼品
++ (void)getMobileGoodWithType:(GoodsType)goodType
+                     finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[NSString stringWithFormat:@"%d",goodType] forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kGetMobileGoods, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+
+//获取收货地址
++ (void)getDeliveryAddressWithUserID:(NSString *)userID
+                            finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:userID forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kGetDeliveryAddress, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+
+//获取用户订单
++ (void)getMobileOrderWithUserID:(NSString *)userID
+                        finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:userID forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kGetMobileOrder, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+
+//获取优惠劵
++ (void)getAllCouponWithUserEmail:(NSString *)email
+                         finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:email forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kGetCoupon, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+
+//获取可用优惠劵
++ (void)getUsableCouponWithUserEmail:(NSString *)email
+                              goodID:(NSString *)goodId
+                            finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:email forKey:@"arg0"];
+    [params setObject:goodId forKey:@"arg1"];
+    NSString *soapMessage = setPostBody(kGetUserCoupon, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+
+//验证优惠劵是否存在
++ (void)couponIsExistWithNumber:(NSString *)couponNumber
+                       finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:couponNumber forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kJudgeCoupon, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+
 + (void)setHttpRequestWithParams:(NSString *)param responseResult:(Result)result {
     NSURL *url = [NSURL URLWithString:kServiceURL];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSString *soapLength = [NSString stringWithFormat:@"%d", [param length]];
+    NSString *soapLength = [NSString stringWithFormat:@"%lu", (unsigned long)[param length]];
     [request addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
     [request addRequestHeader:@"Content-Length" value:soapLength];
     [request setRequestMethod:@"POST"];
