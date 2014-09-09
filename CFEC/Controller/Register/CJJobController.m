@@ -50,6 +50,9 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(jobMessage:)]) {
+        [self.delegate jobMessage:_jobTextfield.text];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)initUI {
@@ -62,7 +65,7 @@
     _jobTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _jobTextfield.leftViewMode = UITextFieldViewModeAlways;
     _jobTextfield.leftView = backView;
-    _jobTextfield.placeholder = @"财务总监";
+    _jobTextfield.placeholder = @"职位";
     _jobTextfield.font = [UIFont systemFontOfSize:14.0f];
     _jobTextfield.delegate = self;
     _jobTextfield.backgroundColor = [UIColor whiteColor];
@@ -70,8 +73,12 @@
     lineView.backgroundColor = [UIColor colorWithRed:221/255.0f green:221/255.0f blue:221/255.0f alpha:1];
     [self.view addSubview:lineView];
     [self.view addSubview:_jobTextfield];
+    [_jobTextfield becomeFirstResponder];
 }
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 /*
 #pragma mark - Navigation
 

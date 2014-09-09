@@ -50,7 +50,16 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (![self isValidateEmail:_emailTextfield.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else {
+        if ([self.delegate respondsToSelector:@selector(emailMessage:)]) {
+            [self.delegate emailMessage:_emailTextfield.text];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 -(void)initUI {
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
@@ -62,7 +71,7 @@
     _emailTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _emailTextfield.leftViewMode = UITextFieldViewModeAlways;
     _emailTextfield.leftView = backView;
-    _emailTextfield.placeholder = @"wys008@desen.com";
+    _emailTextfield.placeholder = @"邮箱";
     _emailTextfield.font = [UIFont systemFontOfSize:14.0f];
     _emailTextfield.delegate = self;
     _emailTextfield.backgroundColor = [UIColor whiteColor];
@@ -70,10 +79,17 @@
     lineView.backgroundColor = [UIColor colorWithRed:221/255.0f green:221/255.0f blue:221/255.0f alpha:1];
     [self.view addSubview:lineView];
     [self.view addSubview:_emailTextfield];
+    [_emailTextfield becomeFirstResponder];
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
+}
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+        NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+        return [emailTest evaluateWithObject:email];
 }
 /*
 #pragma mark - Navigation

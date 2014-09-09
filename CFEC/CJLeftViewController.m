@@ -8,6 +8,15 @@
 
 #import "CJLeftViewController.h"
 #import "CJleftListCell.h"
+#import "CJPersonaldataController.h"
+#import "CJAppDelegate.h"
+#import "CJMyordersController.h"
+#import "CJIntegralController.h"
+#import "CJContactusController.h"
+#import "CJVersionController.h"
+#import "CJTermsofserviceController.h"
+#import "CJAboutUsController.h"
+#import "CJInboxController.h"
 @interface CJLeftViewController ()
 
 @end
@@ -31,6 +40,7 @@
     self.title = @"用户信息";
     self.view.backgroundColor = [UIColor blackColor];
     [self initUI];
+    self.navigationController.navigationBarHidden = YES;
 }
 -(void)initUI {
     _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
@@ -66,7 +76,7 @@
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_07@2x.png"];
         cell.leftLable.text = @"积分";
     }else if (indexPath.row == 1) {
-        cell.leftImage.image = [UIImage imageNamed:@"首页cetui_22@2x.png"];
+        cell.leftImage.image = [UIImage imageNamed:@"我的订单@2x.png"];
         cell.leftLable.text = @"我的订单";
     }else if (indexPath.row == 2) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_15@2x.png"];
@@ -79,7 +89,7 @@
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_20@2x.png"];
         cell.leftLable.text = @"版本号";
     }else if (indexPath.row == 5) {
-        cell.leftImage.image = [UIImage imageNamed:@"我的订单@2x.png"];
+        cell.leftImage.image = [UIImage imageNamed:@"首页cetui_22@2x.png"];
         cell.leftLable.text = @"服务条款";
     }else if (indexPath.row == 6) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_24@2x"];
@@ -99,7 +109,8 @@
     _userHeadImage = [UIButton buttonWithType:UIButtonTypeCustom];
     _userHeadImage.frame = CGRectMake(75, 25, 60, 60);
     [_userHeadImage setImage:[UIImage imageNamed:@"首页cetui_03@2x.png"] forState:UIControlStateNormal];
-    headView.backgroundColor = kColor(24, 24, 19, 1);
+    [_userHeadImage addTarget:self action:@selector(personalData:) forControlEvents:UIControlEventTouchUpInside];
+//    headView.backgroundColor = kColor(24, 24, 19, 1);
     [headView addSubview:_userHeadImage];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, headView.frame.size.height,headView.frame.size.width, 1)];
@@ -119,7 +130,51 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"点击cell");
+    if (indexPath.row == 0) {
+        CJIntegralController *integral = [[CJIntegralController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:integral];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+        
+        
+    }else if (indexPath.row == 1) {
+        CJMyordersController *orderControl = [[CJMyordersController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:orderControl];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+    }else if (indexPath.row == 2) {
+    }else if (indexPath.row == 3) {
+        CJContactusController *contactControl = [[CJContactusController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactControl];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+    }else if (indexPath.row == 4) {
+        CJVersionController *version = [[CJVersionController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:version];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+    }else if (indexPath.row == 5) {
+        CJTermsofserviceController *termsofserviceControl = [[CJTermsofserviceController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:termsofserviceControl];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate]rootController]navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+    }else if (indexPath.row == 6) {
+        CJAboutUsController *aboutusControl = [[CJAboutUsController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:aboutusControl];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate]rootController]navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+    }else if (indexPath.row == 7) {
+    }else {
+        CJInboxController *inboxControl = [[CJInboxController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:inboxControl];
+        [CJAppDelegate setNavigationBarTinColor:nav];
+        [[[[CJAppDelegate shareCJAppDelegate] rootController]navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+    }
 }
-
+-(void)personalData:(id)sender {
+    CJPersonaldataController *personal = [[CJPersonaldataController alloc] init];
+    UINavigationController *nav= [[UINavigationController alloc] initWithRootViewController:personal];
+    [CJAppDelegate setNavigationBarTinColor:nav];
+    [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
+}
 @end

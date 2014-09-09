@@ -10,4 +10,5 @@
 
 @interface CJHomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *mainTable;
+@property (nonatomic, strong) NSMutableArray *newsArray;//最新的六个活动
 @end

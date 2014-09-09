@@ -7,8 +7,14 @@
 //
 
 #import "CJRegisterController.h"
-#import "CJCompleteInfoController.h"
+#import "CJCampController.h"
+#import "CJRequestFormat.h"
 @interface CJRegisterController ()
+
+{
+    BOOL isAgree;
+}
+
 @property (strong, nonatomic) UITableView *showTable;
 @property (strong, nonatomic) UISegmentedControl *judgeSegment;
 @property (strong, nonatomic) UITextField *telTextfield;
@@ -42,6 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    isAgree = NO;//不同意协议
     self.view.backgroundColor = kColor(234, 234, 234, 1);
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     self.title = @"注册";
@@ -124,6 +131,7 @@
     _passwordTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
     _passwordTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _passwordTextfield.leftViewMode = UITextFieldViewModeAlways;
+    _passwordTextfield.secureTextEntry = YES;
     _passwordTextfield.leftView = backView2;
     _passwordTextfield.placeholder = @"输入密码";
     _passwordTextfield.font = [UIFont systemFontOfSize:13.0f];
@@ -138,6 +146,7 @@
     _confirmPasswordTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
     _confirmPasswordTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _confirmPasswordTextfield.leftViewMode = UITextFieldViewModeAlways;
+    _confirmPasswordTextfield.secureTextEntry = YES;
     _confirmPasswordTextfield.leftView = backView3;
     _confirmPasswordTextfield.placeholder = @"确认密码";
     _confirmPasswordTextfield.font = [UIFont systemFontOfSize:14.0f];
@@ -148,12 +157,13 @@
     _emailAddressTextfield = [[UITextField alloc] init];
     _emailAddressTextfield.frame = CGRectMake(0, 0, self.view.frame.size.width, 45);
     _emailAddressTextfield.returnKeyType = UIReturnKeyDone;
+    _emailAddressTextfield.keyboardType = UIKeyboardTypeEmailAddress;
     _emailAddressTextfield.borderStyle = UITextBorderStyleNone;
     _emailAddressTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
     _emailAddressTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _emailAddressTextfield.leftViewMode = UITextFieldViewModeAlways;
     _emailAddressTextfield.leftView = backView4;
-    _emailAddressTextfield.placeholder = @"确认密码";
+    _emailAddressTextfield.placeholder = @"请输入正确的邮箱地址";
     _emailAddressTextfield.font = [UIFont systemFontOfSize:14.0f];
     _emailAddressTextfield.delegate = self;
     _emailAddressTextfield.backgroundColor = [UIColor whiteColor];
@@ -289,8 +299,72 @@
 }
 -(void)complete:(id)sender {
     NSLog(@"完成");
-    CJCompleteInfoController *completeControl = [[CJCompleteInfoController alloc] init];
-    [self.navigationController pushViewController:completeControl animated:YES];
+//    CJCampController *campControl = [[CJCampController alloc] init];
+//    [self.navigationController pushViewController:campControl animated:YES];
+    
+    if (_judgeSegment.selectedSegmentIndex == 1) {
+        BOOL isEmail = NO;
+        isEmail = [self isValidateEmail:_emailAddressTextfield.text];
+        if (isEmail) {
+            if (_passwordTextfield.text.length >5&&_passwordTextfield.text.length < 13) {
+                if ([_passwordTextfield.text isEqualToString:_confirmPasswordTextfield.text]) {
+                    if (isAgree) {
+                        //注册全部判断成功,数据请求
+                        [CJRequestFormat registerWithEmail:_emailAddressTextfield.text password:_passwordTextfield.text finished:^(ResponseStatus status, NSString *response) {
+                            if (status == 0) {
+                                NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
+                                NSError *error;
+                                id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
+                                if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                                    NSDictionary *dic = (NSDictionary *)jsonObject;
+                                    NSString *msg = [dic objectForKey:@"msg"];
+                                    if ([msg isEqualToString:@"error"]) {
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"填写错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                        [alert show];
+                                    }else {
+                                        //注册成功
+                                        CJCampController *campControl = [[CJCampController alloc] init];
+                                        //传注册的email
+                                        campControl.registerEmail = _emailAddressTextfield.text;
+                                        NSLog(@"%@",campControl.registerEmail);
+                                        [self.navigationController pushViewController:campControl animated:YES];
+                                    }
+                                }
+                            }else if (status == 1) {
+//                                NSLog(@"请求出错");
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                [alert show];
+                            }else {
+//                                NSLog(@"请求成功，返回错误");
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络返回错误请重新尝试" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                [alert show];
+                            }
+                        }];
+                    }else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未同意协议" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [alert show];
+//                        NSLog(@"不同意协议");
+                    }
+                }else {
+//                    NSLog(@"密码不一致");
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码不一致" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                }
+            }else {
+//                NSLog(@"密码位数不对");
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码位数不对" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+        }else {
+//            NSLog(@"邮箱错误");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+
+    }else {
+        NSLog(@"功能不明确");
+    }
+     
 }
 -(void)senderIdentiy:(id)sender {
     NSLog(@"发送验证码");
@@ -298,13 +372,12 @@
 -(void)remember:(id)sender {
     //读取用户信息
     UIButton *bt = (UIButton *)sender;
-    static BOOL rememberBool = NO;
-    if (rememberBool) {
-        rememberBool = NO;
+    if (isAgree) {
+        isAgree = NO;
         [bt setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     }else {
         [bt setBackgroundImage:[UIImage imageNamed:@"登录_03-11@2x.png"] forState:UIControlStateNormal];
-        rememberBool = YES;
+        isAgree = YES;
     }
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -321,5 +394,10 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+        NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+        return [emailTest evaluateWithObject:email];
+}
 @end

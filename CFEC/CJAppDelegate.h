@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 
 #import "CJRootViewController.h"
+#import "CJUserModel.h"
+#import "WXApi.h"
 
-@interface CJAppDelegate : UIResponder <UIApplicationDelegate>
+@interface CJAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, strong) CJRootViewController *rootController;
+//登录用户信息 初始时从本地读取
+@property (nonatomic, strong) CJUserModel *user;
+//所有活动
+@property (nonatomic, strong) NSArray *allActivityArray;
 
 
 + (CJAppDelegate *)shareCJAppDelegate;

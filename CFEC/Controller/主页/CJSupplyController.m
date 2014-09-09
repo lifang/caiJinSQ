@@ -7,7 +7,9 @@
 //
 
 #import "CJSupplyController.h"
+#import "CJPayController.h"
 #import "CJSupplyCell.h"
+#import "CJAppDelegate.h"
 @interface CJSupplyController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *supplyTable;
 @property (nonatomic, strong) UILabel *activityNameLable;
@@ -28,6 +30,7 @@
 @synthesize minBt = _minBt;
 @synthesize payBt = _payBt;
 @synthesize number = _number;
+@synthesize activity = _activity;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,6 +47,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];
+    _user = [CJAppDelegate shareCJAppDelegate].user;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(labelChange:) name:@"message" object:nil];
     self.number = 0;
     // Do any additional setup after loading the view.
@@ -54,7 +58,12 @@
     }else {
         _number--;
     }
+    if (_number < 0) {
+        _number = 0;
+        return;
+    }
     _numberLabel.text = [NSString stringWithFormat:@"%i",_number];
+    [_supplyTable reloadData];
 
 }
 - (void)didReceiveMemoryWarning
@@ -94,16 +103,16 @@
     CJSupplyCell *cell = [[CJSupplyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:first];
     if (indexPath.row == 0) {
         cell.infoName.text = @"姓名";
-        cell.info.text = @"王兴胜";
+        cell.info.text = self.user.username;
     }else if (indexPath.row == 1) {
         cell.infoName.text = @"联系电话";
-        cell.info.text = @"13993254456";
+        cell.info.text = self.user.mobilephone;
     }else if (indexPath.row == 2) {
         cell.infoName.text = @"电子邮箱";
-        cell.info.text = @"wxs@desen.com";
+        cell.info.text = self.user.email;
     }else if (indexPath.row == 3) {
         cell.infoName.text = @"公司名称";
-        cell.info.text = @"德胜集团";
+        cell.info.text = self.user.companyName;
     }
     return cell;
 }
@@ -112,8 +121,9 @@
     UIView *headView = [[UIView alloc] init];
     UITextView *textview = [[UITextView alloc] initWithFrame:CGRectMake(20, 0, 280, 50)];
     textview.textAlignment = NSTextAlignmentLeft;
-    textview.text = @"您正在参加2014中国财务精英高峰论坛活动，请确认您的个人信息";
+    textview.text = [NSString stringWithFormat:@"您正在参加%@活动，请确认您的个人信息",_activity.title];
     textview.backgroundColor = [UIColor clearColor];
+    textview.userInteractionEnabled = NO;
     [headView addSubview:textview];
     return headView;
 }
@@ -128,9 +138,9 @@
     label1.font = [UIFont systemFontOfSize:12.0f];
     label1.text = @"活动名称:";
     [footview addSubview:label1];
-    _activityNameLable = [[UILabel alloc] initWithFrame:CGRectMake(80, 20, 200, 30)];
+    _activityNameLable = [[UILabel alloc] initWithFrame:CGRectMake(80, 20, 250, 30)];
     _activityNameLable.font = [UIFont systemFontOfSize:12.0f];
-    _activityNameLable.text = @"2014中国财务精英高峰论坛";
+    _activityNameLable.text = _activity.title;
     [footview addSubview:_activityNameLable];
     UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 60, 30)];
     label2.font = [UIFont systemFontOfSize:12.0f];
@@ -138,7 +148,8 @@
     [footview addSubview:label2];
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 200, 30)];
     _priceLabel.font = [UIFont systemFontOfSize:12.0f];
-    _priceLabel.text = @"20.000$";
+    int price = [_activity.meetingCost intValue];
+    _priceLabel.text = [NSString stringWithFormat:@"%d$",_number*price];
     [footview addSubview:_priceLabel];
     UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 60, 30)];
     label3.font = [UIFont systemFontOfSize:13.0f];
@@ -159,7 +170,7 @@
     _numberLabel.font = [UIFont systemFontOfSize:12.0f];
     _numberLabel.layer.cornerRadius = 10.0f;
     _numberLabel.layer.backgroundColor = [UIColor whiteColor].CGColor;
-    _numberLabel.text = @"0";
+    _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
     [footview addSubview:_numberLabel];
     _minBt = [UIButton buttonWithType:UIButtonTypeCustom];
     _minBt.frame = CGRectMake(175, 90, 40, 30);
@@ -193,6 +204,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"message" object:@"0"];
 }
 -(void)pay:(id)sender {
+    CJPayController *payControl = [[CJPayController alloc] init];
+    [self.navigationController pushViewController:payControl animated:YES];
+}
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 /*
 #pragma mark - Navigation

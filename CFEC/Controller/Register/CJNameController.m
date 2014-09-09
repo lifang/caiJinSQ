@@ -33,6 +33,7 @@
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];
     self.view.backgroundColor = [UIColor whiteColor];
+//    self.isShow = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -49,7 +50,22 @@
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = left;
 }
+-(void)setIsShow:(BOOL)isShow
+{
+    if (isShow) {
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        rightButton.frame = CGRectMake(0, 0, 25, 25);
+        [rightButton setBackgroundImage:[UIImage imageNamed:@"save@2x.png"] forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.navigationItem.rightBarButtonItem = right;
+    }
+
+}
 -(void)back:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(returnMessage:)]) {
+        [self.delegate returnMessage:_nameTextfield.text];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)initUI {
@@ -62,7 +78,7 @@
     _nameTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _nameTextfield.leftViewMode = UITextFieldViewModeAlways;
     _nameTextfield.leftView = backView;
-    _nameTextfield.placeholder = @"王兴胜";
+    _nameTextfield.placeholder = @"姓名";
     _nameTextfield.font = [UIFont systemFontOfSize:14.0f];
     _nameTextfield.delegate = self;
     _nameTextfield.backgroundColor = [UIColor whiteColor];
@@ -70,6 +86,12 @@
     lineView.backgroundColor = [UIColor colorWithRed:221/255.0f green:221/255.0f blue:221/255.0f alpha:1];
     [self.view addSubview:lineView];
     [self.view addSubview:_nameTextfield];
+    [_nameTextfield becomeFirstResponder];
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 /*
 #pragma mark - Navigation

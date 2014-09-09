@@ -7,9 +7,11 @@
 //
 
 #import "CJShareViewController.h"
-
-@interface CJShareViewController ()
-
+#import "CJAddressController.h"
+#import "CJEmailshareController.h"
+@interface CJShareViewController ()<UIActionSheetDelegate>
+@property (nonatomic, strong) UIActionSheet *sinaSheet;
+@property (nonatomic, strong) UIActionSheet *weiSheet;
 @end
 
 @implementation CJShareViewController
@@ -18,6 +20,9 @@
 @synthesize weiboFriendBt = _weiboFriendBt;
 @synthesize weixinFriendBt = _weixinFriendBt;
 @synthesize emailFriendBt = _emailFriendBt;
+
+@synthesize sinaSheet = _sinaSheet;
+@synthesize weiSheet = _weiSheet;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,15 +75,49 @@
 }
 -(void)addressAction:(id)sender {
     NSLog(@"邀请通讯录好友");
+    CJAddressController *addressControl = [[CJAddressController alloc] init];
+    [self.navigationController pushViewController:addressControl animated:YES];
 }
 -(void)weiboAction:(id)sender {
     NSLog(@"邀请微博好友");
+    _sinaSheet = [[UIActionSheet alloc] initWithTitle:@"您并未安装新浪微博客户端" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"前往下载", nil];
+    _sinaSheet.tag = 0;
+    [_sinaSheet showInView:self.view];
 }
 -(void)weixinAction:(id)sender {
     NSLog(@"邀请微信好友");
+    _weiSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享给微信好友",@"分享到微信朋友圈", nil];
+    _weiSheet.tag = 1;
+    [_weiSheet showInView:self.view];
 }
 -(void)emailAction:(id)sender {
     NSLog(@"邀请邮箱好友");
+    CJEmailshareController *emailControl = [[CJEmailshareController alloc] init];
+    [self.navigationController pushViewController:emailControl animated:YES];
+}
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    if (actionSheet.tag == 0) {
+        for (UIView *subViwe in actionSheet.subviews) {
+            if ([subViwe isKindOfClass:[UIButton class]]) {
+                UIButton *button = (UIButton*)subViwe;
+                if (button.tag == 2) {
+                    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+                }
+            }
+        }
+
+    }else {
+        for (UIView *subViwe in actionSheet.subviews) {
+            if ([subViwe isKindOfClass:[UIButton class]]) {
+                UIButton *button = (UIButton*)subViwe;
+                if (button.tag == 3) {
+                    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+                }
+            }
+        }
+
+    }
 }
 /*
 #pragma mark - Navigation

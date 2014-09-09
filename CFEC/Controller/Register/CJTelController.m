@@ -53,6 +53,9 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(telMessage:)]) {
+        [self.delegate telMessage:_telTextfield.text];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -66,7 +69,7 @@
     _telTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _telTextfield.leftViewMode = UITextFieldViewModeAlways;
     _telTextfield.leftView = backView;
-    _telTextfield.placeholder = @"13992014456";
+    _telTextfield.placeholder = @"电话";
     _telTextfield.font = [UIFont systemFontOfSize:14.0f];
     _telTextfield.delegate = self;
     _telTextfield.backgroundColor = [UIColor whiteColor];
@@ -74,6 +77,7 @@
     lineView.backgroundColor = [UIColor colorWithRed:221/255.0f green:221/255.0f blue:221/255.0f alpha:1];
     [self.view addSubview:lineView];
     [self.view addSubview:_telTextfield];
+    [_telTextfield becomeFirstResponder];
 }
 
 /*
@@ -86,5 +90,27 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (![self isValidateTel:textField.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手机号码格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+//验证电话号码
+-(BOOL)isValidateTel:(NSString *)tel
+{
+    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    BOOL isMatch = [pred evaluateWithObject:tel];
+    
+    return isMatch;
+}
 @end

@@ -11,9 +11,12 @@
 #import "CJRegisterController.h"
 #import "CJAppDelegate.h"
 #import "CJRequestFormat.h"
-#import "GDataXMLNode.h"
+#import "CJUserModel.h"
 
 @interface CJLoginViewController ()<ASIHTTPRequestDelegate>
+{
+    BOOL rememberBool;
+}
 @property (nonatomic, assign) CGRect focusRect;
 @end
 
@@ -41,6 +44,7 @@
     self.view.backgroundColor = kColor(234, 234, 234, 1);
     [self setUserNameAndPasswordUI];
     [self setLoginButtonUI];
+    self.isShow = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,10 +55,10 @@
 
 #pragma mark - Action
 
-- (IBAction)login:(id)sender {
-    CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
-    [rootC showMainController];
-}
+//- (IBAction)login:(id)sender {
+//    CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
+//    [rootC showMainController];
+//}
 -(void)setUserNameAndPasswordUI {
     //用户名框
     UIView *userBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 55, 20)];
@@ -94,9 +98,29 @@
     [self.view addSubview:_passwordField];
     
     //记住密码
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *boolNumber = [defaults objectForKey:@"savePWD"];
+    rememberBool = [boolNumber boolValue];
+    
     UIButton *rememberBt = [UIButton buttonWithType:UIButtonTypeCustom];
     rememberBt.frame = CGRectMake(30, 235, 16, 16);
     rememberBt.backgroundColor = [UIColor whiteColor];
+    
+    if (!rememberBool) {
+        [rememberBt setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    }else {
+        [rememberBt setBackgroundImage:[UIImage imageNamed:@"登录_03-11@2x.png"] forState:UIControlStateNormal];
+        //判断是否记有住密码取数据
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDirectory = paths[0];
+        NSString *savefile = [documentDirectory stringByAppendingPathComponent:@"userFile.plist"];
+        CJUserModel *loginUser = [NSKeyedUnarchiver unarchiveObjectWithFile:savefile];
+        if (loginUser != nil) {
+            _usernameField.text = loginUser.username;
+            _passwordField.text = loginUser.password;
+        }
+    }
+    
     [rememberBt addTarget:self action:@selector(rememberpassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rememberBt];
     UILabel *rememberLab = [[UILabel alloc] initWithFrame:CGRectMake(55, 227, 64, 32)];
@@ -108,7 +132,6 @@
 -(void)rememberpassword:(id)sender {
     //读取用户信息
     UIButton *bt = (UIButton *)sender;
-    static BOOL rememberBool = NO;
     if (rememberBool) {
         rememberBool = NO;
         [bt setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -173,21 +196,68 @@
 }
 #pragma mark - 登陆
 -(void)userLogin:(id)sender {
-    [CJRequestFormat loginWithEmail:@"1234444@.com" password:@"123" finished:^(ResponseStatus status,NSString *response) {
-        NSLog(@"%d,%@",status,response);
+    [_passwordField resignFirstResponder];
+    [_usernameField resignFirstResponder];
+    NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
+    [CJRequestFormat loginWithEmail:_usernameField.text password:_passwordField.text finished:^(ResponseStatus status,NSString *response) {
+        if (status == 0) {
+            //登陆成功记住密码,根据bool值判断是否要记住密码
+            //记住状态
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:[NSNumber numberWithBool:rememberBool] forKey:@"savePWD"];
+            [defaults synchronize];
+            
+            NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
+            //检查是否是字典
+            NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
+            CJUserModel *loginUser = [[CJUserModel alloc] init];
+            
+            if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                self.userInfoDic = (NSMutableDictionary *)jsonObject;
+                    //记住用户信息
+                    loginUser.username = _usernameField.text;
+                    loginUser.password = _passwordField.text;
+                    loginUser.camp = [_userInfoDic objectForKey:@"camp"];
+                    loginUser.companyEmail = [_userInfoDic objectForKey:@"companyEmail"];
+                    loginUser.companyName = [_userInfoDic objectForKey:@"companyName"];
+                    loginUser.email = [_userInfoDic objectForKey:@"email"];
+                    loginUser.giftTicet = [_userInfoDic objectForKey:@"giftTicet"];
+                    loginUser.headPhotoUrl = [_userInfoDic objectForKey:@"headPhotoUrl"];
+                    loginUser.integral = [_userInfoDic objectForKey:@"integral"];
+                    loginUser.memberType = [_userInfoDic objectForKey:@"memberType"];
+                    loginUser.mobilephone = [_userInfoDic objectForKey:@"mobilephone"];
+                    loginUser.msg = [_userInfoDic objectForKey:@"msg"];
+                    loginUser.position = [_userInfoDic objectForKey:@"position"];
+                    loginUser.specialty = [_userInfoDic objectForKey:@"specialty"];
+                    loginUser.userId = [_userInfoDic objectForKey:@"userId"];
+                    if ([loginUser.msg isEqualToString:@"error"]) {
+                        NSLog(@"密码错误");
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [alert show];
+                    }else {
+                        if (rememberBool) {
+                            //判断是否需要记住密码
+                            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                            NSString *documentDirectory = paths[0];
+                            NSString *savefile = [documentDirectory stringByAppendingPathComponent:@"userFile.plist"];
+                            [NSKeyedArchiver archiveRootObject:loginUser toFile:savefile];
+                        }
+                        [CJAppDelegate shareCJAppDelegate].user = loginUser;
+                        CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
+                        [rootC showMainController];
+                    }
+            }else
+            {
+                NSLog(@"返回的不是字典");
+            }
+        }else if (status == 1) {
+            NSLog(@"网络请求出错");
+        }else {
+            NSLog(@"网络请求成功，返回出错");
+        }
     }];
-
-    //登陆成功记住密码,根据bool值判断是否要记住密码
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"savePWD"];
-    [defaults synchronize];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = paths[0];
-    NSString *filename = [documentsDirectory stringByAppendingPathComponent:@"userInfo.plist"];
-    //    [NSKeyedArchiver archiveRootObject:_usernameField.text toFile:filename];
-
-    CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
-    [rootC showMainController];
 }
 
 #pragma mark - 找回密码
@@ -254,9 +324,6 @@
         self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     }];
     return YES;
-}
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 //#pragma mark - textField
 //

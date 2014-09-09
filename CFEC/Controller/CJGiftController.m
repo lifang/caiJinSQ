@@ -7,7 +7,12 @@
 //
 
 #import "CJGiftController.h"
-
+#import "CJAllgiftController.h"
+#import "CJHouseholdController.h"
+#import "CJLifeController.h"
+#import "CBookController.h"
+#import "CJHotGoodController.h"
+#import "CJServiceController.h"
 @interface CJGiftController ()
 @property (nonatomic, strong) UIButton *allGiftBt;//全部礼物
 @property (nonatomic, strong) UIButton *applianceBt;//数码家电
@@ -91,16 +96,34 @@
 }
 #pragma mark -Actions
 -(void)allGiftAction:(id)sender {
+    CJAllgiftController *giftControl = [[CJAllgiftController alloc] init];
+    giftControl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:giftControl animated:YES];
 }
 -(void)applianceAction:(id)sender {
+    CJHouseholdController *householdControl = [[CJHouseholdController alloc] init];
+    householdControl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:householdControl animated:YES];
 }
 -(void)lifeAction:(id)sender {
+    CJLifeController *lifeControl = [[CJLifeController alloc] init];
+    lifeControl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:lifeControl animated:YES];
 }
 -(void)bookAction:(id)sender {
+    CBookController *bookControl = [[CBookController alloc] init];
+    bookControl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:bookControl animated:YES];
 }
 -(void)hotGiftAction:(id)sender {
+    CJHotGoodController *hotgoodControl = [[CJHotGoodController alloc] init];
+    hotgoodControl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:hotgoodControl animated:YES];
 }
 -(void)serviceAction:(id)sender {
+    CJServiceController *serviceControl = [[CJServiceController alloc] init];
+    serviceControl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:serviceControl animated:YES];
 }
 /*
 #pragma mark - Navigation

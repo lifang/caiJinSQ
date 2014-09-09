@@ -36,10 +36,10 @@
     // Configure the view for the selected state
 }
 -(void)initUI {
-    _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(27, 12, 20, 20)];
+    _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 8, 25, 25)];
     [self.contentView addSubview:_headImage];
     
-    _infoName = [[UILabel alloc] initWithFrame:CGRectMake(60, 8, 150, 30)];
+    _infoName = [[UILabel alloc] initWithFrame:CGRectMake(60, 8, 250, 30)];
     _infoName.font = [UIFont systemFontOfSize:13.0f];
     [self.contentView addSubview:_infoName];
     

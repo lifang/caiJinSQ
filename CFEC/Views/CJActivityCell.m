@@ -42,7 +42,7 @@
     _titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 12, 25,25)];
     [self.contentView addSubview:_titleImage];
     
-    _mainContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 3, 320 - 52, 20)];
+    _mainContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 3, 240, 20)];
     _mainContentLabel.font = [UIFont systemFontOfSize:13.0f];
     [self.contentView addSubview:_mainContentLabel];
     
