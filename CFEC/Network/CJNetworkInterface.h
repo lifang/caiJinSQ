@@ -48,3 +48,24 @@
 
 //获取礼品
 #define kGetGoods @"getBatchGood" 
+
+//获取分类礼品
+#define kGetMobileGoods @"getMobileGood"
+
+//获取收货地址
+#define kGetDeliveryAddress  @"getDeliveryAddress"
+
+//用户订单
+#define kGetMobileOrder @"getMobileOrder"
+
+//优惠劵
+#define kGetCoupon  @"getCoupon"
+
+//可用优惠劵
+#define kGetUserCoupon  @"getUserCoupon"
+
+//验证优惠劵
+#define kJudgeCoupon  @"getCouponExist"
+
+//支付前
+#define kBeforePay @"mobilePaymentBefore"
