@@ -8,6 +8,7 @@
 
 #import "CJForgotPasswordController.h"
 #import "CJRootViewController.h"
+#import "CJRequestFormat.h"
 @interface CJForgotPasswordController ()
 
 @end
@@ -84,7 +85,40 @@
 
 -(void)sendInfo:(id)sender {
     NSLog(@"获取新密码");
+    if ([_telAndemailTextfield.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱或号码不能为空" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    [CJRequestFormat findPasswordWithEmail:_telAndemailTextfield.text finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
+            if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dic = (NSDictionary *)jsonObject;
+                NSString *s = [dic objectForKey:@"msg"];
+                if ([s isEqualToString:@"error"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                }else {
+                    NSLog(@"密码找回成功,请去邮箱重新填写密码");
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+        }else if (status == 1){
+            NSLog(@"请求失败");
+        }else {
+            NSLog(@"请求成功，服务端返回错误");
+        }
+    }];
 }
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+        NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+        return [emailTest evaluateWithObject:email];
+}
+
 /*
 #pragma mark - Navigation
 

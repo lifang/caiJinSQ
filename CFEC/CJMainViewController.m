@@ -54,7 +54,6 @@
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
     [CJAppDelegate setNavigationBarTinColor:nav1];
     
-    
     CJShareViewController *vc2 = [[CJShareViewController alloc] init];
     vc2.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
                                                    image:[UIImage imageNamed:@"首页_23.png"]

@@ -174,6 +174,7 @@
         [_headImageSheet showInView:self.view];
     }else if (indexPath.row == 1) {
         CJNameController *nameControl = [[CJNameController alloc] init];
+        nameControl.isShow = YES;
         [self.navigationController pushViewController:nameControl animated:YES];
     }else if (indexPath.row == 2) {
         CJTelController *telControl = [[CJTelController alloc] init];

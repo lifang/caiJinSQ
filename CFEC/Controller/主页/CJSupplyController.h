@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CJUserModel.h"
+#import "CJActivityModel.h"
 @interface CJSupplyController : UIViewController
-
+@property (nonatomic, strong) CJUserModel *user;
+@property (nonatomic, strong) CJActivityModel *activity;
 @end

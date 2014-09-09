@@ -50,6 +50,9 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(companyMessage:)]) {
+        [self.delegate companyMessage:_companyTextfield.text];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)initUI {
@@ -62,7 +65,7 @@
     _companyTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _companyTextfield.leftViewMode = UITextFieldViewModeAlways;
     _companyTextfield.leftView = backView;
-    _companyTextfield.placeholder = @"德胜集团";
+    _companyTextfield.placeholder = @"公司";
     _companyTextfield.font = [UIFont systemFontOfSize:14.0f];
     _companyTextfield.delegate = self;
     _companyTextfield.backgroundColor = [UIColor whiteColor];
@@ -70,8 +73,12 @@
     lineView.backgroundColor = [UIColor colorWithRed:221/255.0f green:221/255.0f blue:221/255.0f alpha:1];
     [self.view addSubview:lineView];
     [self.view addSubview:_companyTextfield];
+    [_companyTextfield becomeFirstResponder];
 }
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 /*
 #pragma mark - Navigation
 

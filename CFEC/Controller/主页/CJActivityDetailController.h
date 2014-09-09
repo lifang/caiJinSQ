@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CJActivityModel.h"
 @interface CJActivityDetailController : UIViewController
-
+@property (nonatomic, strong) CJActivityModel *activityModel;
 @end
