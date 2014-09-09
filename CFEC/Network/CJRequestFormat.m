@@ -208,7 +208,7 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
 + (void)setHttpRequestWithParams:(NSString *)param responseResult:(Result)result {
     NSURL *url = [NSURL URLWithString:kServiceURL];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSString *soapLength = [NSString stringWithFormat:@"%d", [param length]];
+    NSString *soapLength = [NSString stringWithFormat:@"%lu", (unsigned long)[param length]];
     [request addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
     [request addRequestHeader:@"Content-Length" value:soapLength];
     [request setRequestMethod:@"POST"];
