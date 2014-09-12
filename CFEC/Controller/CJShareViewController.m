@@ -9,6 +9,8 @@
 #import "CJShareViewController.h"
 #import "CJAddressController.h"
 #import "CJEmailshareController.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
 @interface CJShareViewController ()<UIActionSheetDelegate>
 @property (nonatomic, strong) UIActionSheet *sinaSheet;
 @property (nonatomic, strong) UIActionSheet *weiSheet;
@@ -86,7 +88,7 @@
 }
 -(void)weixinAction:(id)sender {
     NSLog(@"邀请微信好友");
-    _weiSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享给微信好友",@"分享到微信朋友圈", nil];
+    _weiSheet = [[UIActionSheet alloc] initWithTitle:@"分享将打开微信客户端" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享给微信好友",@"分享到微信朋友圈", nil];
     _weiSheet.tag = 1;
     [_weiSheet showInView:self.view];
 }
@@ -117,6 +119,31 @@
             }
         }
 
+    }
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0) {
+//            NSLog(@"分享到微信好友");
+            WXMediaMessage *message = [WXMediaMessage message];
+            message.title = @"推荐一个财务人爱不释手的应用";
+            message.description = @"财圈最前沿，随时随地获取第一手财务资讯及行业动态";
+            [message setThumbImage:[UIImage imageNamed:@"Icon29@2x.png"]];
+            WXWebpageObject *ext = [WXWebpageObject object];
+            ext.webpageUrl = @"http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+            message.mediaObject = ext;
+            SendMessageToWXReq *req= [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = WXSceneSession;
+            [WXApi sendReq:req];            
+        }else if (buttonIndex == 1) {
+            NSLog(@"分享到朋友圈");
+            WXMediaMessage *message = [WXMediaMessage message];
+        }
+    }else {
+        
     }
 }
 /*

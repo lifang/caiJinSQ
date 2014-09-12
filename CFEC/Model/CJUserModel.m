@@ -27,6 +27,7 @@
     [aCoder encodeObject:_specialty forKey:@"specialty"];
     [aCoder encodeObject:_userId forKey:@"userId"];
     [aCoder encodeObject:_name forKey:@"name"];
+    [aCoder encodeObject:_headImage forKey:@"headImage"];
 }
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -47,6 +48,7 @@
         _position = [aDecoder decodeObjectForKey:@"position"];
         _specialty = [aDecoder decodeObjectForKey:@"specialty"];
         _userId = [aDecoder decodeObjectForKey:@"userId"];
+        _headImage = [aDecoder decodeObjectForKey:@"headImage"];
     }
     return self;
 }

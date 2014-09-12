@@ -10,7 +10,7 @@
 #import "CJAppDelegate.h"
 #import "CJMainViewController.h"
 @interface CJAboutUsController ()
-
+@property (nonatomic, strong) UILabel *textLabel;
 @end
 
 @implementation CJAboutUsController
@@ -51,6 +51,8 @@
     self.navigationItem.title = @"关于我们";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
+    _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:_textLabel];
 
 }
 -(void)setLeftNavBarItemWithImageName:(NSString *)name {

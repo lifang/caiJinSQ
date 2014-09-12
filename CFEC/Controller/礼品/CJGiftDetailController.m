@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UILabel *giftNameLabel;//礼品名称
 @property (nonatomic, strong) UIImageView *giftImage;//礼品图片
 @property (nonatomic, strong) UILabel *priceLabel;//价格
-@property (nonatomic, strong) UITextView *giftDiscribe;//礼品描述
+@property (nonatomic, strong) UILabel *giftDiscribe;//礼品描述
 @property (nonatomic, strong) UIButton *buyButton;//立即购买
 @end
 
@@ -73,13 +73,12 @@
     _giftImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 110, 280, 180)];
     NSURL *imgUrl = [NSURL URLWithString:self.giftModel.picture];
     NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
-//    _giftImage.backgroundColor = [UIColor redColor];
     _giftImage.image = [UIImage imageWithData:imgData];
     [self.view addSubview:_giftImage];
     
-    _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 300, 60, 20)];
+    _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 300, 160, 20)];
     _priceLabel.textColor = [UIColor redColor];
-    _priceLabel.text = [NSString stringWithFormat:@"$ %@",self.giftModel.price];
+    _priceLabel.text = [NSString stringWithFormat:@"￥ %@",self.giftModel.price];
     [self.view addSubview:_priceLabel];
     
     UIImageView *img1 = [[UIImageView alloc] initWithFrame:CGRectMake(190, 305, 15, 15)];
@@ -97,10 +96,13 @@
     label2.text = @"可用积分";
     [self.view addSubview:label2];
     
-    _giftDiscribe = [[UITextView alloc] initWithFrame:CGRectMake(20, 339, 320, 480)];
-    _giftDiscribe.editable = NO;
+    self.giftDiscribe = [[UILabel alloc] initWithFrame:CGRectMake(10, 400, 300, 100)];
+//    [_giftDiscribe loadHTMLString:self.giftModel.content baseURL:nil];
+//    _giftDiscribe.editable = NO;
 //    _giftDiscribe.numberOfLines = 0;
-    _giftDiscribe.text = self.giftModel.content;
+    _giftDiscribe.text = self.giftModel.describe;
+    _giftDiscribe.textColor = [UIColor blackColor];
+    NSLog(@"!!!%@",_giftDiscribe.text);
     [self.view addSubview:_giftDiscribe];
     
     //两个button
@@ -116,7 +118,7 @@
     //立即报名
     _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _buyButton.frame = CGRectMake(100, 5, 120, 30);
-    [_buyButton setTitle:@"立即报名" forState:UIControlStateNormal];
+    [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
     [_buyButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [_buyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [_buyButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
@@ -129,6 +131,7 @@
 }
 -(void)buy:(id)sender {
     CJOrderController *orderControl = [[CJOrderController alloc] init];
+    orderControl.giftModel = self.giftModel;
     [self.navigationController pushViewController:orderControl animated:YES];
 }
 @end

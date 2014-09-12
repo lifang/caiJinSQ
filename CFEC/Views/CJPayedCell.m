@@ -17,6 +17,9 @@
 @synthesize numberLabel = _numberLabel;
 @synthesize sumLabel = _sumLabel;
 @synthesize deleteButton = _deleteButton;
+@synthesize cancelButton = _cancelButton;
+@synthesize payButton = _payButton;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -88,6 +91,29 @@
     _deleteButton.layer.borderWidth = 1;
     _deleteButton.layer.cornerRadius = 5;
     [self.contentView addSubview:_deleteButton];
+    
+    _payButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _payButton.frame = CGRectMake(225, 95, 60, 20);
+    [_payButton setTitle:@"立即支付" forState:UIControlStateNormal];
+    [_payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    _payButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    _payButton.layer.borderWidth = 1;
+    _payButton.layer.cornerRadius = 5;
+    _payButton.hidden = YES;
+    [self.contentView addSubview:_payButton];
+    
+    _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _cancelButton.frame = CGRectMake(225 - 20 - 60, 95, 60, 20);
+    [_cancelButton setTitle:@"取消订单" forState:UIControlStateNormal];
+    [_cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    _cancelButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    _cancelButton.layer.borderWidth = 1;
+    _cancelButton.layer.cornerRadius = 5;
+    _cancelButton.hidden = YES;
+    [self.contentView addSubview:_cancelButton];
+
     
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0,124, self.contentView.frame.size.width, 6)];

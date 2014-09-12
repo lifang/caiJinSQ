@@ -17,8 +17,11 @@
 #import "CJTermsofserviceController.h"
 #import "CJAboutUsController.h"
 #import "CJInboxController.h"
+#import "CJUserModel.h"
 @interface CJLeftViewController ()
-
+{
+    CJUserModel *user;
+}
 @end
 
 @implementation CJLeftViewController
@@ -52,6 +55,9 @@
     [_listTable setSeparatorInset:UIEdgeInsetsMake(-10, 0, 10, 0)];
     [self.view addSubview:_listTable];
 }
+-(void)viewWillAppear:(BOOL)animated {
+    user = [CJAppDelegate shareCJAppDelegate].user;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -81,7 +87,7 @@
     }else if (indexPath.row == 2) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_15@2x.png"];
         cell.leftLable.text = @"清除缓存";
-        cell.rightLable.text = @"缓存 200M";
+//        cell.rightLable.text = @"缓存 200M";
     }else if (indexPath.row == 3) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_17@2x.png"];
         cell.leftLable.text = @"联系我们";
@@ -108,7 +114,13 @@
     
     _userHeadImage = [UIButton buttonWithType:UIButtonTypeCustom];
     _userHeadImage.frame = CGRectMake(75, 25, 60, 60);
-    [_userHeadImage setImage:[UIImage imageNamed:@"首页cetui_03@2x.png"] forState:UIControlStateNormal];
+    if (user.headImage == nil) {
+        [_userHeadImage setImage:[UIImage imageNamed:@"首页cetui_03@2x.png"] forState:UIControlStateNormal];
+    }else {
+        UIImage *img = [UIImage imageWithData:user.headImage];
+        [_userHeadImage setImage:img forState:UIControlStateNormal];
+    }
+
     [_userHeadImage addTarget:self action:@selector(personalData:) forControlEvents:UIControlEventTouchUpInside];
 //    headView.backgroundColor = kColor(24, 24, 19, 1);
     [headView addSubview:_userHeadImage];

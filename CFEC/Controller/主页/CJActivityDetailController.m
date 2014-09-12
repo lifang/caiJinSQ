@@ -75,7 +75,7 @@
     NSData *imageData = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *img = [UIImage imageWithData:imageData];
     _titleImage.image = img;
-    _titleImage.backgroundColor = [UIColor orangeColor];
+    _titleImage.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_titleImage];
     
     //scrollview
@@ -84,7 +84,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13.0f],NSFontAttributeName, nil];
     CGRect rect = [self.activityModel.mobileContent boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
     NSLog(@" rect =%@, %f,%f",self.activityModel.mobileContent,rect.size.height,rect.size.width);
-    _mainScrooll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 206, 320, kScreenHeight - 206 - 37)];
+    _mainScrooll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 206, 320, kScreenHeight - 206 - 27 )];
     _mainScrooll.contentSize = CGSizeMake(320, 151 + rect.size.height);
     _mainScrooll.backgroundColor = [UIColor whiteColor];
 //    _mainScrooll.pagingEnabled = YES;

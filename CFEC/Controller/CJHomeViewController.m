@@ -131,6 +131,36 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CJActivityDetailController *detailControl = [[CJActivityDetailController alloc] init];
     detailControl.activityModel = _newsArray[indexPath.row];
+    
+//    CJUserModel *user = [CJAppDelegate shareCJAppDelegate].user;
+//    CJActivityModel *model = _newsArray[indexPath.row];
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    [dic setObject:@"2404" forKey:@"userId"];
+//    [dic setObject:@"M20140910140000" forKey:@"orderNo"];
+//    [dic setObject:model.ID forKey:@"activityId"];
+//    [dic setObject:model.title forKey:@"activityName"];
+//    [dic setObject:model.mobileContent forKey:@"activityDescribe"];
+//    [dic setObject:user.name forKey:@"name"];
+//    [dic setObject:user.email forKey:@"email"];
+//    [dic setObject:user.mobilephone forKey:@"telephone"];
+//    [dic setObject:user.companyName forKey:@"companyName"];
+//    [dic setObject:@"2000" forKey:@"price"];
+//    [dic setObject:@"2000" forKey:@"orderAmount"];
+//    [dic setObject:@"1" forKey:@"quantity"];
+//    NSError *error;
+//    NSData *data;
+//    data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    [CJRequestFormat createOrderWithOrderJson:jsonStr finished:^(ResponseStatus status, NSString *response) {
+//        if (status == 0) {
+//            NSLog(@"成功");
+//        }else if (status == 1) {
+//            NSLog(@"请求出错");
+//        }else if (status == 2) {
+//            NSLog(@"请求成功，返回出错");
+//        }
+//    }];
+    
     detailControl.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailControl animated:YES];
 }

@@ -110,11 +110,11 @@
     _shengLabel.font = [UIFont systemFontOfSize:13.0f];
     _shengLabel.text = @"北京";
     
-    _cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,50, 20)];
+    _cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,100, 20)];
     _cityLabel.font = [UIFont systemFontOfSize:13.0f];
     _cityLabel.text = @"北京";
     
-    _xianLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,50, 20)];
+    _xianLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,100, 20)];
     _xianLabel.font = [UIFont systemFontOfSize:13.0f];
     _xianLabel.text = @"东城区";
     
@@ -225,7 +225,7 @@
     }
     UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 50, 20)];
     label1.font = [UIFont systemFontOfSize:13.0f];
-    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(250, 12, 20, 20)];
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(280, 12, 20, 20)];
     img.image = [UIImage imageNamed:@"礼品箭头@2x.png"];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {

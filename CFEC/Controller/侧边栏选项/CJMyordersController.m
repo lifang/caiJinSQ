@@ -10,7 +10,12 @@
 #import "CJAppDelegate.h"
 #import "CJMainViewController.h"
 #import "CJPayedCell.h"
+#import "CJRequestFormat.h"
+#import "CJUserModel.h"
 @interface CJMyordersController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    CJUserModel *user;
+}
 @property (nonatomic ,strong) UISegmentedControl *segControl;
 @property (nonatomic, strong) UITableView *giftTable;
 @end
@@ -31,6 +36,7 @@
 {
     [super viewDidLoad];
     [self initUI];
+    [self getDateFromNet];
     // Do any additional setup after loading the view.
 }
 
@@ -45,6 +51,8 @@
     _segControl = [[UISegmentedControl alloc] initWithItems:@[@"已支付",@"待支付"]];
     _segControl.frame = CGRectMake(0, 0, 150, 20);
     _segControl.tintColor = [UIColor whiteColor];
+    _segControl.selectedSegmentIndex = 0;
+    [_segControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = _segControl;
     
     _giftTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
@@ -88,6 +96,15 @@
     if (cell == nil) {
         cell = [[CJPayedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:first];
     }
+    if (_segControl.selectedSegmentIndex == 1) {
+        cell.cancelButton.hidden = NO;
+        cell.payButton.hidden = NO;
+        cell.deleteButton.hidden = YES;
+    }else if (_segControl.selectedSegmentIndex == 0) {
+        cell.cancelButton.hidden = YES;
+        cell.payButton.hidden = YES;
+        cell.deleteButton.hidden = NO;
+    }
     cell.giftImage.image = [UIImage imageNamed:@"活动2@2x.png"];
     cell.giftTitleLabel.text = @"2014中国财务精英高峰论坛--北京站";
     cell.organizerLabel.text = @"CEFC";
@@ -103,5 +120,27 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10;
+}
+-(void)segmentAction:(UISegmentedControl*)segment {
+    if (segment.selectedSegmentIndex == 0) {
+        [_giftTable reloadData];
+    }else {
+        [_giftTable reloadData];
+    }
+}
+-(void)getDateFromNet {
+    user = [CJAppDelegate shareCJAppDelegate].user;
+    [CJRequestFormat getMobileOrderWithUserID:user.userId finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSError *error;
+            NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            NSLog(@"------%@",jsonObject);
+        }else if (status == 1) {
+            NSLog(@"请求出错");
+        }else if (status == 2) {
+            NSLog(@"请求成功，返回出错");
+        }
+    }];
 }
 @end

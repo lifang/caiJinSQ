@@ -16,12 +16,14 @@
 #import "CJJobController.h"
 #import "CJEmailController.h"
 #import "CJUserModel.h"
-@interface CJPersonaldataController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+#import "CJRequestFormat.h"
+@interface CJPersonaldataController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     CJUserModel *user;
 }
 @property (nonatomic, strong) UITableView *infoTable;
 @property (nonatomic, strong) UIActionSheet *headImageSheet;
+//@property (nonatomic, strong) UIImageView *headImage;
 
 @end
 
@@ -87,6 +89,8 @@
     _infoTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _infoTable.separatorInset = UIEdgeInsetsMake(0, -5, 0, 5);
     [self.view addSubview:_infoTable];
+//    _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 8, 25, 25)];
+
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -107,6 +111,9 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.infoName.text = @"头像";
         cell.headImage.image = [UIImage imageNamed:@"首页-个人资料_03@2x.png"];
+//        cell.headImage.hidden = YES;
+//        _headImage.backgroundColor = [UIColor redColor];
+//        [cell.contentView addSubview:_headImage];
         return cell;
     }else if (indexPath.row == 1) {
         static NSString *ID = @"two";
@@ -175,7 +182,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-        NSLog(@"换头像");
+//        NSLog(@"换头像");
         _headImageSheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照上传",@"从相册上传", nil];
         [_headImageSheet showInView:self.view];
     }else if (indexPath.row == 1) {
@@ -232,4 +239,46 @@
         }
     }
 }
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSInteger sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (buttonIndex == 0) {
+        NSLog(@"拍照上传");
+        sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else if (buttonIndex == 1) {
+        NSLog(@"图片库");
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType] &&
+        buttonIndex != actionSheet.cancelButtonIndex) {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
+}
+#pragma mark - UIImagePickerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage *editImage = [info objectForKey:UIImagePickerControllerEditedImage];
+//    UIImage *resizeImage = [FXResizeImage scaleImage:editImage];
+//    _headImage.image = editImage;
+//    _headImage.backgroundColor = [UIColor redColor];
+    NSData *data = UIImageJPEGRepresentation(editImage, 1.0);
+    user = [CJAppDelegate shareCJAppDelegate].user;
+    user.headImage = data;
+    NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [CJRequestFormat uploadUserHeaderPhotoWithUserID:user.userId headerImageString:dataStr finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSLog(@"请求成功");
+        }else if (status == 1) {
+            NSLog(@"请求失败");
+        }else if (status == 2) {
+            NSLog(@"请求成功,返回失败");
+        }
+    }];
+}
+
 @end

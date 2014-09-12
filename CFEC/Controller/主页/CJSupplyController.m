@@ -49,7 +49,7 @@
     [self initUI];
     _user = [CJAppDelegate shareCJAppDelegate].user;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(labelChange:) name:@"message" object:nil];
-    self.number = 0;
+    self.number = 1;
     // Do any additional setup after loading the view.
 }
 -(void)labelChange:(NSNotification *)notification {
@@ -58,8 +58,8 @@
     }else {
         _number--;
     }
-    if (_number < 0) {
-        _number = 0;
+    if (_number <= 1) {
+        _number = 1;
         return;
     }
     _numberLabel.text = [NSString stringWithFormat:@"%i",_number];
@@ -149,7 +149,7 @@
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 200, 30)];
     _priceLabel.font = [UIFont systemFontOfSize:12.0f];
     int price = [_activity.meetingCost intValue];
-    _priceLabel.text = [NSString stringWithFormat:@"%d$",_number*price];
+    _priceLabel.text = [NSString stringWithFormat:@"￥ %d",_number*price];
     [footview addSubview:_priceLabel];
     UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 60, 30)];
     label3.font = [UIFont systemFontOfSize:13.0f];

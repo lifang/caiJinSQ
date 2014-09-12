@@ -41,7 +41,7 @@
     [super viewDidLoad];
     [self initUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNumber:) name:@"message" object:nil];
-    self.number = 0;
+    self.number = 1;
     // Do any additional setup after loading the view.
 }
 
@@ -54,14 +54,14 @@
     if ([notification.object isEqualToString:@"0"]) {
         self.number++;
     }else if ([notification.object isEqualToString:@"1"]) {
-        if (self.number < 1) {
-            self.number = 0;
+        if (self.number <=1) {
+            self.number = 1;
         }else {
             self.number--;
         }
     }
     self.numberLabel.text = [NSString stringWithFormat:@"%d",self.number];
-    self.priceLabel.text = [NSString stringWithFormat:@""];
+    [_orderTable reloadData];
 }
 -(void)setLeftNavBarItemWithImageName:(NSString *)name {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -174,7 +174,7 @@
     [headview addSubview:label1];
     _giftNameLable = [[UILabel alloc] initWithFrame:CGRectMake(80, 20, 250, 30)];
     _giftNameLable.font = [UIFont systemFontOfSize:12.0f];
-    _giftNameLable.text = @"商品名称";
+    _giftNameLable.text = self.giftModel.name;
     [headview addSubview:_giftNameLable];
     UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 60, 30)];
     label2.font = [UIFont systemFontOfSize:12.0f];
@@ -182,7 +182,8 @@
     [headview addSubview:label2];
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 200, 30)];
     _priceLabel.font = [UIFont systemFontOfSize:12.0f];
-    _priceLabel.text = [NSString stringWithFormat:@"0 $"];
+    int price = [self.giftModel.price intValue];
+    _priceLabel.text = [NSString stringWithFormat:@"%d ￥",_number * price];
     [headview addSubview:_priceLabel];
     UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 60, 30)];
     label3.font = [UIFont systemFontOfSize:13.0f];

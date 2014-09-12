@@ -16,4 +16,6 @@
 @property (nonatomic, strong) UILabel *numberLabel;
 @property (nonatomic, strong) UILabel *sumLabel;
 @property (nonatomic, strong) UIButton *deleteButton;
+@property (nonatomic, strong) UIButton *cancelButton;
+@property (nonatomic, strong) UIButton *payButton;
 @end

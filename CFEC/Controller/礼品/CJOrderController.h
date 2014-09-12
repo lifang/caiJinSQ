@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CJGiftModel.h"
 @interface CJOrderController : UIViewController
-
+@property (nonatomic, strong) CJGiftModel *giftModel;
 @end

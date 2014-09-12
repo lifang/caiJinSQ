@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSString *companyEmail;
 //公司名称
 @property (nonatomic, strong) NSString *companyName;
+//头像
+@property (nonatomic, strong) NSData *headImage;
 //注册邮箱
 @property (nonatomic, strong) NSString *email;
 //giftTicet

@@ -86,7 +86,7 @@
  }
  */
 -(void)getDate {
-    [CJRequestFormat getGoodWithType:GoodsLife finished:^(ResponseStatus status, NSString *response) {
+    [CJRequestFormat getMobileGoodWithType:GoodsLife finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
             //            NSLog(@"%@",response);
             allGiftArray = [NSMutableArray array];
@@ -149,7 +149,7 @@
     CJGiftModel *model = allGiftArray[indexPath.row];
     [cell.giftImage sd_setImageWithURL:[NSURL URLWithString:model.picture] placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageRefreshCached : 0];
     cell.giftNameLabel.text = model.name;
-    cell.priceLabel.text = [NSString stringWithFormat:@"$%@",model.price];
+    cell.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.price];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,7 +158,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CJGiftDetailController *giftDetailControl = [[CJGiftDetailController alloc] init];
+    giftDetailControl.giftModel = allGiftArray[indexPath.row];
     [self.navigationController pushViewController:giftDetailControl animated:YES];
 }
 
