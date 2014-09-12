@@ -60,7 +60,7 @@
     _filtrateSegment.userInteractionEnabled = YES;
     [_filtrateSegment addTarget:self action:@selector(selectIndex:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_filtrateSegment];
-    _activityTable = [[UITableView alloc] initWithFrame:CGRectMake(0 , 104 + 10, self.view.frame.size.width, self.view.frame.size.height - 80) style:UITableViewStyleGrouped];
+    _activityTable = [[UITableView alloc] initWithFrame:CGRectMake(0 , 104 + 10, self.view.frame.size.width, kScreenHeight - 114 - 49) style:UITableViewStylePlain];
     _activityTable.delegate = self;
     _activityTable.dataSource = self;
     _activityTable.backgroundColor = [UIColor whiteColor];
@@ -196,13 +196,13 @@
     return [contactList sortedArrayUsingComparator:^NSComparisonResult(CJActivityModel *model1, CJActivityModel *model2) {
         NSDate *date1 = [self dateWithString:model1.startTime];
         NSDate *date2 = [self dateWithString:model2.startTime];
-        //        if (!date1 && date2) {
-        //            return NSOrderedDescending;
-        //        }
-        //        if (date1 && !date2) {
-        //            return NSOrderedAscending;
-        //        }
-        NSComparisonResult result = [date1 compare:date2];
+        if (!date1 && date2) {
+            return NSOrderedDescending;
+        }
+        if (date1 && !date2) {
+            return NSOrderedAscending;
+        }
+        NSComparisonResult result = [date2 compare:date1];
         return result;
     }];
 }
@@ -259,15 +259,5 @@
     }
     tableArray = okArr;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

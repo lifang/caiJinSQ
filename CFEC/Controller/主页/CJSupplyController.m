@@ -10,6 +10,12 @@
 #import "CJPayController.h"
 #import "CJSupplyCell.h"
 #import "CJAppDelegate.h"
+#import "AlixLibService.h"
+#import "AlixPayResult.h"
+#import "CJCreatePayOrder.h"
+#import "PartnerConfig.h"
+#import "DataVerifier.h"
+
 @interface CJSupplyController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *supplyTable;
 @property (nonatomic, strong) UILabel *activityNameLable;
@@ -46,26 +52,12 @@
     self.navigationItem.title = @"报名";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
+    self.number = 1;
     [self initUI];
     _user = [CJAppDelegate shareCJAppDelegate].user;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(labelChange:) name:@"message" object:nil];
-    self.number = 1;
     // Do any additional setup after loading the view.
 }
--(void)labelChange:(NSNotification *)notification {
-    if ([notification.object  isEqual: @"1"] ) {
-        _number++;
-    }else {
-        _number--;
-    }
-    if (_number <= 1) {
-        _number = 1;
-        return;
-    }
-    _numberLabel.text = [NSString stringWithFormat:@"%i",_number];
-    [_supplyTable reloadData];
 
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -134,29 +126,34 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footview = [[UIView alloc]init];
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 60, 30)];
-    label1.font = [UIFont systemFontOfSize:12.0f];
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 80, 30)];
+    label1.font = [UIFont boldSystemFontOfSize:14.0f];
     label1.text = @"活动名称:";
     [footview addSubview:label1];
-    _activityNameLable = [[UILabel alloc] initWithFrame:CGRectMake(80, 20, 250, 30)];
-    _activityNameLable.font = [UIFont systemFontOfSize:12.0f];
+    
+    _activityNameLable = [[UILabel alloc] initWithFrame:CGRectMake(100, 20, 210, 30)];
+    _activityNameLable.font = [UIFont systemFontOfSize:14.0f];
     _activityNameLable.text = _activity.title;
     [footview addSubview:_activityNameLable];
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 60, 30)];
-    label2.font = [UIFont systemFontOfSize:12.0f];
-    label2.text = @"活动价格:";
+    
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 80, 30)];
+    label2.font = [UIFont boldSystemFontOfSize:14.0f];
+    label2.text = @"活动价格";
     [footview addSubview:label2];
-    _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 200, 30)];
-    _priceLabel.font = [UIFont systemFontOfSize:12.0f];
-    int price = [_activity.meetingCost intValue];
-    _priceLabel.text = [NSString stringWithFormat:@"￥ %d",_number*price];
+    
+    _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 60, 200, 30)];
+    _priceLabel.font = [UIFont systemFontOfSize:14.0f];
+    float price = [_activity.meetingCost floatValue];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * price];
     [footview addSubview:_priceLabel];
-    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 60, 30)];
-    label3.font = [UIFont systemFontOfSize:13.0f];
-    label3.text = @"购买数量:";
+    
+    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 80, 30)];
+    label3.font = [UIFont boldSystemFontOfSize:14.0f];
+    label3.text = @"购买数量";
     [footview addSubview:label3];
+    
     _maxBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _maxBt.frame = CGRectMake(80, 90, 40, 30);
+    _maxBt.frame = CGRectMake(100, 100, 40, 30);
     _maxBt.backgroundColor = kColor(135, 135, 135, 1);
     [_maxBt setTitle:@"+" forState:UIControlStateNormal];
     [_maxBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -165,15 +162,15 @@
     _maxBt.layer.cornerRadius = 8.0f;
     [footview addSubview:_maxBt];
     //数量显示
-    _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 90, 35, 30)];
+    _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 100, 35, 30)];
     _numberLabel.textAlignment = NSTextAlignmentCenter;
-    _numberLabel.font = [UIFont systemFontOfSize:12.0f];
+    _numberLabel.font = [UIFont systemFontOfSize:14.0f];
     _numberLabel.layer.cornerRadius = 10.0f;
     _numberLabel.layer.backgroundColor = [UIColor whiteColor].CGColor;
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
     [footview addSubview:_numberLabel];
     _minBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _minBt.frame = CGRectMake(175, 90, 40, 30);
+    _minBt.frame = CGRectMake(195, 100, 40, 30);
     _minBt.backgroundColor = kColor(135, 135, 135, 1);
     [_minBt setTitle:@"-" forState:UIControlStateNormal];
     [_minBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -186,7 +183,7 @@
     _payBt = [UIButton buttonWithType:UIButtonTypeCustom];
     _payBt.frame = CGRectMake(0, 150, self.view.frame.size.width, 40);
     _payBt.backgroundColor = kColor(228, 77, 40, 1);
-    [_payBt setTitle:@"支付" forState:UIControlStateNormal];
+    [_payBt setTitle:@"使用支付宝支付" forState:UIControlStateNormal];
     [_payBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_payBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_payBt addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
@@ -198,27 +195,60 @@
     return  300.0f;
 }
 -(void)add:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"message" object:@"1"];
+    _number ++;
+    _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_activity.meetingCost floatValue]];
 }
 -(void)reduce:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"message" object:@"0"];
+    if (_number >= 1) {
+        _number --;
+    }
+    _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_activity.meetingCost floatValue]];
 }
 -(void)pay:(id)sender {
-    CJPayController *payControl = [[CJPayController alloc] init];
-    [self.navigationController pushViewController:payControl animated:YES];
+//    CJPayController *payControl = [[CJPayController alloc] init];
+//    [self.navigationController pushViewController:payControl animated:YES];
+    NSString *orderString = [CJCreatePayOrder createActivityOrderWithActivity:_activity
+                                                                  countNumber:_number];
+    [AlixLibService payOrder:orderString
+                   AndScheme:kAlipayScheme
+                     seletor:@selector(payResult:)
+                      target:self];
 }
+
+#pragma mark - 支付结果
+
+- (void)payResult:(NSString *)resultString {
+    AlixPayResult *result = [[AlixPayResult alloc] initWithString:resultString];
+    if (result) {
+        if (result.statusCode == 9000) {
+            id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(AlipayPubKey);
+			if ([verifier verifyString:result.resultString withSign:result.signString]) {
+                //验证签名成功，交易结果无篡改
+                NSLog(@"success");
+			}
+        }
+        else if (result.statusCode == 8000) {
+            NSLog(@"正在处理");
+        }
+        else if (result.statusCode == 4000) {
+            NSLog(@"支付失败");
+        }
+        else if (result.statusCode == 6001) {
+            NSLog(@"中途取消");
+        }
+        else if (result.statusCode == 6002) {
+            NSLog(@"网络出错");
+        }
+    }
+}
+
+
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -78,7 +78,7 @@
     UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:vc4];
     [CJAppDelegate setNavigationBarTinColor:nav4];
     
-    self.viewControllers = [NSArray arrayWithObjects:nav1,nav2,nav3,nav4, nil];
+    self.viewControllers = [NSArray arrayWithObjects:nav1,nav3,nav4,nav2, nil];
 }
 
 @end

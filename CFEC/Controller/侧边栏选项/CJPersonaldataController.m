@@ -269,7 +269,7 @@
     NSData *data = UIImageJPEGRepresentation(editImage, 1.0);
     user = [CJAppDelegate shareCJAppDelegate].user;
     user.headImage = data;
-    NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *dataStr = [data base64EncodedStringWithOptions:0];
     [CJRequestFormat uploadUserHeaderPhotoWithUserID:user.userId headerImageString:dataStr finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
             NSLog(@"请求成功");

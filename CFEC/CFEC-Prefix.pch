@@ -9,6 +9,9 @@
 //屏幕高度
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
+//url scheme
+#define kAlipayScheme @"AlipayCallBack"
+
 #import <Availability.h>
 
 #ifndef __IPHONE_3_0

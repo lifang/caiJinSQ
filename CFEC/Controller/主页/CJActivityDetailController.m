@@ -71,10 +71,7 @@
 }
 -(void)initUI {
     _titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 270-64)];
-    NSURL *url = [NSURL URLWithString:_activityModel.pictures];
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL:url];
-    UIImage *img = [UIImage imageWithData:imageData];
-    _titleImage.image = img;
+    [self downloadDetailImageWithURL:_activityModel.pictures];
     _titleImage.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_titleImage];
     
@@ -84,7 +81,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13.0f],NSFontAttributeName, nil];
     CGRect rect = [self.activityModel.mobileContent boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
     NSLog(@" rect =%@, %f,%f",self.activityModel.mobileContent,rect.size.height,rect.size.width);
-    _mainScrooll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 206, 320, kScreenHeight - 206 - 27 )];
+    _mainScrooll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 206, 320, kScreenHeight - 206 - 37 )];
     _mainScrooll.contentSize = CGSizeMake(320, 151 + rect.size.height);
     _mainScrooll.backgroundColor = [UIColor whiteColor];
 //    _mainScrooll.pagingEnabled = YES;
@@ -190,9 +187,21 @@
     _contactBt.layer.borderColor = [UIColor greenColor].CGColor;
     _contactBt.layer.masksToBounds = YES;
     [bottomView addSubview:_contactBt];
-
-    
 }
+
+- (void)downloadDetailImageWithURL:(NSString *)urlstring {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *url = [NSURL URLWithString:urlstring];
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *image = [UIImage imageWithData:imageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (image) {
+                _titleImage.image = image;
+            }
+        });
+    });
+}
+
 //textview首行缩进
 -(void)textViewSuoJin:(UITextView *)textview
 {
@@ -247,15 +256,5 @@
         //分享给微信好友
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

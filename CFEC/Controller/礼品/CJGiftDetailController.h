@@ -10,4 +10,8 @@
 #import "CJGiftModel.h"
 @interface CJGiftDetailController : UIViewController
 @property (nonatomic, strong) CJGiftModel *giftModel;
+
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+
 @end

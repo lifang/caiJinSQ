@@ -10,7 +10,7 @@
 @implementation CJAppDelegate
 
 + (CJAppDelegate *)shareCJAppDelegate {
-    return [[UIApplication sharedApplication] delegate];
+    return (CJAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
