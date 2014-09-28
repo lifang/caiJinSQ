@@ -18,6 +18,8 @@
 #import "CJAboutUsController.h"
 #import "CJInboxController.h"
 #import "CJUserModel.h"
+#import "UIImageView+WebCache.h"
+#import "SVProgressHUD.h"
 @interface CJLeftViewController ()
 {
     CJUserModel *user;
@@ -88,7 +90,9 @@
     }else if (indexPath.row == 2) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_15@2x.png"];
         cell.leftLable.text = @"清除缓存";
-//        cell.rightLable.text = @"缓存 200M";
+        NSInteger interger = [[SDImageCache sharedImageCache] getSize];
+        float getCache = interger/1024/1024;
+        cell.rightLable.text = [NSString stringWithFormat:@"%.2fM",getCache];
     }else if (indexPath.row == 3) {
         cell.leftImage.image = [UIImage imageNamed:@"首页cetui_17@2x.png"];
         cell.leftLable.text = @"联系我们";
@@ -157,6 +161,8 @@
         [CJAppDelegate setNavigationBarTinColor:nav];
         [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
     }else if (indexPath.row == 2) {
+        [SVProgressHUD showWithStatus:@"请稍后..."];
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(stopAction) userInfo:nil repeats:NO];
     }else if (indexPath.row == 3) {
         CJContactusController *contactControl = [[CJContactusController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactControl];
@@ -191,4 +197,13 @@
     [CJAppDelegate setNavigationBarTinColor:nav];
     [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:nav withCloseAnimation:YES completion:nil];
 }
+-(void)stopAction {
+    [SVProgressHUD dismissWithSuccess:@"清除成功"];
+    [[SDImageCache sharedImageCache] cleanDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+    [[SDImageCache sharedImageCache] clearDisk];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    [_listTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 @end

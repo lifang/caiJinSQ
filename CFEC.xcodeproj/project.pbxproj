@@ -18,6 +18,8 @@
 		3A2058A019B98EAA00EBDF5F /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20589F19B98EAA00EBDF5F /* area.plist */; };
 		3A2058A219B9948000EBDF5F /* 礼品箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A2058A119B9948000EBDF5F /* 礼品箭头@2x.png */; };
 		3A2A0A4919B5B41100F669E6 /* CJUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A0A4819B5B41100F669E6 /* CJUserModel.m */; };
+		3A2E03D619D841CB00E0BB39 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */; };
+		3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */; };
 		3A34EA1319BEA7450083773C /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A34EA1219BEA7450083773C /* save@2x.png */; };
 		3A3A194319B18A0E0021F6F5 /* CJCampController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A194219B18A0E0021F6F5 /* CJCampController.m */; };
 		3A49C3F919AF453100FFA307 /* CJAllgiftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3F819AF453100FFA307 /* CJAllgiftController.m */; };
@@ -233,6 +235,9 @@
 		3A2058A119B9948000EBDF5F /* 礼品箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "礼品箭头@2x.png"; sourceTree = "<group>"; };
 		3A2A0A4719B5B41100F669E6 /* CJUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUserModel.h; sourceTree = "<group>"; };
 		3A2A0A4819B5B41100F669E6 /* CJUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUserModel.m; sourceTree = "<group>"; };
+		3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		3A2E03D419D841CB00E0BB39 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		3A34EA1219BEA7450083773C /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
 		3A3A194119B18A0E0021F6F5 /* CJCampController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCampController.h; sourceTree = "<group>"; };
 		3A3A194219B18A0E0021F6F5 /* CJCampController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCampController.m; sourceTree = "<group>"; };
@@ -576,6 +581,16 @@
 				3ACC7B1419D7CF810093690E /* CJAddressModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3A2E03D219D841CB00E0BB39 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */,
+				3A2E03D419D841CB00E0BB39 /* SVProgressHUD.h */,
+				3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		3A49C3F619AF451000FFA307 /* 礼品 */ = {
@@ -1184,6 +1199,7 @@
 		77DAF05419C2983C0045E2B4 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3A2E03D219D841CB00E0BB39 /* SVProgressHUD */,
 				3ACC7B0F19D7CF0B0093690E /* ChineseToPinyin */,
 				77DAF05519C299A80045E2B4 /* CJCreatePayOrder.h */,
 				77DAF05619C299A80045E2B4 /* CJCreatePayOrder.m */,
@@ -1293,6 +1309,7 @@
 				3A7C51A519AAFE1100EBFDE9 /* 首页_24.png in Resources */,
 				3A54F6E319B442DA00819DE8 /* 首页-个人资料2_03@2x.png in Resources */,
 				3A7C51A019AAFE1100EBFDE9 /* 首页_12.png in Resources */,
+				3A2E03D619D841CB00E0BB39 /* SVProgressHUD.bundle in Resources */,
 				3A7C51B419AB10EC00EBFDE9 /* 礼品_03@2x.png in Resources */,
 				3A7C519E19AAFE1100EBFDE9 /* 首页_06@2x.png in Resources */,
 				3A7C51B719AB178F00EBFDE9 /* 活动_03@2x.png in Resources */,
@@ -1397,6 +1414,7 @@
 				3A4BCE4919AC2B2C0027C023 /* CJActivityDetailController.m in Sources */,
 				3A6B8DDE19B06DA900CF7E9E /* CJAboutUsController.m in Sources */,
 				771AA7EF19A2E4C0005B9AAE /* MMDrawerBarButtonItem.m in Sources */,
+				3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */,
 				3A7C514319AAFD3E00EBFDE9 /* CJHomeViewController.m in Sources */,
 				3A7C514619AAFD3E00EBFDE9 /* CJCompanyController.m in Sources */,
 				3AFE669219B6C4A4004009E0 /* NSData+ImageContentType.m in Sources */,
