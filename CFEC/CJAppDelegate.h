@@ -11,8 +11,9 @@
 #import "CJRootViewController.h"
 #import "CJUserModel.h"
 #import "WXApi.h"
+#import "WeiboSDK.h"
 
-@interface CJAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
+@interface CJAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,WeiboSDKDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

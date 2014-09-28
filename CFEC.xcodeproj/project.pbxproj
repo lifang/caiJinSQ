@@ -130,6 +130,12 @@
 		3A7C51CC19AB238A00EBFDE9 /* 首页cetui_24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51C319AB238A00EBFDE9 /* 首页cetui_24@2x.png */; };
 		3A7C51CD19AB238A00EBFDE9 /* 首页cetui_26@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51C419AB238A00EBFDE9 /* 首页cetui_26@2x.png */; };
 		3A7C51CF19AB276800EBFDE9 /* 我的订单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51CE19AB276800EBFDE9 /* 我的订单@2x.png */; };
+		3ACC7B0919D7A9C00093690E /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */; };
+		3ACC7B0A19D7A9C00093690E /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3ACC7B0719D7A9C00093690E /* WeiboSDK.bundle */; };
+		3ACC7B0C19D7B6F10093690E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0B19D7B6F10093690E /* AddressBook.framework */; };
+		3ACC7B0E19D7B6F80093690E /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */; };
+		3ACC7B1219D7CF0B0093690E /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */; };
+		3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC7B1419D7CF810093690E /* CJAddressModel.m */; };
 		3AFE666E19B6C02E004009E0 /* CJActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE666D19B6C02E004009E0 /* CJActivityModel.m */; };
 		3AFE669119B6C4A4004009E0 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE667119B6C4A4004009E0 /* MKAnnotationView+WebCache.m */; };
 		3AFE669219B6C4A4004009E0 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE667319B6C4A4004009E0 /* NSData+ImageContentType.m */; };
@@ -385,6 +391,15 @@
 		3A7C51C319AB238A00EBFDE9 /* 首页cetui_24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页cetui_24@2x.png"; sourceTree = "<group>"; };
 		3A7C51C419AB238A00EBFDE9 /* 首页cetui_26@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页cetui_26@2x.png"; sourceTree = "<group>"; };
 		3A7C51CE19AB276800EBFDE9 /* 我的订单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的订单@2x.png"; sourceTree = "<group>"; };
+		3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		3ACC7B0719D7A9C00093690E /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		3ACC7B0819D7A9C00093690E /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		3ACC7B0B19D7B6F10093690E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3ACC7B1019D7CF0B0093690E /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
+		3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
+		3ACC7B1319D7CF810093690E /* CJAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAddressModel.h; sourceTree = "<group>"; };
+		3ACC7B1419D7CF810093690E /* CJAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAddressModel.m; sourceTree = "<group>"; };
 		3AFE666C19B6C02E004009E0 /* CJActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJActivityModel.h; sourceTree = "<group>"; };
 		3AFE666D19B6C02E004009E0 /* CJActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJActivityModel.m; sourceTree = "<group>"; };
 		3AFE667019B6C4A4004009E0 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -516,9 +531,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACC7B0E19D7B6F80093690E /* AddressBookUI.framework in Frameworks */,
+				3ACC7B0C19D7B6F10093690E /* AddressBook.framework in Frameworks */,
 				77DAF02E19C295B80045E2B4 /* AlipayRsaLib.a in Frameworks */,
 				77A6389C19AF210F00584C97 /* libxml2.2.dylib in Frameworks */,
 				771C0E9519AB133D0065D46F /* MobileCoreServices.framework in Frameworks */,
+				3ACC7B0919D7A9C00093690E /* libWeiboSDK.a in Frameworks */,
 				3A63634119B8044300D818FB /* libWeChatSDK.a in Frameworks */,
 				771C0E9319AB13080065D46F /* libz.1.2.5.dylib in Frameworks */,
 				771C0E9119AB12F10065D46F /* SystemConfiguration.framework in Frameworks */,
@@ -554,6 +572,8 @@
 				3AFE666D19B6C02E004009E0 /* CJActivityModel.m */,
 				3A1B847619BC23D000BF6F21 /* CJGiftModel.h */,
 				3A1B847719BC23D000BF6F21 /* CJGiftModel.m */,
+				3ACC7B1319D7CF810093690E /* CJAddressModel.h */,
+				3ACC7B1419D7CF810093690E /* CJAddressModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -879,6 +899,26 @@
 			path = "首页侧推";
 			sourceTree = "<group>";
 		};
+		3ACC7B0519D7A9C00093690E /* libWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */,
+				3ACC7B0719D7A9C00093690E /* WeiboSDK.bundle */,
+				3ACC7B0819D7A9C00093690E /* WeiboSDK.h */,
+			);
+			name = libWeiboSDK;
+			path = AliPay/libWeiboSDK;
+			sourceTree = "<group>";
+		};
+		3ACC7B0F19D7CF0B0093690E /* ChineseToPinyin */ = {
+			isa = PBXGroup;
+			children = (
+				3ACC7B1019D7CF0B0093690E /* ChineseToPinyin.h */,
+				3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */,
+			);
+			path = ChineseToPinyin;
+			sourceTree = "<group>";
+		};
 		3AFE666F19B6C4A4004009E0 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -941,6 +981,8 @@
 		771AA7AE19A2E22A005B9AAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */,
+				3ACC7B0B19D7B6F10093690E /* AddressBook.framework */,
 				77A6389B19AF210F00584C97 /* libxml2.2.dylib */,
 				771C0E9219AB13080065D46F /* libz.1.2.5.dylib */,
 				771C0E9419AB133D0065D46F /* MobileCoreServices.framework */,
@@ -1013,6 +1055,7 @@
 		771AA7E419A2E4B6005B9AAE /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				3ACC7B0519D7A9C00093690E /* libWeiboSDK */,
 				77DAF02A19C295690045E2B4 /* AliPay */,
 				3A63633D19B8044300D818FB /* WeChatSDK_64 */,
 				3AFE666F19B6C4A4004009E0 /* SDWebImage */,
@@ -1141,6 +1184,7 @@
 		77DAF05419C2983C0045E2B4 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3ACC7B0F19D7CF0B0093690E /* ChineseToPinyin */,
 				77DAF05519C299A80045E2B4 /* CJCreatePayOrder.h */,
 				77DAF05619C299A80045E2B4 /* CJCreatePayOrder.m */,
 				77DAF05819C2E2830045E2B4 /* NSDataAdditions.m */,
@@ -1275,6 +1319,7 @@
 				3A7C51C819AB238A00EBFDE9 /* 首页cetui_15@2x.png in Resources */,
 				3A7C519619AAFE1100EBFDE9 /* 时间2@2x.png in Resources */,
 				3A7C51C919AB238A00EBFDE9 /* 首页cetui_17@2x.png in Resources */,
+				3ACC7B0A19D7A9C00093690E /* WeiboSDK.bundle in Resources */,
 				3A7C518F19AAFE1100EBFDE9 /* 首页-个人资料_03-18@2x.png in Resources */,
 				3A7C51B119AB10EC00EBFDE9 /* 礼品_03-13@2x.png in Resources */,
 				3A7C51A319AAFE1100EBFDE9 /* 首页_22.png in Resources */,
@@ -1318,6 +1363,7 @@
 				3A63635119B84CAC00D818FB /* CJGiftDetailController.m in Sources */,
 				3A7C514219AAFD3E00EBFDE9 /* CJGiftController.m in Sources */,
 				3A7C51BA19AB1C3300EBFDE9 /* CJleftListCell.m in Sources */,
+				3ACC7B1219D7CF0B0093690E /* ChineseToPinyin.m in Sources */,
 				3A7C515319AAFD7C00EBFDE9 /* CJCompleteInfoCell.m in Sources */,
 				3A54F6DB19B43A7D00819DE8 /* CJSchoolViewController.m in Sources */,
 				3A1B848119BC386600BF6F21 /* CBookController.m in Sources */,
@@ -1403,6 +1449,7 @@
 				771C0E7E19AB07370065D46F /* ASIDataDecompressor.m in Sources */,
 				771C0E7F19AB07370065D46F /* ASIDownloadCache.m in Sources */,
 				3A7C515219AAFD7C00EBFDE9 /* CJActivityCell.m in Sources */,
+				3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */,
 				3AFE669519B6C4A4004009E0 /* SDWebImageDecoder.m in Sources */,
 				3AFE669719B6C4A4004009E0 /* SDWebImageDownloaderOperation.m in Sources */,
 				3A7C512519AAFD0300EBFDE9 /* CJMainViewController.m in Sources */,
@@ -1546,8 +1593,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CFEC/Library/WeChatSDK_64",
 					"$(PROJECT_DIR)/CFEC/Library/AliPay",
+					"$(PROJECT_DIR)/CFEC/Library/AliPay/libWeiboSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1575,8 +1624,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CFEC/Library/WeChatSDK_64",
 					"$(PROJECT_DIR)/CFEC/Library/AliPay",
+					"$(PROJECT_DIR)/CFEC/Library/AliPay/libWeiboSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

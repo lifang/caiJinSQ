@@ -26,6 +26,9 @@
     _allActivityArray = [NSArray array];
     //向微信注册id
     [WXApi registerApp:@"wx97aebc5a0dae2501" withDescription:@"CEFC 1.0"];
+    //向新浪微博注册id
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:@"1652382296"];
     return YES;
 }
 //设置导航栏颜色
@@ -54,7 +57,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         alert.tag = 1000;
         [alert show];
-//        [alert release];
     }
     else if([req isKindOfClass:[ShowMessageFromWXReq class]])
     {
@@ -69,7 +71,6 @@
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-//        [alert release];
     }
     else if([req isKindOfClass:[LaunchFromWXReq class]])
     {
@@ -79,17 +80,40 @@
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
-//        [alert release];
+    }
+}
+//微博返回的状态
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+        NSString *title = @"发送结果";
+        if (response.statusCode == 0) {
+            title = @"发送成功";
+        }else if (response.statusCode == -1) {
+            title = @"发送失败";
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
 }
 //如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面
 -(void)onResp:(BaseResp *)resp
 {
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
-        NSString *strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
-        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+        NSString *strTitle;
+//        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+        if (resp.errCode == 0) {
+            strTitle = @"发送成功";
+        }else {
+            strTitle = @"发送失败";
+        }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
@@ -125,8 +149,12 @@
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL isSuc = [WXApi handleOpenURL:url delegate:self];
-    NSLog(@"url %@ isSuc %d",url,isSuc == YES ? 1 : 0);
-    return  isSuc;
+    if ([url.scheme isEqualToString:@"wx97aebc5a0dae2501"]) {
+        BOOL isSuc = [WXApi handleOpenURL:url delegate:self];
+        NSLog(@"url %@ isSuc %d",url,isSuc == YES ? 1 : 0);
+        return  isSuc;
+    }else {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
 }
 @end

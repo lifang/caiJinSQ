@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIButton *hotGiftBt;//热门礼物
 @property (nonatomic, strong) UIButton *serviceBt;//专业服务
 
+@property (nonatomic, strong) UIScrollView *scroll;
+
 @end
 
 @implementation CJGiftController
@@ -56,41 +58,48 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)initUI {
+    
+    _scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kScreenHeight - 40)];
+    _scroll.contentSize = CGSizeMake(self.view.frame.size.width, 134 + 382 - 84);
+    _scroll.showsHorizontalScrollIndicator = NO;
+    _scroll.showsVerticalScrollIndicator = NO;
+    [self.view addSubview:_scroll];
+    
     _allGiftBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _allGiftBt.frame = CGRectMake(15, 84, 134, 134);
+    _allGiftBt.frame = CGRectMake(15, 84-40-10, 134, 134);
     [_allGiftBt setBackgroundImage:[UIImage imageNamed:@"礼品_03-06@2x.png"] forState:UIControlStateNormal];
     [_allGiftBt addTarget:self action:@selector(allGiftAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_allGiftBt];
+    [_scroll addSubview:_allGiftBt];
     
     _applianceBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _applianceBt.frame = CGRectMake(164, 84, 134, 134);
+    _applianceBt.frame = CGRectMake(164, 84-40-10, 134, 134);
     [_applianceBt setBackgroundImage:[UIImage imageNamed:@"礼品_03@2x.png"] forState:UIControlStateNormal];
     [_applianceBt addTarget:self action:@selector(applianceAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_applianceBt];
+    [_scroll addSubview:_applianceBt];
     
     _lifeBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _lifeBt.frame = CGRectMake(15, 233, 134, 134);
+    _lifeBt.frame = CGRectMake(15, 233-40-10, 134, 134);
     [_lifeBt setBackgroundImage:[UIImage imageNamed:@"礼品_03-11@2x.png"] forState:UIControlStateNormal];
     [_lifeBt addTarget:self action:@selector(lifeAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_lifeBt];
+    [_scroll addSubview:_lifeBt];
     
     _bookBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _bookBt.frame = CGRectMake(164, 233, 134, 134);
+    _bookBt.frame = CGRectMake(164, 233-40-10, 134, 134);
     [_bookBt setBackgroundImage:[UIImage imageNamed:@"礼品_03-13@2x.png"] forState:UIControlStateNormal];
     [_bookBt addTarget:self action:@selector(bookAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_bookBt];
+    [_scroll addSubview:_bookBt];
     
     _hotGiftBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _hotGiftBt.frame = CGRectMake(15, 382, 134, 134);
+    _hotGiftBt.frame = CGRectMake(15, 382-40-10, 134, 134);
     [_hotGiftBt setBackgroundImage:[UIImage imageNamed:@"礼品_03-17@2x.png"] forState:UIControlStateNormal];
     [_hotGiftBt addTarget:self action:@selector(hotGiftAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_hotGiftBt];
+    [_scroll addSubview:_hotGiftBt];
     
     _serviceBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    _serviceBt.frame = CGRectMake(164, 382, 134, 134);
+    _serviceBt.frame = CGRectMake(164, 382-40-10, 134, 134);
     [_serviceBt setBackgroundImage:[UIImage imageNamed:@"礼品_03-19@2x.png"] forState:UIControlStateNormal];
     [_serviceBt addTarget:self action:@selector(serviceAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_serviceBt];
+    [_scroll addSubview:_serviceBt];
 
 
 }

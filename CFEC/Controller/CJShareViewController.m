@@ -78,11 +78,12 @@
 -(void)addressAction:(id)sender {
     NSLog(@"邀请通讯录好友");
     CJAddressController *addressControl = [[CJAddressController alloc] init];
+    addressControl.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addressControl animated:YES];
 }
 -(void)weiboAction:(id)sender {
     NSLog(@"邀请微博好友");
-    _sinaSheet = [[UIActionSheet alloc] initWithTitle:@"您并未安装新浪微博客户端" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"前往下载", nil];
+    _sinaSheet = [[UIActionSheet alloc] initWithTitle:@"分享将打开新浪微博客户端" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享到新浪微博", nil];
     _sinaSheet.tag = 0;
     [_sinaSheet showInView:self.view];
 }
@@ -141,11 +142,46 @@
         }else if (buttonIndex == 1) {
             NSLog(@"分享到朋友圈");
             WXMediaMessage *message = [WXMediaMessage message];
+            message.title = @"推荐一个财务人爱不释手的应用";
+            message.description = @"财务圈最前沿，随时随地获取第一手财务资讯及行业动态";
+            [message setThumbImage:[UIImage imageNamed:@"Icon29@2x.png"]];
+            WXWebpageObject *ext = [WXWebpageObject object];
+            ext.webpageUrl = @"http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+            message.mediaObject = ext;
+            SendMessageToWXReq *req= [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = WXSceneTimeline;
+            [WXApi sendReq:req];
         }
     }else {
+        //分享到微博朋友圈
+        NSLog(@"分享到微博朋友圈");
+        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:[self messageToShare]];
+//        request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
+//                             @"Other_Info_1": [NSNumber numberWithInt:123],
+//                             @"Other_Info_2": @[@"obj1", @"obj2"],
+//                             @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+        //    request.shouldOpenWeiboAppInstallPageIfNotInstalled = NO;
         
+        [WeiboSDK sendRequest:request];
     }
 }
+-(WBMessageObject *)messageToShare{
+    WBMessageObject *message = [WBMessageObject message];
+
+    WBWebpageObject *webpage = [WBWebpageObject object];
+    webpage.objectID = @"identifier1";
+    webpage.title = @"CFEC";
+    webpage.description = [NSString stringWithFormat:@"推荐一个财务人爱不释手的应用-%.0f", [[NSDate date] timeIntervalSince1970]];
+    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon29@2x" ofType:@"png"]];
+    webpage.webpageUrl = @"http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+    message.mediaObject = webpage;
+    
+    return message;
+
+}
+
 /*
 #pragma mark - Navigation
 

@@ -254,7 +254,47 @@
     NSLog(@"%d",buttonIndex);
     if (buttonIndex == 0) {
         //分享给微信好友
+        WXMediaMessage *message = [WXMediaMessage message];
+        message.title = @"最近参加CFEC活动";
+        message.description = _activityModel.title;
+        [message setThumbImage:[UIImage imageNamed:@"Icon29@2x.png"]];
+        WXWebpageObject *ext = [WXWebpageObject object];
+        ext.webpageUrl = @"http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+        message.mediaObject = ext;
+        SendMessageToWXReq *req= [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        req.scene = WXSceneSession;
+        [WXApi sendReq:req];
+    }else {
+        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:[self messageToShare]];
+        [WeiboSDK sendRequest:request];
+
     }
+}
+-(void)willPresentActionSheet:(UIActionSheet *)actionSheet {
+    for (UIView *subView in actionSheet.subviews) {
+        if ([subView isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)subView;
+            if (button.tag == 3) {
+                [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+        }
+    }
+}
+-(WBMessageObject *)messageToShare{
+    WBMessageObject *message = [WBMessageObject message];
+    
+    WBWebpageObject *webpage = [WBWebpageObject object];
+    webpage.objectID = @"identifier1";
+    webpage.title = @"最近参加CFEC活动";
+    webpage.description = [NSString stringWithFormat:@"%@-%.0f",_activityModel.title, [[NSDate date] timeIntervalSince1970]];
+    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon29@2x" ofType:@"png"]];
+    webpage.webpageUrl = @"http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+    message.mediaObject = webpage;
+    
+    return message;
+    
 }
 
 @end

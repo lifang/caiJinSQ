@@ -56,13 +56,13 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[CJPersonaldataController imagePickerController:didFinishPickingMediaWithInfo:]"
                   moduleName = "CFEC"
-                  urlString = "file:///Users/sumflower/Desktop/CFEC/caiJinSQ/CFEC/Controller/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E9%80%89%E9%A1%B9/CJPersonaldataController.m"
-                  timestampString = "432181559.074381"
+                  urlString = "file:///Users/sumflower/Desktop/cefc/caiJinSQ/CFEC/Controller/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E9%80%89%E9%A1%B9/CJPersonaldataController.m"
+                  timestampString = "433587608.865106"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "273"
                   endingLineNumber = "273"
-                  offsetFromSymbolStart = "518">
+                  offsetFromSymbolStart = "482">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -70,8 +70,8 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__80-[CJPersonaldataController imagePickerController:didFinishPickingMediaWithInfo:]_block_invoke"
                   moduleName = "CFEC"
-                  urlString = "file:///Users/sumflower/Desktop/CFEC/caiJinSQ/CFEC/Controller/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E9%80%89%E9%A1%B9/CJPersonaldataController.m"
-                  timestampString = "432181559.074737"
+                  urlString = "file:///Users/sumflower/Desktop/cefc/caiJinSQ/CFEC/Controller/%E4%BE%A7%E8%BE%B9%E6%A0%8F%E9%80%89%E9%A1%B9/CJPersonaldataController.m"
+                  timestampString = "433587608.865336"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "273"
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CFEC/CJAppDelegate.m"
-            timestampString = "432178640.251832"
+            timestampString = "433566323.812145"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "-onResp:"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,27 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CFEC/CJAppDelegate.m"
-            timestampString = "432178640.251832"
+            timestampString = "433565136.607225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-application:openURL:sourceApplication:annotation:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CFEC/CJAppDelegate.m"
-            timestampString = "432179064.576383"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "-onReq:"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CFEC/CJAppDelegate.m"
-            timestampString = "432179672.590378"
+            timestampString = "433565136.607225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "-onReq:"
             landmarkType = "5">
          </BreakpointContent>
@@ -168,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CFEC/CJAppDelegate.m"
-            timestampString = "432179684.259378"
+            timestampString = "433566323.812145"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "-application:handleOpenURL:"
             landmarkType = "5">
          </BreakpointContent>
@@ -183,13 +167,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CFEC/Controller/CJShareViewController.m"
-            timestampString = "432179695.154609"
+            filePath = "CFEC/CJAppDelegate.m"
+            timestampString = "433566323.812145"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "-actionSheet:clickedButtonAtIndex:"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
