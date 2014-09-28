@@ -57,6 +57,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     user = [CJAppDelegate shareCJAppDelegate].user;
+    [_listTable reloadData];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -108,6 +109,7 @@
     cell.selectedBackgroundView.backgroundColor = kColor(255, 255, 255, .5);
     return cell;
 }
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];

@@ -245,6 +245,11 @@
                             NSString *savefile = [documentDirectory stringByAppendingPathComponent:@"userFile.plist"];
                             [NSKeyedArchiver archiveRootObject:loginUser toFile:savefile];
                         }
+                        NSString *imageStr = [NSString stringWithFormat:@"%@",loginUser.headPhotoUrl];
+//                        NSData *data = [[NSData alloc] initWithBase64EncodedString:imageStr options:0];
+                        NSURL *url = [[NSURL alloc] initWithString:imageStr];
+                        NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+                        loginUser.headImage = data;
                         [CJAppDelegate shareCJAppDelegate].user = loginUser;
                         [CJAppDelegate shareCJAppDelegate].userDic = self.userInfoDic;
                         CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
