@@ -16,6 +16,7 @@
 {
     NSArray *allActivityarr;//所有活动未作处理的
     NSArray *tableArray;
+    
 }
 @end
 
@@ -41,6 +42,7 @@
     tableArray = [NSArray array];
     tableArray = allActivityarr;
     [self initUI];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -67,6 +69,7 @@
     _activityTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _activityTable.separatorInset = UIEdgeInsetsMake(0, -2, 0, 2);
     [self.view addSubview:_activityTable];
+    
 }
 -(void)selectIndex:(UISegmentedControl *)segment {
     CGRect rect;

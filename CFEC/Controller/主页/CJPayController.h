@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CJActivityModel.h"
 @interface CJPayController : UIViewController
-
+@property (nonatomic, strong) CJActivityModel *activityModel;
+@property (assign, nonatomic) int count;
 @end

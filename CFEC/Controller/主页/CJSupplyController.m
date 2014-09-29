@@ -183,7 +183,7 @@
     _payBt = [UIButton buttonWithType:UIButtonTypeCustom];
     _payBt.frame = CGRectMake(0, 150, self.view.frame.size.width, 40);
     _payBt.backgroundColor = kColor(228, 77, 40, 1);
-    [_payBt setTitle:@"使用支付宝支付" forState:UIControlStateNormal];
+    [_payBt setTitle:@"去支付" forState:UIControlStateNormal];
     [_payBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_payBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_payBt addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
@@ -207,14 +207,16 @@
     _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * [_activity.meetingCost floatValue]];
 }
 -(void)pay:(id)sender {
-//    CJPayController *payControl = [[CJPayController alloc] init];
-//    [self.navigationController pushViewController:payControl animated:YES];
-    NSString *orderString = [CJCreatePayOrder createActivityOrderWithActivity:_activity
-                                                                  countNumber:_number];
-    [AlixLibService payOrder:orderString
-                   AndScheme:kAlipayScheme
-                     seletor:@selector(payResult:)
-                      target:self];
+    CJPayController *payControl = [[CJPayController alloc] init];
+    payControl.activityModel = self.activity;
+    payControl.count = _number;
+    [self.navigationController pushViewController:payControl animated:YES];
+//    NSString *orderString = [CJCreatePayOrder createActivityOrderWithActivity:_activity
+//                                                                  countNumber:_number];
+//    [AlixLibService payOrder:orderString
+//                   AndScheme:kAlipayScheme
+//                     seletor:@selector(payResult:)
+//                      target:self];
 }
 
 #pragma mark - 支付结果

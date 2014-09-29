@@ -10,6 +10,7 @@
 #import "CJSupplyController.h"
 #import "WXApiObject.h"
 #import "WXApi.h"
+#import "CJContactusController.h"
 
 #define startHeight 10
 @interface CJActivityDetailController ()<UIActionSheetDelegate>
@@ -182,7 +183,7 @@
     [_contactBt setTitle:@"联系我们" forState:UIControlStateNormal];
     [_contactBt setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [_contactBt setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [_contactBt addTarget:self action:@selector(contact:) forControlEvents:UIControlEventTouchUpInside];
+    [_contactBt addTarget:self action:@selector(contactUs:) forControlEvents:UIControlEventTouchUpInside];
     _contactBt.layer.borderWidth = 1.0f;
     _contactBt.layer.cornerRadius = 8.0f;
     _contactBt.layer.borderColor = [UIColor greenColor].CGColor;
@@ -226,7 +227,9 @@
     supplyControl.activity = _activityModel;
     [self.navigationController pushViewController:supplyControl animated:YES];
 }
--(void)contact:(id)sender {
+-(void)contactUs:(id)sender {
+    CJContactusController *contactC = [[CJContactusController alloc] init];
+    [self.navigationController pushViewController:contactC animated:YES];
 }
 -(void)setLeftNavBarItemWithImageName:(NSString *)name {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -7,8 +7,12 @@
 //
 
 #import "CJPayController.h"
-
+#import "CJUserModel.h"
+#import "CJAppDelegate.h"
 @interface CJPayController ()<UITextFieldDelegate>
+{
+    CJUserModel *user;
+}
 @property (nonatomic, strong) UILabel *VIPlevelLabel;//会员等级
 @property (nonatomic, strong) UILabel *sumIntegralLabel;//总积分
 @property (nonatomic, strong) UITextField *useIntegralTextfiled;//使用积分
@@ -31,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    user = [CJAppDelegate shareCJAppDelegate].user;
     self.view.backgroundColor = kColor(243, 243, 243, 1);
     self.navigationItem.title = @"活动支付";
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
@@ -70,13 +75,21 @@
     [self.view addSubview:sumLabel];
     _sumIntegralLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 110, 60, 30)];
     _sumIntegralLabel.font = [UIFont systemFontOfSize:12.0f];
-    _sumIntegralLabel.text = @"50";
+    NSString *userIntegral = [NSString stringWithFormat:@"%@",user.integral];
+    _sumIntegralLabel.text = userIntegral;
     [self.view addSubview:_sumIntegralLabel];
-    UILabel *useLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 136, 60, 30)];
+    
+    UILabel *canUse = [[UILabel alloc] initWithFrame:CGRectMake(20, 136, 200, 30)];
+    canUse.font = [UIFont systemFontOfSize:12.0f];
+    int price = [self returnPrice];
+    canUse.text = [NSString stringWithFormat:@"当前活动可用积分: %d",price];
+    [self.view addSubview:canUse];
+    
+    UILabel *useLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 136 + 26, 60, 30)];
     useLabel.font = [UIFont systemFontOfSize:12.0f];
     useLabel.text = @"使用积分:";
     [self.view addSubview:useLabel];
-    _useIntegralTextfiled = [[UITextField alloc] initWithFrame:CGRectMake(80, 136, 60, 30)];
+    _useIntegralTextfiled = [[UITextField alloc] initWithFrame:CGRectMake(80, 136 + 26, 60, 30)];
     _useIntegralTextfiled.backgroundColor = [UIColor whiteColor];
     _useIntegralTextfiled.delegate = self;
     _useIntegralTextfiled.layer.cornerRadius = 8.0f;
@@ -109,5 +122,66 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(int)canReduceMoney:(int)goodPrice andGoodCount:(int)number andUser:(CJUserModel *)userModel {
+    int memberType = [[NSString stringWithFormat:@"%@",userModel.memberType] intValue];
+    int sumPrice = goodPrice * number;
+    if (memberType == 0) {
+        return 0;
+    }else if (memberType == 1) {
+        if (sumPrice <= 50) {
+            return 0;
+        }else if (sumPrice > 50&&sumPrice <= 1000) {
+            return sumPrice * 0.4;
+        }else if (sumPrice > 1000&& sumPrice <= 3000) {
+            return sumPrice * 0.3;
+        }else if (sumPrice > 3000&&sumPrice <= 6000) {
+            return sumPrice * 0.2;
+        }else  {
+            return sumPrice * 0.1;
+        }
+    }else if (memberType == 2) {
+        if (sumPrice <= 50) {
+            return 0;
+        }else if (sumPrice > 50&&sumPrice <= 1000) {
+            return sumPrice * 0.5;
+        }else if (sumPrice > 1000&& sumPrice <= 3000) {
+            return sumPrice * 0.4;
+        }else if (sumPrice > 3000&&sumPrice <= 6000) {
+            return sumPrice * 0.3;
+        }else {
+            return sumPrice * 0.2;
+        }
+    }else if (memberType == 3) {
+        if (sumPrice <= 50) {
+            return 0;
+        }else if (sumPrice > 50&&sumPrice <= 1000) {
+            return sumPrice * 0.6;
+        }else if (sumPrice > 1000&& sumPrice <= 3000) {
+            return sumPrice * 0.5;
+        }else if (sumPrice > 3000&&sumPrice <= 6000) {
+            return sumPrice * 0.4;
+        }else {
+            return sumPrice * 0.3;
+        }
+    }else {
+        if (sumPrice <= 50) {
+            return 0;
+        }else if (sumPrice > 50&&sumPrice <= 1000) {
+            return sumPrice * 0.8;
+        }else if (sumPrice > 1000&& sumPrice <= 3000) {
+            return sumPrice * 0.7;
+        }else if (sumPrice > 3000&&sumPrice <= 6000) {
+            return sumPrice * 0.6;
+        }else {
+            return sumPrice * 0.5;
+        }
+    }
+}
 
+-(int)returnPrice {
+    NSString *priceStr = [NSString stringWithFormat:@"%@",self.activityModel.meetingCost];
+    int price = [priceStr intValue];
+    int redecePrice = [self canReduceMoney:price andGoodCount:self.count andUser:user];
+    return redecePrice;
+}
 @end

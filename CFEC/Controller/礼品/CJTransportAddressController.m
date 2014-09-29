@@ -118,7 +118,6 @@
     _xianLabel.font = [UIFont systemFontOfSize:13.0f];
     _xianLabel.text = @"东城区";
     
-    _items = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil];
     _height = [[UIScreen mainScreen] bounds].size.height;
     _toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, _height, 320, 44)];
     UIBarButtonItem *finish = [[UIBarButtonItem alloc] initWithTitle:@"完成"
@@ -316,7 +315,7 @@
     CGRect startFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect endFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    CGFloat bottomHeight = 267 - _focusRect.origin.y - _focusRect.size.height;
+    CGFloat bottomHeight = 100;
     CGFloat offset = 0;
     NSLog(@"%@,%@",NSStringFromCGRect(startFrame),NSStringFromCGRect(endFrame));
     if (startFrame.origin.y >= screenHeight) {

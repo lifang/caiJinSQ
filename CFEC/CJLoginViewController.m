@@ -16,6 +16,8 @@
 @interface CJLoginViewController ()<ASIHTTPRequestDelegate,UITextViewDelegate>
 {
     BOOL rememberBool;
+    UIActivityIndicatorView *activity;
+    UIView *backView;
 }
 @property (nonatomic, assign) CGRect focusRect;
 @end
@@ -45,7 +47,7 @@
     [self setUserNameAndPasswordUI];
     [self setLoginButtonUI];
     self.isShow = YES;
-    
+    [self directLogin];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,6 +138,12 @@
     rememberLab.font = [UIFont fontWithName:nil size:13.0f];
     rememberLab.textColor = kColor(135, 135, 146, 1);
     [self.view addSubview:rememberLab];
+    
+    activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activity.center = self.view.center;
+    [activity setHidesWhenStopped:YES];
+    backView = [[UIView alloc] initWithFrame:self.view.frame];
+    [backView addSubview:activity];
 }
 -(void)rememberpassword:(id)sender {
     //读取用户信息
@@ -204,6 +212,9 @@
 }
 #pragma mark - 登陆
 -(void)userLogin:(id)sender {
+    [activity startAnimating];
+    [self.view addSubview:backView];
+    
     [_passwordField resignFirstResponder];
     [_usernameField resignFirstResponder];
     if (![self isValidateEmail:_usernameField.text]) {
@@ -251,6 +262,8 @@
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     }else {
+                        [activity stopAnimating];
+                        [backView removeFromSuperview];
                         if (rememberBool) {
                             //判断是否需要记住密码
                             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -351,5 +364,19 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
     return [emailTest evaluateWithObject:email];
 }
+-(void)directLogin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginBoolStr = [defaults objectForKey:@"savePWD"];
+    BOOL loginBool = [loginBoolStr boolValue];
+    if (loginBool) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDirectory = paths[0];
+        NSString *savefile = [documentDirectory stringByAppendingPathComponent:@"userFile.plist"];
+        CJUserModel *loginUser = [NSKeyedUnarchiver unarchiveObjectWithFile:savefile];
+        _usernameField.text = loginUser.username;
+        _passwordField.text = loginUser.password;
+        [self userLogin:self];
+    }
 
+}
 @end

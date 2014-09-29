@@ -34,6 +34,10 @@
     NSString *graduationStr;
     NSString *businessStr;
     NSString *interestingStr;
+    
+    UIActivityIndicatorView *activity;
+    UIView *backView;
+
 }
 @end
 
@@ -99,6 +103,13 @@
     schoolStr = [NSString string];
     
     _commitDic = [NSMutableDictionary dictionary];
+    
+    activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activity.center = self.view.center;
+    [activity setHidesWhenStopped:YES];
+    backView = [[UIView alloc] initWithFrame:self.view.frame];
+    [backView addSubview:activity];
+
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -550,6 +561,8 @@
     jsonDate = [NSJSONSerialization dataWithJSONObject:_commitDic options:NSJSONWritingPrettyPrinted error:&error];
     jsonStr = [[NSString alloc] initWithData:jsonDate encoding:NSUTF8StringEncoding];
 //    NSLog(@"%@",jsonStr);
+    [activity startAnimating];
+    [self.view addSubview:backView];
     
     [CJRequestFormat addPersonalInformationWithJson:jsonStr groupType:type finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
@@ -564,6 +577,8 @@
                     [alert show];
                 }else {
                     NSLog(@"注册全部完成");
+                    [activity stopAnimating];
+                    [backView removeFromSuperview];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"请去邮箱激活" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     alert.tag = 1;
                     [alert show];

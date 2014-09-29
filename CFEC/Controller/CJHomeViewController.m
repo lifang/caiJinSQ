@@ -25,6 +25,9 @@
     NSMutableArray *activityArr5;//税务学院
     NSMutableArray *activityArr6;
     NSMutableArray *lastArray;//当前显示的活动数组
+    
+    UIActivityIndicatorView *activityView;
+    UIView *backView;
 }
 @end
 
@@ -47,8 +50,8 @@
     self.navigationItem.title = @"CFEC";
     [self setLeftNavBarItemWithImageName:@"首页_03@2x"];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self GetActivityMessage];//获取活动信息
     [self initUI];
+    [self GetActivityMessage];//获取活动信息
     // Do any additional setup after loading the view.
 }
 
@@ -79,6 +82,14 @@
     _mainTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _mainTable.separatorInset = UIEdgeInsetsMake(0, -2, 0, 2);
     [self.view addSubview:_mainTable];
+    
+    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.center = self.view.center;
+    [activityView setHidesWhenStopped:YES];
+    backView = [[UIView alloc] initWithFrame:self.view.frame];
+    [backView addSubview:activityView];
+
+    
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -165,6 +176,9 @@
     [self.navigationController pushViewController:detailControl animated:YES];
 }
 -(void)GetActivityMessage {
+    [activityView startAnimating];
+    [self.view addSubview:backView];
+    
     activityArr0 = [NSMutableArray array];
     activityArr1 = [NSMutableArray array];
     activityArr2 = [NSMutableArray array];
@@ -175,6 +189,9 @@
     lastArray = [NSMutableArray array];
     [CJRequestFormat getActivityTitleFinished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
+            [activityView stopAnimating];
+            [backView removeFromSuperview];
+            
             NSError *error;
             NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
             id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
