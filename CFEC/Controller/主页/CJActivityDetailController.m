@@ -13,7 +13,9 @@
 
 #define startHeight 10
 @interface CJActivityDetailController ()<UIActionSheetDelegate>
-
+{
+    UIImage *headImage;
+}
 @property (nonatomic, strong) UIScrollView *mainScrooll;
 @property (nonatomic, strong) UIImageView *titleImage;
 @property (nonatomic, strong) UILabel *themeLabel;
@@ -70,17 +72,16 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)initUI {
-    _titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 270-64)];
+
     [self downloadDetailImageWithURL:_activityModel.pictures];
-    _titleImage.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_titleImage];
+
     
     //scrollview
     //文本高度
 
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13.0f],NSFontAttributeName, nil];
     CGRect rect = [self.activityModel.mobileContent boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
-    NSLog(@" rect =%@, %f,%f",self.activityModel.mobileContent,rect.size.height,rect.size.width);
+//    NSLog(@" rect =%@, %f,%f",self.activityModel.mobileContent,rect.size.height,rect.size.width);
     _mainScrooll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 206, 320, kScreenHeight - 206 - 37 )];
     _mainScrooll.contentSize = CGSizeMake(320, 151 + rect.size.height);
     _mainScrooll.backgroundColor = [UIColor whiteColor];
@@ -196,7 +197,11 @@
         UIImage *image = [UIImage imageWithData:imageData];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (image) {
-                _titleImage.image = image;
+                headImage = image;
+                _titleImage = [[UIImageView alloc] initWithImage:headImage];
+                _titleImage.frame = CGRectMake(0, 64, self.view.frame.size.width, 270-64);
+                _titleImage.backgroundColor = [UIColor whiteColor];
+                [self.view addSubview:_titleImage];
             }
         });
     });

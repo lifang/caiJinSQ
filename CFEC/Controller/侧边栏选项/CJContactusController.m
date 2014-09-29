@@ -12,6 +12,7 @@
 @interface CJContactusController ()
 @property (nonatomic, strong) UILabel *contacttelLabel;
 @property (nonatomic, strong) UILabel *contactemailLabel;
+@property (nonatomic, strong) UIButton *contactBt;
 @end
 
 @implementation CJContactusController
@@ -74,10 +75,27 @@
     _contacttelLabel.font = [UIFont systemFontOfSize:13.0f];
     [self.view addSubview:_contacttelLabel];
     
+    _contactBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    _contactBt.frame = CGRectMake(self.view.frame.size.width - _contacttelLabel.frame.origin.x - _contacttelLabel.frame.size.width + 120, _contacttelLabel.frame.origin.y, 30, _contacttelLabel.frame.size.height);
+    _contactBt.tintColor = [UIColor greenColor];
+    _contactBt.titleLabel.font = [UIFont systemFontOfSize:13.0];
+    [_contactBt setTitle:@"拨打" forState:UIControlStateNormal];
+    [_contactBt setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [_contactBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_contactBt addTarget:self action:@selector(contact:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_contactBt];
+    
     _contactemailLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 145, 200, 15)];
     _contactemailLabel.font = [UIFont systemFontOfSize:13.0f];
     _contactemailLabel.text = @"member-service@cfec.pro";
     [self.view addSubview:_contactemailLabel];
+}
+-(IBAction)contact:(id)sender {
+    UIWebView*callWebview =[[UIWebView alloc] init];
+    NSURL *telURL =[NSURL URLWithString:@"tel:4008203872"];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+    //记得添加到view上
+    [self.view addSubview:callWebview];
 }
 -(void)setLeftNavBarItemWithImageName:(NSString *)name {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];

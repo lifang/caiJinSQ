@@ -225,8 +225,13 @@
     [footView addSubview:getinBt];
     return footView;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 80.0;
+}
 -(void)logout:(id)sender {
-    NSLog(@"退出登录");
+    
+    [[[CJAppDelegate shareCJAppDelegate] rootController] showLoginController];
 }
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet
 {

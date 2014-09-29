@@ -51,7 +51,13 @@
     self.navigationItem.title = @"关于我们";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
-    _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13.0],NSFontAttributeName, nil];
+    NSString *text = @"www.cfec.pro作为国内首个且唯一通过国际谁的专业资质网站，致力于成为最优秀财务专业人士的信息互动中心。我们深入账务圈，凭借丰富多云多元的媒介载体，专业独到的信息内容，为您第一时间解读行业动态，呈现最优质的账务资讯。";
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 40, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil];
+    _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 64 + 20, self.view.frame.size.width - 40, rect.size.height)];
+    _textLabel.font = [UIFont systemFontOfSize:13.0];
+    _textLabel.numberOfLines = 0;
+    _textLabel.text = text;
     [self.view addSubview:_textLabel];
 
 }

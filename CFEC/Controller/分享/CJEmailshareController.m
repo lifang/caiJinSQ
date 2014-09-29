@@ -7,8 +7,9 @@
 //
 
 #import "CJEmailshareController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface CJEmailshareController ()
+@interface CJEmailshareController () <MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) UITextField *emailTextfield;
 @property (nonatomic, strong) UIButton *sendBt;
 @end
@@ -66,6 +67,7 @@
     [_sendBt setTitle:@"确认发送邀请" forState:UIControlStateNormal];
     [_sendBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_sendBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_sendBt addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_sendBt];
 }
 /*
@@ -78,5 +80,86 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(IBAction)sendEmail:(id)sender {
+    if ([self isValidateEmail:_emailTextfield.text]) {
+        Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+        if (!mailClass) {
+            [self alertWithMessage:@"当前系统版本不支持应用内发送邮件功能，您可以使用mailto方法代替"];
+            return;
+        }
+        if (![mailClass canSendMail]) {
+            [self alertWithMessage:@"用户没有设置邮件账户"];
+            return;
+        }
+        [self displayMailPicker];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+-(void)alertWithMessage:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
+//调出邮件发送窗口
+- (void)displayMailPicker
+{
+    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
+    mailPicker.mailComposeDelegate = self;
+    
+    //设置主题
+    [mailPicker setSubject: @"CFEC"];
+    //添加收件人
+    NSString *emailStr = [NSString stringWithFormat:@"%@",_emailTextfield.text];
+    NSArray *toRecipients = [NSArray arrayWithObject: emailStr];
+    [mailPicker setToRecipients: toRecipients];
+    //添加抄送
+
+    //添加密送
+
+    
+    // 添加一张图片
+    UIImage *addPic = [UIImage imageNamed: @"Icon29@2x.png"];
+    NSData *imageData = UIImagePNGRepresentation(addPic);            // png
+    [mailPicker addAttachmentData: imageData mimeType: @"" fileName: @"Icon.png"];
+    
+    //添加一个pdf附件
+
+    
+    NSString *emailBody = @"<font color='red'>eMail</font> http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+    [mailPicker setMessageBody:emailBody isHTML:YES];
+    [self presentViewController:mailPicker animated:YES completion:nil];
+}
+#pragma mark - 实现 MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    //关闭邮件发送窗口
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString *msg;
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            msg = @"取消编辑邮件";
+            break;
+        case MFMailComposeResultSaved:
+            msg = @"成功保存邮件";
+            break;
+        case MFMailComposeResultSent:
+            msg = @"发送成功";
+            break;
+        case MFMailComposeResultFailed:
+            msg = @"保存或者发送邮件失败";
+            break;
+        default:
+            msg = @"";
+            break;
+    }
+    [self alertWithMessage:msg];
+}
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
 
 @end

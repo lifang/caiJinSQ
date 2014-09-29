@@ -8,6 +8,8 @@
 
 //屏幕高度
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
+//当前系统
+#define kDevice [[[UIDevice currentDevice] systemVersion] floatValue]
 
 //url scheme
 #define kAlipayScheme @"AlipayCallBack"

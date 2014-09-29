@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CFEC/Controller/&#x793c;&#x54c1;/CJTransportAddressController.m"
-            timestampString = "431923908.908845"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CFEC/Network/CJRequestFormat.m"
             timestampString = "432029763.295044"
             startingColumnNumber = "9223372036854775807"
@@ -118,16 +102,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CFEC/CJLeftViewController.m"
-            timestampString = "433603784.687254"
+            filePath = "CFEC/Controller/Register/CJCompleteInfoController.m"
+            timestampString = "433662061.554411"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "-getIn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -50,6 +50,7 @@
     _graduationTextField.leftViewMode = UITextFieldViewModeAlways;
     _graduationTextField.leftView = backView;
     _graduationTextField.placeholder = @"毕业时间";
+    _graduationTextField.keyboardType = UIKeyboardTypeNumberPad;
     _graduationTextField.font = [UIFont systemFontOfSize:14.0f];
     _graduationTextField.delegate = self;
     _graduationTextField.backgroundColor = [UIColor whiteColor];

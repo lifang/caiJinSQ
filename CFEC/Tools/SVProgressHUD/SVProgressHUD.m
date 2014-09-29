@@ -247,7 +247,7 @@
 - (void)positionHUD:(NSNotification*)notification {
     
     CGFloat keyboardHeight;
-    double animationDuration;
+    double animationDuration = 0.0;
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
@@ -312,8 +312,8 @@
     } 
     
     if(notification) {
-        [UIView animateWithDuration:animationDuration 
-                              delay:0 
+        [UIView animateWithDuration:animationDuration
+                              delay:0
                             options:UIViewAnimationOptionAllowUserInteraction 
                          animations:^{
                              [self moveToPoint:newCenter rotateAngle:rotateAngle];
@@ -471,7 +471,7 @@
 		stringLabel.textColor = [UIColor whiteColor];
 		stringLabel.backgroundColor = [UIColor clearColor];
 		stringLabel.adjustsFontSizeToFitWidth = YES;
-		stringLabel.textAlignment = UITextAlignmentCenter;
+		stringLabel.textAlignment = NSTextAlignmentCenter;
 		stringLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 		stringLabel.font = [UIFont boldSystemFontOfSize:16];
 		stringLabel.shadowColor = [UIColor blackColor];

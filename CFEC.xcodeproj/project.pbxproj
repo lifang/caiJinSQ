@@ -22,6 +22,9 @@
 		3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */; };
 		3A34EA1319BEA7450083773C /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A34EA1219BEA7450083773C /* save@2x.png */; };
 		3A3A194319B18A0E0021F6F5 /* CJCampController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A194219B18A0E0021F6F5 /* CJCampController.m */; };
+		3A4040B719D8F71E009E5202 /* serviceContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A4040B619D8F71E009E5202 /* serviceContent.txt */; };
+		3A4040BD19D9052C009E5202 /* CJRegisterServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */; };
+		3A4040BF19D930B8009E5202 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4040BE19D930B8009E5202 /* MessageUI.framework */; };
 		3A49C3F919AF453100FFA307 /* CJAllgiftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3F819AF453100FFA307 /* CJAllgiftController.m */; };
 		3A49C3FC19AF46DF00FFA307 /* CJGiftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3FB19AF46DF00FFA307 /* CJGiftCell.m */; };
 		3A4BCE4919AC2B2C0027C023 /* CJActivityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4BCE4819AC2B2C0027C023 /* CJActivityDetailController.m */; };
@@ -241,6 +244,10 @@
 		3A34EA1219BEA7450083773C /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
 		3A3A194119B18A0E0021F6F5 /* CJCampController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCampController.h; sourceTree = "<group>"; };
 		3A3A194219B18A0E0021F6F5 /* CJCampController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCampController.m; sourceTree = "<group>"; };
+		3A4040B619D8F71E009E5202 /* serviceContent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = serviceContent.txt; sourceTree = "<group>"; };
+		3A4040BB19D9052C009E5202 /* CJRegisterServiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRegisterServiceController.h; sourceTree = "<group>"; };
+		3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRegisterServiceController.m; sourceTree = "<group>"; };
+		3A4040BE19D930B8009E5202 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3A49C3F719AF453100FFA307 /* CJAllgiftController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAllgiftController.h; sourceTree = "<group>"; };
 		3A49C3F819AF453100FFA307 /* CJAllgiftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAllgiftController.m; sourceTree = "<group>"; };
 		3A49C3FA19AF46DF00FFA307 /* CJGiftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftCell.h; sourceTree = "<group>"; };
@@ -536,6 +543,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4040BF19D930B8009E5202 /* MessageUI.framework in Frameworks */,
 				3ACC7B0E19D7B6F80093690E /* AddressBookUI.framework in Frameworks */,
 				3ACC7B0C19D7B6F10093690E /* AddressBook.framework in Frameworks */,
 				77DAF02E19C295B80045E2B4 /* AlipayRsaLib.a in Frameworks */,
@@ -747,6 +755,8 @@
 				3A54F6DD19B43EAC00819DE8 /* CJProfessionViewController.m */,
 				3A54F6DF19B43FB500819DE8 /* CJGraduationViewController.h */,
 				3A54F6E019B43FB500819DE8 /* CJGraduationViewController.m */,
+				3A4040BB19D9052C009E5202 /* CJRegisterServiceController.h */,
+				3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -996,6 +1006,7 @@
 		771AA7AE19A2E22A005B9AAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A4040BE19D930B8009E5202 /* MessageUI.framework */,
 				3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */,
 				3ACC7B0B19D7B6F10093690E /* AddressBook.framework */,
 				77A6389B19AF210F00584C97 /* libxml2.2.dylib */,
@@ -1040,6 +1051,7 @@
 		771AA7B619A2E22A005B9AAE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A4040B619D8F71E009E5202 /* serviceContent.txt */,
 				3A20589F19B98EAA00EBDF5F /* area.plist */,
 				771AA7B719A2E22A005B9AAE /* CFEC-Info.plist */,
 				771AA7B819A2E22A005B9AAE /* InfoPlist.strings */,
@@ -1296,6 +1308,7 @@
 				3A7C51AF19AB10EC00EBFDE9 /* 礼品_03-06@2x.png in Resources */,
 				3A54F6D019B41B1900819DE8 /* 学校@2x.png in Resources */,
 				3A7C51CD19AB238A00EBFDE9 /* 首页cetui_26@2x.png in Resources */,
+				3A4040B719D8F71E009E5202 /* serviceContent.txt in Resources */,
 				3A34EA1319BEA7450083773C /* save@2x.png in Resources */,
 				3A7C51B019AB10EC00EBFDE9 /* 礼品_03-11@2x.png in Resources */,
 				3A7C51A619AAFE1100EBFDE9 /* 首页_25.png in Resources */,
@@ -1407,6 +1420,7 @@
 				77DAF05319C296410045E2B4 /* SBJsonWriter.m in Sources */,
 				3A54F6D519B435F700819DE8 /* CJBusinessRangeViewController.m in Sources */,
 				3A6B8DCF19B0272F00CF7E9E /* CJPayedCell.m in Sources */,
+				3A4040BD19D9052C009E5202 /* CJRegisterServiceController.m in Sources */,
 				3A1B848719BC3AEF00BF6F21 /* CJServiceController.m in Sources */,
 				3AFE669C19B6C4A4004009E0 /* UIImage+MultiFormat.m in Sources */,
 				77DAF03E19C296360045E2B4 /* AlixPayOrder.m in Sources */,

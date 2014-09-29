@@ -9,6 +9,7 @@
 #import "CJRegisterController.h"
 #import "CJCampController.h"
 #import "CJRequestFormat.h"
+#import "CJRegisterServiceController.h"
 @interface CJRegisterController ()
 
 {
@@ -133,8 +134,8 @@
     _passwordTextfield.leftViewMode = UITextFieldViewModeAlways;
     _passwordTextfield.secureTextEntry = YES;
     _passwordTextfield.leftView = backView2;
-    _passwordTextfield.placeholder = @"输入密码";
-    _passwordTextfield.font = [UIFont systemFontOfSize:13.0f];
+    _passwordTextfield.placeholder = @"输入密码 6-12 位";
+    _passwordTextfield.font = [UIFont systemFontOfSize:14.0f];
     _passwordTextfield.delegate = self;
     _passwordTextfield.backgroundColor = [UIColor whiteColor];
     
@@ -259,23 +260,33 @@
     _judgeSegment = [[UISegmentedControl alloc] initWithItems:segArray];
     _judgeSegment.frame = CGRectMake(86, 8, 150, 32);
     _judgeSegment.tintColor = kColor(93, 201, 16, 1);
-    _judgeSegment.selectedSegmentIndex = 0;
+    _judgeSegment.selectedSegmentIndex = 1;
     [_judgeSegment addTarget:self action:@selector(segAction:) forControlEvents:UIControlEventValueChanged];
     [headView addSubview:_judgeSegment];
+    _judgeSegment.hidden = YES;
     return headView;
 }
 -(UIView *)setTableViewFoot{
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
     UIButton *rememberBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    rememberBt.frame = CGRectMake(30, 30, 16, 16);
+    rememberBt.frame = CGRectMake(40, 30, 16, 16);
     rememberBt.backgroundColor = [UIColor whiteColor];
     [rememberBt addTarget:self action:@selector(remember:) forControlEvents:UIControlEventTouchUpInside];
     [footView addSubview:rememberBt];
     
-    UILabel *rememberLab = [[UILabel alloc] initWithFrame:CGRectMake(55, 22, 200, 32)];
-    rememberLab.text = @"我已阅读并同意相关服务条款";
-    rememberLab.font = [UIFont systemFontOfSize:13.0f];
-    [footView addSubview:rememberLab];
+//    UILabel *rememberLab = [[UILabel alloc] initWithFrame:CGRectMake(55, 22, 200, 32)];
+//    rememberLab.text = @"我已阅读并同意相关服务条款";
+//    rememberLab.font = [UIFont systemFontOfSize:13.0f];
+//    [footView addSubview:rememberLab];
+    
+    UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
+    bt.frame = CGRectMake(55, 22, 200, 32);
+    bt.titleLabel.font = [UIFont systemFontOfSize:13.0];
+    [bt setTitle:@"我已阅读并同意相关服务条款" forState:UIControlStateNormal];
+    [bt setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [bt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [bt addTarget:self action:@selector(go:) forControlEvents:UIControlEventTouchUpInside];
+    [footView addSubview:bt];
     
     UIButton *completeButton= [UIButton buttonWithType:UIButtonTypeCustom];
     completeButton.frame = CGRectMake(0, 60, 320, 44);
@@ -287,6 +298,10 @@
     [footView addSubview:completeButton];
 
     return footView;
+}
+-(IBAction)go:(id)sender {
+    CJRegisterServiceController *registerC = [[CJRegisterServiceController alloc] init];
+    [self.navigationController pushViewController:registerC animated:YES];
 }
 #pragma mark -segment事件
 -(void)segAction:(UISegmentedControl *)segment {
@@ -318,46 +333,45 @@
                                 if ([jsonObject isKindOfClass:[NSDictionary class]]) {
                                     NSDictionary *dic = (NSDictionary *)jsonObject;
                                     NSString *msg = [dic objectForKey:@"msg"];
-                                    if ([msg isEqualToString:@"error"]) {
-                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"填写错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                                        [alert show];
-                                    }else {
+                                    if ([msg isEqualToString:@"ok"]) {
                                         //注册成功
                                         CJCampController *campControl = [[CJCampController alloc] init];
                                         //传注册的email
                                         campControl.registerEmail = _emailAddressTextfield.text;
-                                        NSLog(@"%@",campControl.registerEmail);
                                         [self.navigationController pushViewController:campControl animated:YES];
+                                    }else {
+                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱已注册" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                        [alert show];
                                     }
                                 }
                             }else if (status == 1) {
 //                                NSLog(@"请求出错");
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                 [alert show];
                             }else {
 //                                NSLog(@"请求成功，返回错误");
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络返回错误请重新尝试" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络返回错误请重新尝试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                 [alert show];
                             }
                         }];
                     }else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未同意协议" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"未同意协议" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                         [alert show];
 //                        NSLog(@"不同意协议");
                     }
                 }else {
 //                    NSLog(@"密码不一致");
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码不一致" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码不一致" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
                 }
             }else {
 //                NSLog(@"密码位数不对");
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码位数不对" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码位数不对" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alert show];
             }
         }else {
 //            NSLog(@"邮箱错误");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
         }
 

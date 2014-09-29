@@ -61,9 +61,15 @@
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 115, 280, 1)];
     line.backgroundColor = kColor(221, 221, 221, 1);
     [self.view addSubview:line];
+    
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    CFShow((__bridge CFTypeRef)(infoDic));
+    
+    NSString *appVersion = [infoDic objectForKey:@"CFBundleVersion"];
+    
     _versionNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 94, 100, 15)];
     _versionNumberLabel.font = [UIFont systemFontOfSize:13.0f];
-    _versionNumberLabel.text = @"0.0.1";
+    _versionNumberLabel.text = appVersion;
     [self.view addSubview:_versionNumberLabel];
     
     _versionDescribeLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 94, 150, 15)];

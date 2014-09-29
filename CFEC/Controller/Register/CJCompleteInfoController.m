@@ -21,7 +21,7 @@
 #import "CJProfessionViewController.h"
 #import "CJGraduationViewController.h"
 
-@interface CJCompleteInfoController ()<nameDelegate,telDelegate,companyDelegate,companyDelegate,jobDelegate,emailDelegate,schoolDelegate,professionDelegate,graduationDelegate,businessDelegate,interestingDelegate>
+@interface CJCompleteInfoController ()<nameDelegate,telDelegate,companyDelegate,companyDelegate,jobDelegate,emailDelegate,schoolDelegate,professionDelegate,graduationDelegate,businessDelegate,interestingDelegate,UIAlertViewDelegate>
 {
     //代理传过来接受的参数
     NSString *nameStr;
@@ -96,6 +96,7 @@
     graduationStr = [NSString string];
     businessStr = [NSString string];
     interestingStr = [NSString string];
+    schoolStr = [NSString string];
     
     _commitDic = [NSMutableDictionary dictionary];
 }
@@ -352,7 +353,159 @@
     return footView;
 }
 -(void)getIn:(id)sender {
-    NSLog(@"提交");
+    //在职财务和待业
+    if ([_campString isEqualToString:@"A"]||[_campString isEqualToString:@"I"]) {
+        if (![nameStr isEqualToString:@""]) {
+            if ([self checkTel:telStr]) {
+                if (![companyStr isEqualToString:@""]) {
+                    if (![jobStr isEqualToString:@""]) {
+                        if ([self isValidateEmail:emailStr]) {
+                        }else {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                            [alert show];
+                            return;
+                        }
+                    }else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"职位不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                        [alert show];
+                        return;
+                    }
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"公司名称不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                    return;
+                }
+            }else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"电话号码格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+                return;
+            }
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"姓名不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+    }
+  //财务圈相关人士
+    if ([_campString isEqualToString:@"E"]) {
+        if (![nameStr isEqualToString:@""]) {
+            if ([self checkTel:telStr]) {
+                if (![companyStr isEqualToString:@""]) {
+                    if (![jobStr isEqualToString:@""]) {
+                        if ([self isValidateEmail:emailStr]) {
+                            if (![businessStr isEqualToString:@""]) {
+                            }else {
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"业务范围不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                [alert show];
+                                return;
+                            }
+                        }else {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                            [alert show];
+                            return;
+                        }
+                    }else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"职位不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                        [alert show];
+                        return;
+                    }
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"公司名称不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                    return;
+                }
+            }else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"电话号码格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+                return;
+            }
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"姓名不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+
+    }
+   //感兴趣
+    if ([_campString isEqualToString:@"P"]) {
+        if (![nameStr isEqualToString:@""]) {
+            if ([self checkTel:telStr]) {
+                if (![companyStr isEqualToString:@""]) {
+                    if (![jobStr isEqualToString:@""]) {
+                        if ([self isValidateEmail:emailStr]) {
+                            if (![interestingStr isEqualToString:@""]) {
+                            }else {
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"感兴趣原因不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                [alert show];
+                                return;
+                            }
+                        }else {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                            [alert show];
+                            return;
+                        }
+                    }else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"职位不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                        [alert show];
+                        return;
+                    }
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"公司名称不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                    return;
+                }
+            }else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"电话号码格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+                return;
+            }
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"姓名不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+    }
+    //财务专业学生
+    if ([_campString isEqualToString:@"F"]) {
+        if (![nameStr isEqualToString:@""]) {
+            if ([self checkTel:telStr]) {
+                if (![schoolStr isEqualToString:@""]) {
+                    if (![professionStr isEqualToString:@""]) {
+                        if ([self isValidateEmail:emailStr]) {
+                            if (![graduationStr isEqualToString:@""]) {
+                            }else {
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"毕业时间不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                [alert show];
+                                return;
+                            }
+                        }else {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                            [alert show];
+                            return;
+                        }
+                    }else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"专业不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                        [alert show];
+                        return;
+                    }
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"学校名称不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                    return;
+                }
+            }else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"电话号码格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+                return;
+            }
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"姓名不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+    }
+  
+    
     NSError *error;
     NSData *jsonDate;
     NSString *jsonStr;
@@ -361,22 +514,25 @@
         //在职财务、待业
         [_commitDic setObject:nameStr forKey:@"name"];
         [_commitDic setObject:companyStr forKey:@"company_name"];
-        [_commitDic setObject:jobStr forKey:@"position"];
         [_commitDic setObject:emailStr forKey:@"company_email"];
         [_commitDic setObject:telStr forKey:@"mobilephone"];
         [_commitDic setObject:self.emailRegisterStr forKey:@"email"];
 
         if ([_campString isEqualToString:@"E"]) {
             //财务圈相关人士
+            [_commitDic setObject:jobStr forKey:@"position"];
             type = GroupE;
             [_commitDic setObject:businessStr forKey:@"business_range"];
         }else if ([_campString isEqualToString:@"P"]) {
             //感兴趣
+            [_commitDic setObject:jobStr forKey:@"position"];
             [_commitDic setObject:interestingStr forKey:@"interested_reason"];
             type = GroupP;
         }else if ([_campString isEqualToString:@"A"]) {
+            [_commitDic setObject:jobStr forKey:@"position"];
             type = GroupA;
         }else if ([_campString isEqualToString:@"I"]) {
+            [_commitDic setObject:jobStr forKey:@"last_position"];
             type = GroupI;
         }
     }else {
@@ -404,16 +560,18 @@
                 NSDictionary *dic = (NSDictionary *)jsonObject;
                 NSString *msg = [dic objectForKey:@"msg"];
                 if ([msg isEqualToString:@"error"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"填写错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"填写错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
                 }else {
                     NSLog(@"注册全部完成");
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:@"请去邮箱激活" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    alert.tag = 1;
+                    [alert show];
                 }
             }
         }else if (status == 1) {
             NSLog(@"数据请求出错");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
         }else {
             NSLog(@"数据请求成功返回出错");
@@ -423,6 +581,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 50.0f;
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 //代理方法的实现
 -(void)returnMessage:(NSString *)s {
@@ -475,5 +639,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+//验证电话号码
+-(BOOL)checkTel:(NSString *)str {
+    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    BOOL isMatch = [pred evaluateWithObject:str];
+    return isMatch;
+}
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+
 
 @end

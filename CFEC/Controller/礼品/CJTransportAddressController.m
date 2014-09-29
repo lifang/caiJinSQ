@@ -108,11 +108,11 @@
     
     _shengLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,50, 20)];
     _shengLabel.font = [UIFont systemFontOfSize:13.0f];
-    _shengLabel.text = @"北京";
+    _shengLabel.text = @"北京市";
     
     _cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,100, 20)];
     _cityLabel.font = [UIFont systemFontOfSize:13.0f];
-    _cityLabel.text = @"北京";
+    _cityLabel.text = @"北京市";
     
     _xianLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12,100, 20)];
     _xianLabel.font = [UIFont systemFontOfSize:13.0f];
@@ -261,6 +261,8 @@
         index = indexPath.row;
         if (indexPath.row == 0) {
             _items = provinceArray;
+            _cityLabel.text = nil;
+            _xianLabel.text = nil;
         }else if (indexPath.row == 1) {
             NSString *province = _shengLabel.text;
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];

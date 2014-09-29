@@ -13,7 +13,7 @@
 #import "CJRequestFormat.h"
 #import "CJUserModel.h"
 
-@interface CJLoginViewController ()<ASIHTTPRequestDelegate>
+@interface CJLoginViewController ()<ASIHTTPRequestDelegate,UITextViewDelegate>
 {
     BOOL rememberBool;
 }
@@ -45,6 +45,7 @@
     [self setUserNameAndPasswordUI];
     [self setLoginButtonUI];
     self.isShow = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +53,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - textViewDelegate
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField.tag == 1) {
+        _passwordField.text = nil;
+    }
+}
 #pragma mark - Action
 
 //- (IBAction)login:(id)sender {
@@ -75,6 +82,7 @@
     _usernameField.placeholder = @"输入手机号/邮箱号";
     _usernameField.font = [UIFont fontWithName:nil size:13.0f];
     _usernameField.backgroundColor = [UIColor whiteColor];
+    _usernameField.tag = 1;
     _usernameField.delegate = self;
     [_usernameField addTarget:self action:@selector(getUserInfo) forControlEvents:UIControlEventEditingDidEnd];
     [self.view addSubview:_usernameField];
@@ -198,6 +206,11 @@
 -(void)userLogin:(id)sender {
     [_passwordField resignFirstResponder];
     [_usernameField resignFirstResponder];
+    if (![self isValidateEmail:_usernameField.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
 //    NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
     [CJRequestFormat loginWithEmail:_usernameField.text password:_passwordField.text finished:^(ResponseStatus status,NSString *response) {
         if (status == 0) {
@@ -332,38 +345,11 @@
     }];
     return YES;
 }
-//#pragma mark - textField
-//
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    _focusRect = textField.frame;
-//}
-//#pragma mark - UITextFieldDelegate
-//-(BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    [textField resignFirstResponder];
-//    [self resetViewFrame];
-//    return YES;
-//}
-//#pragma mark - keyboard
-//-(void)keyboardWillShow:(NSNotification *)notification {
-//    NSLog(@"%@",[notification userInfo]);
-//    if ([_usernameField isFirstResponder]||[_passwordField isFirstResponder]) {
-//        NSDictionary *info = [notification userInfo];
-//        CGRect kbRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-//        int offset = kScreenHeight - 347 - kbRect.size.height;
-//        if (offset < 0) {
-//            [UIView animateWithDuration:0.3 animations:^{
-//                CGRect rect = self.view.frame;
-//                rect.origin.y -= (-offset);
-//                self.view.frame = rect;
-//            }];
-//        }
-//    }
-//}
-//-(void)resetViewFrame {
-//    [UIView animateWithDuration:0.3 animations:^{
-//        CGFloat originY = 0;
-//        CGRect rect = CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height);
-//        self.view.frame = rect;
-//    }];
-//}
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+
 @end

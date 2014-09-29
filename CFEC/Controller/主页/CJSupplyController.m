@@ -197,14 +197,14 @@
 -(void)add:(id)sender {
     _number ++;
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
-    _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_activity.meetingCost floatValue]];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * [_activity.meetingCost floatValue]];
 }
 -(void)reduce:(id)sender {
-    if (_number >= 1) {
+    if (_number > 1) {
         _number --;
     }
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
-    _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_activity.meetingCost floatValue]];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * [_activity.meetingCost floatValue]];
 }
 -(void)pay:(id)sender {
 //    CJPayController *payControl = [[CJPayController alloc] init];
