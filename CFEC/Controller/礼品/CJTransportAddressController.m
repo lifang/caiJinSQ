@@ -72,18 +72,47 @@
     self.navigationItem.rightBarButtonItem = rightbt;
 }
 -(void)back:(id)sender {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:_shengLabel.text forKey:@"province"];
-    [dic setObject:_cityLabel.text forKey:@"city"];
-    [dic setObject:_xianLabel.text forKey:@"county"];
-    [dic setObject:_text1.text forKey:@"address"];
-    [dic setObject:_text2.text forKey:@"post"];
-    [dic setObject:_text3 forKey:@"name"];
-    [dic setObject:_text4 forKey:@"tel"];
-    if ([self.delegate respondsToSelector:@selector(sendAddress:)]) {
-        [self.delegate sendAddress:dic];
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    [dic setObject:_shengLabel.text forKey:@"province"];
+//    [dic setObject:_cityLabel.text forKey:@"city"];
+//    [dic setObject:_xianLabel.text forKey:@"county"];
+//    [dic setObject:_text1.text forKey:@"address"];
+//    [dic setObject:_text2.text forKey:@"post"];
+//    [dic setObject:_text3 forKey:@"name"];
+//    [dic setObject:_text4 forKey:@"tel"];
+//    if ([self.delegate respondsToSelector:@selector(sendAddress:)]) {
+//        [self.delegate sendAddress:dic];
+//    }
+    if (![_shengLabel.text isEqualToString:@""]) {
+        if (![_cityLabel.text isEqualToString:@""]) {
+            if (![_xianLabel.text isEqualToString:@""]) {
+                if (![_text1.text isEqualToString:@""]) {
+                    if (![_text2.text isEqualToString:@""]) {
+                        if (![_text3.text isEqualToString:@""]) {
+                            if (![_text4.text isEqualToString:@""]) {
+                                
+                                [self.navigationController popViewControllerAnimated:YES];
+                            }else {
+                                [self showAlert:@"电话不能为空"];
+                            }
+                        }else {
+                            [self showAlert:@"姓名不能为空"];
+                        }
+                    }else {
+                        [self showAlert:@"邮编不能为空"];
+                    }
+                }else {
+                    [self showAlert:@"街道不能为空"];
+                }
+            }else {
+                [self showAlert:@"县不能为空"];
+            }
+        }else {
+            [self showAlert:@"市不能为空"];
+        }
+    }else {
+        [self showAlert:@"省份不能为空"];
     }
-    [self.navigationController popViewControllerAnimated:YES];
 }
 /*
 #pragma mark - Navigation
@@ -373,5 +402,9 @@
 }
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+-(void)showAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 @end

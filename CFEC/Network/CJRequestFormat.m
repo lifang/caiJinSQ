@@ -310,5 +310,18 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
         result(ResponseFail,[wRequest responseString]);
     }];
 }
+//支付前上传信息
++ (void)payInfomationWithUserID:(NSString *)email
+                        payJson:(NSString *)payInfoJson
+                       finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:email forKey:@"arg0"];
+    [params setObject:payInfoJson forKey:@"arg1"];
+    NSString *soapMessage = setPostBody(kBeforePay, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
 
+    
+}
 @end

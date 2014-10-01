@@ -69,3 +69,5 @@
 
 //支付前
 #define kBeforePay @"mobilePaymentBefore"
+//添加地址
+#define kAddress @"addMobileAddress"

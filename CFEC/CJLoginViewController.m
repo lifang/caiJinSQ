@@ -258,7 +258,9 @@
                     loginUser.specialty = [_userInfoDic objectForKey:@"specialty"];
                     loginUser.userId = [_userInfoDic objectForKey:@"userId"];
                     if ([loginUser.msg isEqualToString:@"error"]) {
-                        NSLog(@"密码错误");
+                        
+                        [activity stopAnimating];
+                        [backView removeFromSuperview];
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                         [alert show];
                     }else {

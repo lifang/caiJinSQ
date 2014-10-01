@@ -31,14 +31,14 @@
 }
 
 + (NSString *)createActivityOrderWithActivity:(CJActivityModel *)activity
-                                  countNumber:(int)count {
+                                  countNumber:(int)count andReducePrice:(int)reduce{
     AlixPayOrder *order = [[AlixPayOrder alloc] init];
     order.partner = PartnerID;
     order.seller = SellerID;
     order.tradeNO = [[self class] createTradeNo];
     order.productName = activity.title;
     order.productDescription = activity.title;
-    order.amount = [NSString stringWithFormat:@"%.2f",[activity.meetingCost floatValue] * count];
+    order.amount = [NSString stringWithFormat:@"%.2f",[activity.meetingCost floatValue] * count - reduce];
     order.notifyURL = @"http%3A%2F%2Fwww.xxx.com";
     
     NSString *orderInfo = [order description];

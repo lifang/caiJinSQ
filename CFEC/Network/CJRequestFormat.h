@@ -261,8 +261,23 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
                     order_no:礼品卡号
  @result 请求结果
  */
-+ (void)payInfomationWithUserID:(NSString *)userID
++ (void)payInfomationWithUserID:(NSString *)email
                         payJson:(NSString *)payInfoJson
                        finished:(Result)result;
-
+/*
+ @abstract 添加地址
+ @param user_id 登陆用户ID
+ @param addressInfo 地址信息json
+                    name:姓名
+                    province:省份
+                    city:市
+                    area:县
+                    post_code:邮编
+                    street_address:街道
+                    mobile:电话
+                    telephone:写空" "                
+ */
++ (void)addAddressBefor:(NSString *)userid
+                       andAddressInfo:(NSString *)addressInfo
+                       finished:(Result)result;
 @end

@@ -50,6 +50,7 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

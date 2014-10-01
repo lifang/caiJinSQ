@@ -10,6 +10,12 @@
 #import "CJUserModel.h"
 #import "CJAppDelegate.h"
 #import "CJRequestFormat.h"
+#import "AlixLibService.h"
+#import "AlixPayResult.h"
+#import "CJCreatePayOrder.h"
+#import "PartnerConfig.h"
+#import "DataVerifier.h"
+
 @interface CJPayController ()<UITextFieldDelegate>
 {
     CJUserModel *user;
@@ -47,9 +53,9 @@
 }
 -(void)valueChange:(NSNotification *)notification
 {
-    if ([_useIntegralTextfiled.text isEqualToString:@""]) {
-        _useIntegralTextfiled.text = @"0";
-    }
+//    if ([_useIntegralTextfiled.text isEqualToString:@""]) {
+//        _useIntegralTextfiled.text = @"0";
+//    }
     
     int reducePrice = [self returnPrice];
     
@@ -59,7 +65,7 @@
         _useIntegralTextfiled.text = [NSString stringWithFormat:@"%d",reducePrice];
     }
     if (userPrintIntergal <= 0) {
-        _useIntegralTextfiled.text = @"0";
+        _useIntegralTextfiled.text = @"";
     }
 }
 
@@ -87,7 +93,7 @@
     [self.view addSubview:level];
     _VIPlevelLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 84, 60, 30)];
     _VIPlevelLabel.font = [UIFont systemFontOfSize:12.0f];
-    _VIPlevelLabel.text = @"普通会员";
+    _VIPlevelLabel.text = [self returnMemberType];
     [self.view addSubview:_VIPlevelLabel];
     UILabel *sumLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 60, 30)];
     sumLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -112,9 +118,9 @@
     _useIntegralTextfiled = [[UITextField alloc] initWithFrame:CGRectMake(80, 136 + 26, 60, 30)];
     _useIntegralTextfiled.backgroundColor = [UIColor whiteColor];
     _useIntegralTextfiled.delegate = self;
-    _useIntegralTextfiled.text = @"0";
+//    _useIntegralTextfiled.text = @"0";
     _useIntegralTextfiled.layer.cornerRadius = 8.0f;
-    _useIntegralTextfiled.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    _useIntegralTextfiled.keyboardType = UIKeyboardTypeNumberPad;
     _useIntegralTextfiled.font = [UIFont systemFontOfSize:12.0f];
     [self.view addSubview:_useIntegralTextfiled];
     
@@ -149,7 +155,11 @@
     NSString *orderNumber = [self getOrderNumber];
     int sumPrice = [self getSumPrice:_count andPrice:_activityModel.meetingCost];
     int userPrintIntegral;
-    userPrintIntegral = [_useIntegralTextfiled.text intValue];
+    if ([_useIntegralTextfiled.text isEqualToString:@""]) {
+        userPrintIntegral = 0;
+    }else {
+        userPrintIntegral = [_useIntegralTextfiled.text intValue];
+    }
     
     int shouldPay = sumPrice - userPrintIntegral;
     NSString *numberStr = [NSString stringWithFormat:@"%d",_count];
@@ -177,6 +187,18 @@
     [CJRequestFormat createOrderWithOrderJson:dicStr finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
             NSLog(@"请求成功");
+            if (shouldPay == 0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"已报名" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+            }else {
+                NSString *orderString = [CJCreatePayOrder createActivityOrderWithActivity:_activityModel
+                                                                              countNumber:_count andReducePrice:userPrintIntegral];
+                [AlixLibService payOrder:orderString
+                               AndScheme:kAlipayScheme
+                                 seletor:@selector(payResult:)
+                                  target:self];
+
+            }
         }else if (status == 1) {
             NSLog(@"网络请求出错");
         }else if (status == 2) {
@@ -259,4 +281,54 @@
     NSString *orderNumber = [NSString stringWithFormat:@"M%@",currentDate];
     return orderNumber;
 }
+//判断会员等级
+-(NSString *)returnMemberType {
+    NSString *memberTypeStr = [NSString stringWithFormat:@"%@",user.memberType];
+    int memberType = [memberTypeStr intValue];
+    NSString *str;
+    if (memberType == 0) {
+        str = @"游客";
+    }else if (memberType == 1) {
+        str = @"普通会员";
+    }else if (memberType == 2) {
+        str  = @"黄金会员";
+    }else if (memberType == 3) {
+        str = @"白金会员";
+    }else {
+        str = @"钻石会员";
+    }
+    return str;
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+#pragma mark - 支付结果
+
+- (void)payResult:(NSString *)resultString {
+    AlixPayResult *result = [[AlixPayResult alloc] initWithString:resultString];
+    if (result) {
+        if (result.statusCode == 9000) {
+            id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(AlipayPubKey);
+            if ([verifier verifyString:result.resultString withSign:result.signString]) {
+                //验证签名成功，交易结果无篡改
+                NSLog(@"success");
+            }
+        }
+        else if (result.statusCode == 8000) {
+            NSLog(@"正在处理");
+        }
+        else if (result.statusCode == 4000) {
+            NSLog(@"支付失败");
+        }
+        else if (result.statusCode == 6001) {
+            NSLog(@"中途取消");
+        }
+        else if (result.statusCode == 6002) {
+            NSLog(@"网络出错");
+        }
+    }
+}
+
 @end

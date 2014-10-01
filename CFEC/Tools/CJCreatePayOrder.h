@@ -16,6 +16,6 @@
                           countNumber:(int)count;
 
 + (NSString *)createActivityOrderWithActivity:(CJActivityModel *)activity
-                                  countNumber:(int)count;
+                                  countNumber:(int)count andReducePrice:(int)reduce;
 
 @end
