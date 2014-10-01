@@ -9,6 +9,7 @@
 #import "CJPayController.h"
 #import "CJUserModel.h"
 #import "CJAppDelegate.h"
+#import "CJRequestFormat.h"
 @interface CJPayController ()<UITextFieldDelegate>
 {
     CJUserModel *user;
@@ -40,7 +41,26 @@
     self.navigationItem.title = @"活动支付";
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valueChange:) name:UITextFieldTextDidChangeNotification object:nil];
+    
     // Do any additional setup after loading the view.
+}
+-(void)valueChange:(NSNotification *)notification
+{
+    if ([_useIntegralTextfiled.text isEqualToString:@""]) {
+        _useIntegralTextfiled.text = @"0";
+    }
+    
+    int reducePrice = [self returnPrice];
+    
+    int userPrintIntergal = [_useIntegralTextfiled.text intValue];
+    
+    if (userPrintIntergal >= reducePrice) {
+        _useIntegralTextfiled.text = [NSString stringWithFormat:@"%d",reducePrice];
+    }
+    if (userPrintIntergal <= 0) {
+        _useIntegralTextfiled.text = @"0";
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,6 +112,7 @@
     _useIntegralTextfiled = [[UITextField alloc] initWithFrame:CGRectMake(80, 136 + 26, 60, 30)];
     _useIntegralTextfiled.backgroundColor = [UIColor whiteColor];
     _useIntegralTextfiled.delegate = self;
+    _useIntegralTextfiled.text = @"0";
     _useIntegralTextfiled.layer.cornerRadius = 8.0f;
     _useIntegralTextfiled.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _useIntegralTextfiled.font = [UIFont systemFontOfSize:12.0f];
@@ -101,9 +122,10 @@
     _payBt.frame = CGRectMake(0, 206, self.view.frame.size.width, 50);
     _payBt.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     _payBt.backgroundColor = kColor(228, 77, 40, 1);
-    [_payBt setTitle:@"支付宝支付" forState:UIControlStateNormal];
+    [_payBt setTitle:@"确认支付" forState:UIControlStateNormal];
     [_payBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_payBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_payBt addTarget:self action:@selector(payNow:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_payBt];
     
 }
@@ -122,6 +144,46 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(IBAction)payNow:(UIButton *)sender {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSString *orderNumber = [self getOrderNumber];
+    int sumPrice = [self getSumPrice:_count andPrice:_activityModel.meetingCost];
+    int userPrintIntegral;
+    userPrintIntegral = [_useIntegralTextfiled.text intValue];
+    
+    int shouldPay = sumPrice - userPrintIntegral;
+    NSString *numberStr = [NSString stringWithFormat:@"%d",_count];
+    NSString *shouldPayStr = [NSString stringWithFormat:@"%d",shouldPay];
+    NSString *name = [NSString stringWithFormat:@"%@",user.name];
+    NSString *companyStr = [NSString stringWithFormat:@"%@",user.companyName];
+    
+    [dic setObject:user.userId forKey:@"userId"];
+    [dic setObject:orderNumber forKey:@"orderNo"];
+    [dic setObject:_activityModel.ID forKey:@"activityId"];
+    [dic setObject:_activityModel.title forKey:@"activityDescribe"];
+    [dic setObject:_activityModel.title forKey:@"activityName"];
+    [dic setObject:name forKey:@"name"];
+    [dic setObject:user.email forKey:@"email"];
+    [dic setObject:user.mobilephone forKey:@"telephone"];
+    [dic setObject:companyStr forKey:@"companyName"];
+    [dic setObject:_activityModel.meetingCost forKey:@"price"];
+    [dic setObject:shouldPayStr forKey:@"orderAmount"];
+    [dic setObject:numberStr forKey:@"quantity"];
+    
+    NSError *error;
+    NSData *dicData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *dicStr = [[NSString alloc] initWithData:dicData encoding:NSUTF8StringEncoding];
+    
+    [CJRequestFormat createOrderWithOrderJson:dicStr finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSLog(@"请求成功");
+        }else if (status == 1) {
+            NSLog(@"网络请求出错");
+        }else if (status == 2) {
+            NSLog(@"请求成功，数据返回出错");
+        }
+    }];
+}
 -(int)canReduceMoney:(int)goodPrice andGoodCount:(int)number andUser:(CJUserModel *)userModel {
     int memberType = [[NSString stringWithFormat:@"%@",userModel.memberType] intValue];
     int sumPrice = goodPrice * number;
@@ -177,11 +239,24 @@
         }
     }
 }
-
+//未打折前的价格
+-(int)getSumPrice:(int)count andPrice:(NSString *)price {
+    int onePrice = [price intValue];
+    int allPrice = count * onePrice;
+    return allPrice;
+}
 -(int)returnPrice {
     NSString *priceStr = [NSString stringWithFormat:@"%@",self.activityModel.meetingCost];
     int price = [priceStr intValue];
     int redecePrice = [self canReduceMoney:price andGoodCount:self.count andUser:user];
     return redecePrice;
+}
+//订单号
+-(NSString *)getOrderNumber {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *currentDate = [dateFormatter stringFromDate:[NSDate date ]];
+    NSString *orderNumber = [NSString stringWithFormat:@"M%@",currentDate];
+    return orderNumber;
 }
 @end
