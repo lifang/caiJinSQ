@@ -72,10 +72,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark -- CJTransportAddressController代理方法
--(void)sendAddress:(NSDictionary *)dic
+-(void)sendAddress:(NSString *)addressid
 {
     //传过来的地址
-    NSLog(@"地址");
+    NSLog(@"地址:%@",addressid);
 }
 
 -(void)initUI {
@@ -180,7 +180,7 @@
     _confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _confirmButton.frame = CGRectMake(0, 30, self.view.frame.size.width, 40);
     _confirmButton.backgroundColor = kColor(228, 77, 40, 1);
-    [_confirmButton setTitle:@"使用支付宝支付" forState:UIControlStateNormal];
+    [_confirmButton setTitle:@"去支付" forState:UIControlStateNormal];
     [_confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_confirmButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_confirmButton addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
@@ -195,7 +195,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return 3;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -208,6 +208,7 @@
         [cell.contentView addSubview:label];
         
         _integralSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(250, 8, 10, 10)];
+        [_integralSwitch addTarget:self action:@selector(changeOne) forControlEvents:UIControlEventValueChanged];
         [cell.contentView addSubview:_integralSwitch];
     }else if (indexPath.row == 1) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 12, 150, 20)];
@@ -216,6 +217,7 @@
         [cell.contentView addSubview:label];
         
         _giftCardSwitch = [[UISwitch alloc] initWithFrame:_integralSwitch.frame];
+        [_giftCardSwitch addTarget:self action:@selector(changeTwo) forControlEvents:UIControlEventValueChanged];
         [cell.contentView addSubview:_giftCardSwitch];
     }else {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 12, 100, 20)];
@@ -224,9 +226,32 @@
         [cell.contentView addSubview:label];
         
         _zhiFuBaoSwitch = [[UISwitch alloc] initWithFrame:_integralSwitch.frame];
+        [_zhiFuBaoSwitch addTarget:self action:@selector(changeThree) forControlEvents:UIControlEventValueChanged];
         [cell.contentView addSubview:_zhiFuBaoSwitch];
     }
     return cell;
+}
+-(void)changeOne {
+    if (_integralSwitch.isOn) {
+        _giftCardSwitch.on = NO;
+        _zhiFuBaoSwitch.on = NO;
+    }
+}
+-(void)changeTwo {
+    if (_giftCardSwitch.isOn) {
+        _integralSwitch.on = NO;
+        _zhiFuBaoSwitch.on = NO;
+    }
+}
+-(void)changeThree {
+    if (_zhiFuBaoSwitch.isOn) {
+        _integralSwitch.on = NO;
+        _giftCardSwitch.on = NO;
+    }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 -(void)add:(id)sender {
     _number ++;

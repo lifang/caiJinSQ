@@ -288,8 +288,14 @@
                 NSLog(@"返回的不是字典");
             }
         }else if (status == 1) {
+            [activity stopAnimating];
+            [backView removeFromSuperview];
+            [self returnAlert:@"网络请求出错"];
             NSLog(@"网络请求出错");
         }else {
+            [activity stopAnimating];
+            [backView removeFromSuperview];
+            [self returnAlert:@"网络请求成功，返回出错"];
             NSLog(@"网络请求成功，返回出错");
         }
     }];
@@ -380,5 +386,9 @@
         [self userLogin:self];
     }
 
+}
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 @end

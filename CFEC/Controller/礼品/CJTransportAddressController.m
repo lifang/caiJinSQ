@@ -7,12 +7,15 @@
 //
 
 #import "CJTransportAddressController.h"
-
+#import "CJAppDelegate.h"
+#import "CJRequestFormat.h"
+#import "CJUserModel.h"
 @interface CJTransportAddressController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 {
     NSMutableArray *provinceArray;//所有省
     NSMutableDictionary *shengshiDic;
     int index;//区别label
+    CJUserModel *user;
 }
 @property (nonatomic, assign) CGRect focusRect;
 
@@ -48,6 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    user = [CJAppDelegate shareCJAppDelegate].user;
     [self initUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHeightChanged:) name:UIKeyboardWillChangeFrameNotification object:nil];
     // Do any additional setup after loading the view.
@@ -72,17 +76,29 @@
     self.navigationItem.rightBarButtonItem = rightbt;
 }
 -(void)back:(id)sender {
-//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//    [dic setObject:_shengLabel.text forKey:@"province"];
-//    [dic setObject:_cityLabel.text forKey:@"city"];
-//    [dic setObject:_xianLabel.text forKey:@"county"];
-//    [dic setObject:_text1.text forKey:@"address"];
-//    [dic setObject:_text2.text forKey:@"post"];
-//    [dic setObject:_text3 forKey:@"name"];
-//    [dic setObject:_text4 forKey:@"tel"];
-//    if ([self.delegate respondsToSelector:@selector(sendAddress:)]) {
-//        [self.delegate sendAddress:dic];
-//    }
+    if ([self.delegate respondsToSelector:@selector(sendAddress:)]) {
+        [self.delegate sendAddress:_addressId];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(IBAction)save:(UIButton *)sender {
+    NSMutableDictionary *addressDic = [NSMutableDictionary dictionary];
+    [addressDic setObject:user.userId forKey:@"user_id"];
+    [addressDic setObject:_text3.text forKey:@"name"];
+    [addressDic setObject:_shengLabel.text forKey:@"province"];
+    [addressDic setObject:_cityLabel.text forKey:@"city"];
+    [addressDic setObject:_xianLabel.text forKey:@"area"];
+    [addressDic setObject:_text2.text forKey:@"post_code"];
+    [addressDic setObject:_text1.text forKey:@"street_address"];
+    [addressDic setObject:_text4.text forKey:@"mobile"];
+    [addressDic setObject:@"" forKey:@"telephone"];
+    //    NSString *userid = [NSString stringWithFormat:@"%@",user.userId];
+    //    NSLog(@"%@%@",userid,addressDic);
+    NSError *error;
+    NSData *addressData = [NSJSONSerialization dataWithJSONObject:addressDic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *addressStr = [[NSString alloc] initWithData:addressData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",addressStr);
+    
     if (![_shengLabel.text isEqualToString:@""]) {
         if (![_cityLabel.text isEqualToString:@""]) {
             if (![_xianLabel.text isEqualToString:@""]) {
@@ -90,8 +106,16 @@
                     if (![_text2.text isEqualToString:@""]) {
                         if (![_text3.text isEqualToString:@""]) {
                             if (![_text4.text isEqualToString:@""]) {
-                                
-                                [self.navigationController popViewControllerAnimated:YES];
+                                [CJRequestFormat addAddressBefor:addressStr finished:^(ResponseStatus status, NSString *response) {
+                                    if (status == 0) {
+                                        _addressId = response;
+                                        [self showAlert:@"保存成功"];
+                                    }else if (status == 1) {
+                                        [self showAlert:@"网络出错"];
+                                    }else if (status == 2) {
+                                        [self showAlert:@"请求成功，返回失败"];
+                                    }
+                                }];
                             }else {
                                 [self showAlert:@"电话不能为空"];
                             }
@@ -229,9 +253,6 @@
         _pickerView.frame = CGRectMake(0, _height, 320, 216);
         _toolBar.frame = CGRectMake(0, _height, 320, 44);
     }];
-}
-
--(void)save:(id)sender {
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -321,7 +321,18 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
     [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
         result(status,response);
     }];
-
-    
 }
+//添加地址
++ (void)addAddressBefor:(NSString *)addressInfo
+               finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:addressInfo forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kAddress, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+
+}
+
+
 @end

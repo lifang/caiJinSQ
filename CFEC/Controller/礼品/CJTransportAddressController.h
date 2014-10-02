@@ -7,11 +7,12 @@
 //
 @protocol sendTansportDelegate <NSObject>
 
--(void)sendAddress:(NSDictionary *)dic;
+-(void)sendAddress:(NSString *)addressid;
 
 @end
 #import <UIKit/UIKit.h>
 
 @interface CJTransportAddressController : UIViewController
 @property (nonatomic, assign) id<sendTansportDelegate>delegate;
+@property (nonatomic, strong) NSString *addressId;
 @end

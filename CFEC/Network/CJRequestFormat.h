@@ -277,7 +277,6 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
                     mobile:电话
                     telephone:写空" "                
  */
-+ (void)addAddressBefor:(NSString *)userid
-                       andAddressInfo:(NSString *)addressInfo
++ (void)addAddressBefor:(NSString *)addressInfo
                        finished:(Result)result;
 @end
