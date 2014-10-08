@@ -12,9 +12,15 @@
 #import "CJPayedCell.h"
 #import "CJRequestFormat.h"
 #import "CJUserModel.h"
+#import "CJOrderModel.h"
+#import "UIImageView+WebCache.h"
+
 @interface CJMyordersController ()<UITableViewDataSource,UITableViewDelegate>
 {
     CJUserModel *user;
+    NSMutableArray *noPayArray;
+    NSMutableArray *payedArray;
+    NSMutableArray *tableViewArray;
 }
 @property (nonatomic ,strong) UISegmentedControl *segControl;
 @property (nonatomic, strong) UITableView *giftTable;
@@ -36,7 +42,11 @@
 {
     [super viewDidLoad];
     [self initUI];
+    noPayArray = [NSMutableArray array];
+    payedArray = [NSMutableArray array];
+    tableViewArray = [NSMutableArray array];
     [self getDateFromNet];
+
     // Do any additional setup after loading the view.
 }
 
@@ -87,7 +97,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return tableViewArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,12 +115,19 @@
         cell.payButton.hidden = YES;
         cell.deleteButton.hidden = NO;
     }
-    cell.giftImage.image = [UIImage imageNamed:@"活动2@2x.png"];
-    cell.giftTitleLabel.text = @"2014中国财务精英高峰论坛--北京站";
+    CJOrderModel *order = tableViewArray[indexPath.row];
+    [cell.giftImage sd_setImageWithURL:[NSURL URLWithString:order.image] placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageRefreshCached : 0];
+    NSString *name = [NSString stringWithFormat:@"%@",order.goodName];
+    NSString *price = [NSString stringWithFormat:@"%@",order.price];
+    NSString *number = [NSString stringWithFormat:@"%@",order.quantity];
+    int priceInt = [price intValue];
+    int numberInt = [number intValue];
+    int sumPrice = priceInt * numberInt;
+    cell.giftTitleLabel.text = name;
     cell.organizerLabel.text = @"CEFC";
-    cell.priceLabel.text = @"20,000";
-    cell.numberLabel.text = @"数量 1 件";
-    cell.sumLabel.text = @"金额: $20,000";
+    cell.priceLabel.text = price;
+    cell.numberLabel.text = [NSString stringWithFormat:@"数量%@件",number];
+    cell.sumLabel.text = [NSString stringWithFormat:@"金额:￥%d",sumPrice];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,8 +140,10 @@
 }
 -(void)segmentAction:(UISegmentedControl*)segment {
     if (segment.selectedSegmentIndex == 0) {
+        tableViewArray = payedArray;
         [_giftTable reloadData];
     }else {
+        tableViewArray = noPayArray;
         [_giftTable reloadData];
     }
 }
@@ -135,7 +154,25 @@
             NSError *error;
             NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
             id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-            NSLog(@"------%@",jsonObject);
+            if ([jsonObject isKindOfClass:[NSArray class]]) {
+                NSMutableArray *jsonArray = (NSMutableArray *)jsonObject;
+                for (int i = 0; i < jsonArray.count; i++) {
+                    NSMutableDictionary *dic = jsonArray[i];
+                    CJOrderModel *order = [[CJOrderModel alloc] init];
+                    order.goodName = [dic objectForKey:@"goodName"];
+                    order.image = [dic objectForKey:@"picture"];
+                    order.price = [dic objectForKey:@"price"];
+                    order.quantity = [dic objectForKey:@"quantity"];
+                    order.tradeStatus = [dic objectForKey:@"tradeStatus"];
+                    if ([order.tradeStatus isEqualToString:@"TRADE_NOSUCCESS"]) {
+                        [noPayArray addObject:order];
+                    }else {
+                        [payedArray addObject:order];
+                    }
+                }
+                tableViewArray = payedArray;
+                [_giftTable reloadData];
+            }
         }else if (status == 1) {
             NSLog(@"请求出错");
         }else if (status == 2) {

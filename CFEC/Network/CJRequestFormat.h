@@ -258,7 +258,7 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
                     p_coupon:优惠劵
                     p_orderAmount:价格
                     p_total:总价
-                    order_no:礼品卡号
+                    order_no:订单号
  @result 请求结果
  */
 + (void)payInfomationWithUserID:(NSString *)email

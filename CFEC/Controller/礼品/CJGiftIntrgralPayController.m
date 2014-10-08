@@ -1,12 +1,12 @@
 //
-//  CJPayController.m
+//  CJGiftIntrgralPayController.m
 //  CFEC
 //
-//  Created by SumFlower on 14-8-28.
+//  Created by SumFlower on 14-10-3.
 //  Copyright (c) 2014年 ___MyCompanyName___. All rights reserved.
 //
 
-#import "CJPayController.h"
+#import "CJGiftIntrgralPayController.h"
 #import "CJUserModel.h"
 #import "CJAppDelegate.h"
 #import "CJRequestFormat.h"
@@ -16,7 +16,7 @@
 #import "PartnerConfig.h"
 #import "DataVerifier.h"
 
-@interface CJPayController ()<UITextFieldDelegate>
+@interface CJGiftIntrgralPayController ()<UITextFieldDelegate>
 {
     CJUserModel *user;
 }
@@ -24,31 +24,22 @@
 @property (nonatomic, strong) UILabel *sumIntegralLabel;//总积分
 @property (nonatomic, strong) UITextField *useIntegralTextfiled;//使用积分
 @property (nonatomic, strong) UIButton *payBt;//支付宝支付
+
 @end
 
-@implementation CJPayController
+@implementation CJGiftIntrgralPayController
 @synthesize VIPlevelLabel = _VIPlevelLabel;
 @synthesize sumIntegralLabel = _sumIntegralLabel;
 @synthesize useIntegralTextfiled = _useIntegralTextfiled;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     user = [CJAppDelegate shareCJAppDelegate].user;
+    self.navigationItem.title = @"积分支付";
     self.view.backgroundColor = kColor(243, 243, 243, 1);
-    self.navigationItem.title = @"活动支付";
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self initUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(valueChange:) name:UITextFieldTextDidChangeNotification object:nil];
-    
     // Do any additional setup after loading the view.
 }
 -(void)valueChange:(NSNotification *)notification
@@ -78,19 +69,16 @@
     
     _useIntegralTextfiled.text = [NSString stringWithFormat:@"%d",intrgral];
 
-    
     if (userPrintIntergal <= 0) {
         _useIntegralTextfiled.text = @"";
     }
     
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)setLeftNavBarItemWithImageName:(NSString *)name {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftButton.frame = CGRectMake(0, 0, 25, 25);
@@ -134,7 +122,7 @@
     _useIntegralTextfiled = [[UITextField alloc] initWithFrame:CGRectMake(80, 136 + 26, 60, 30)];
     _useIntegralTextfiled.backgroundColor = [UIColor whiteColor];
     _useIntegralTextfiled.delegate = self;
-//    _useIntegralTextfiled.text = @"0";
+    //    _useIntegralTextfiled.text = @"0";
     _useIntegralTextfiled.layer.cornerRadius = 8.0f;
     _useIntegralTextfiled.keyboardType = UIKeyboardTypeNumberPad;
     _useIntegralTextfiled.font = [UIFont systemFontOfSize:12.0f];
@@ -157,19 +145,19 @@
     return YES;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 -(IBAction)payNow:(UIButton *)sender {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     NSString *orderNumber = [self getOrderNumber];
-    int sumPrice = [self getSumPrice:_count andPrice:_activityModel.meetingCost];
+    int sumPrice = [self getSumPrice:_count andPrice:_giftModel.price];
     int userPrintIntegral;
     if ([_useIntegralTextfiled.text isEqualToString:@""]) {
         userPrintIntegral = 0;
@@ -183,47 +171,51 @@
     int shouldPay = sumPrice - userPrintIntegral;
     NSString *numberStr = [NSString stringWithFormat:@"%d",_count];
     NSString *shouldPayStr = [NSString stringWithFormat:@"%d",shouldPay];
-    NSString *name = [NSString stringWithFormat:@"%@",user.name];
-    NSString *companyStr = [NSString stringWithFormat:@"%@",user.companyName];
+    NSString *integralStr = [NSString stringWithFormat:@"%@",_useIntegralTextfiled.text];
+    NSString *giftPriceStr = [NSString stringWithFormat:@"%@",_giftModel.price];
     
-    [dic setObject:user.userId forKey:@"userId"];
-    [dic setObject:orderNumber forKey:@"orderNo"];
-    [dic setObject:_activityModel.ID forKey:@"activityId"];
-    [dic setObject:_activityModel.title forKey:@"activityDescribe"];
-    [dic setObject:_activityModel.title forKey:@"activityName"];
-    [dic setObject:name forKey:@"name"];
-    [dic setObject:user.email forKey:@"email"];
-    [dic setObject:user.mobilephone forKey:@"telephone"];
-    [dic setObject:companyStr forKey:@"companyName"];
-    [dic setObject:_activityModel.meetingCost forKey:@"price"];
-    [dic setObject:shouldPayStr forKey:@"orderAmount"];
-    [dic setObject:numberStr forKey:@"quantity"];
+    [dic setObject:_addressStr forKey:@"p_delivery_address"];
+    [dic setObject:_giftModel.ID forKey:@"p_goodId"];
+    [dic setObject:numberStr forKey:@"p_quantity"];
+    [dic setObject:@"1" forKey:@"p_flag"];
+    [dic setObject:integralStr forKey:@"p_integral"];
+    [dic setObject:@"0" forKey:@"p_giftTicket"];
+    [dic setObject:@"0" forKey:@"p_coupon"];
+    [dic setObject:giftPriceStr forKey:@"p_orderAmount"];
+    [dic setObject:shouldPayStr forKey:@"p_total"];
+    [dic setObject:orderNumber forKey:@"order_no"];
     
     NSError *error;
     NSData *dicData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
     NSString *dicStr = [[NSString alloc] initWithData:dicData encoding:NSUTF8StringEncoding];
     
-    [CJRequestFormat createOrderWithOrderJson:dicStr finished:^(ResponseStatus status, NSString *response) {
+    [CJRequestFormat payInfomationWithUserID:user.email payJson:dicStr finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {
             NSLog(@"请求成功");
-            if (shouldPay == 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"已报名" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
-            }else {
-                NSString *orderString = [CJCreatePayOrder createActivityOrderWithActivity:_activityModel
-                                                                              countNumber:_count andReducePrice:userPrintIntegral];
-                [AlixLibService payOrder:orderString
-                               AndScheme:kAlipayScheme
-                                 seletor:@selector(payResult:)
-                                  target:self];
+            NSError *error;
+            NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+            id responseObj = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&error];
+            if ([responseObj isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *responseDic = (NSDictionary *)responseObj;
+                if ([[responseDic objectForKey:@"msg"] isEqualToString:@"ok"]) {
+                    NSString *orderString = [CJCreatePayOrder createGiftOrderWithGift:_giftModel
+                                                                          countNumber:_count andReducePrice:userPrintIntegral];
+                    [AlixLibService payOrder:orderString
+                                   AndScheme:kAlipayScheme
+                                     seletor:@selector(payResult:)
+                                      target:self];
 
+                }
             }
         }else if (status == 1) {
-            NSLog(@"网络请求出错");
+            NSLog(@"请检查网络");
+            [self returnAlert:@"请检查网络"];
         }else if (status == 2) {
-            NSLog(@"请求成功，数据返回出错");
+            NSLog(@"请求成功，返回失败");
+            [self returnAlert:@"请求成功，返回失败"];
         }
     }];
+    
 }
 -(int)canReduceMoney:(int)goodPrice andGoodCount:(int)number andUser:(CJUserModel *)userModel {
     int memberType = [[NSString stringWithFormat:@"%@",userModel.memberType] intValue];
@@ -287,7 +279,7 @@
     return allPrice;
 }
 -(int)returnPrice {
-    NSString *priceStr = [NSString stringWithFormat:@"%@",self.activityModel.meetingCost];
+    NSString *priceStr = [NSString stringWithFormat:@"%@",self.giftModel.price];
     int price = [priceStr intValue];
     int redecePrice = [self canReduceMoney:price andGoodCount:self.count andUser:user];
     return redecePrice;
@@ -352,13 +344,10 @@
             NSLog(@"网络出错");
             [self returnAlert:@"网络出错"];
         }
-
     }
 }
-
 -(void)returnAlert:(NSString *)str {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
 }
-
 @end

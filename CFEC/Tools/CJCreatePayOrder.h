@@ -13,7 +13,7 @@
 @interface CJCreatePayOrder : NSObject
 
 + (NSString *)createGiftOrderWithGift:(CJGiftModel *)gift
-                          countNumber:(int)count;
+                          countNumber:(int)count andReducePrice:(int)reducePrice;
 
 + (NSString *)createActivityOrderWithActivity:(CJActivityModel *)activity
                                   countNumber:(int)count andReducePrice:(int)reduce;

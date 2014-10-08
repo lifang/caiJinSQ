@@ -144,7 +144,7 @@
             [CJRequestFormat modifyUserInformationWithUserID:user.userId userJson:jsonStr finished:^(ResponseStatus status, NSString *response) {
                 if (status == 0) {
                     NSLog(@"保存成功");
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存成功" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
                 }else if (status == 1) {
                     NSLog(@"请求失败");
@@ -154,7 +154,7 @@
             }];
         }
     }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手机号码格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手机号码格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
 
     }

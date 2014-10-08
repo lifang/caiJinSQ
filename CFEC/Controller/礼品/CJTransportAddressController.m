@@ -365,7 +365,7 @@
     CGRect startFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect endFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    CGFloat bottomHeight = 100;
+    CGFloat bottomHeight = 50;
     CGFloat offset = 0;
     NSLog(@"%@,%@",NSStringFromCGRect(startFrame),NSStringFromCGRect(endFrame));
     if (startFrame.origin.y >= screenHeight) {

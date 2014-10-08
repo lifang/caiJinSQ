@@ -90,7 +90,7 @@
         }
     }
     if (i == 5) {
-        UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"未选择阵营" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"未选择阵营" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [aler show];
     }else {
         //传阵营参数

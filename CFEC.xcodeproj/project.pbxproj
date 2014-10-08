@@ -18,10 +18,12 @@
 		3A2058A019B98EAA00EBDF5F /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20589F19B98EAA00EBDF5F /* area.plist */; };
 		3A2058A219B9948000EBDF5F /* 礼品箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A2058A119B9948000EBDF5F /* 礼品箭头@2x.png */; };
 		3A2A0A4919B5B41100F669E6 /* CJUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A0A4819B5B41100F669E6 /* CJUserModel.m */; };
+		3A2A226019DFACE00085C3EE /* CJGiftTicketPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A225F19DFACE00085C3EE /* CJGiftTicketPayController.m */; };
 		3A2E03D619D841CB00E0BB39 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */; };
 		3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */; };
 		3A34EA1319BEA7450083773C /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A34EA1219BEA7450083773C /* save@2x.png */; };
 		3A3A194319B18A0E0021F6F5 /* CJCampController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A194219B18A0E0021F6F5 /* CJCampController.m */; };
+		3A3D7B3219E4F12E00D72A15 /* CJOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D7B3119E4F12E00D72A15 /* CJOrderModel.m */; };
 		3A4040B719D8F71E009E5202 /* serviceContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A4040B619D8F71E009E5202 /* serviceContent.txt */; };
 		3A4040BD19D9052C009E5202 /* CJRegisterServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */; };
 		3A4040BF19D930B8009E5202 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4040BE19D930B8009E5202 /* MessageUI.framework */; };
@@ -135,6 +137,7 @@
 		3A7C51CC19AB238A00EBFDE9 /* 首页cetui_24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51C319AB238A00EBFDE9 /* 首页cetui_24@2x.png */; };
 		3A7C51CD19AB238A00EBFDE9 /* 首页cetui_26@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51C419AB238A00EBFDE9 /* 首页cetui_26@2x.png */; };
 		3A7C51CF19AB276800EBFDE9 /* 我的订单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51CE19AB276800EBFDE9 /* 我的订单@2x.png */; };
+		3AAC873519DE44F300AE97F2 /* CJGiftIntrgralPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAC873419DE44F300AE97F2 /* CJGiftIntrgralPayController.m */; };
 		3ACC7B0919D7A9C00093690E /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */; };
 		3ACC7B0A19D7A9C00093690E /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3ACC7B0719D7A9C00093690E /* WeiboSDK.bundle */; };
 		3ACC7B0C19D7B6F10093690E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0B19D7B6F10093690E /* AddressBook.framework */; };
@@ -238,12 +241,16 @@
 		3A2058A119B9948000EBDF5F /* 礼品箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "礼品箭头@2x.png"; sourceTree = "<group>"; };
 		3A2A0A4719B5B41100F669E6 /* CJUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUserModel.h; sourceTree = "<group>"; };
 		3A2A0A4819B5B41100F669E6 /* CJUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUserModel.m; sourceTree = "<group>"; };
+		3A2A225E19DFACE00085C3EE /* CJGiftTicketPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftTicketPayController.h; sourceTree = "<group>"; };
+		3A2A225F19DFACE00085C3EE /* CJGiftTicketPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGiftTicketPayController.m; sourceTree = "<group>"; };
 		3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		3A2E03D419D841CB00E0BB39 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		3A34EA1219BEA7450083773C /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
 		3A3A194119B18A0E0021F6F5 /* CJCampController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCampController.h; sourceTree = "<group>"; };
 		3A3A194219B18A0E0021F6F5 /* CJCampController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCampController.m; sourceTree = "<group>"; };
+		3A3D7B3019E4F12E00D72A15 /* CJOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJOrderModel.h; sourceTree = "<group>"; };
+		3A3D7B3119E4F12E00D72A15 /* CJOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJOrderModel.m; sourceTree = "<group>"; };
 		3A4040B619D8F71E009E5202 /* serviceContent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = serviceContent.txt; sourceTree = "<group>"; };
 		3A4040BB19D9052C009E5202 /* CJRegisterServiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRegisterServiceController.h; sourceTree = "<group>"; };
 		3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRegisterServiceController.m; sourceTree = "<group>"; };
@@ -403,6 +410,8 @@
 		3A7C51C319AB238A00EBFDE9 /* 首页cetui_24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页cetui_24@2x.png"; sourceTree = "<group>"; };
 		3A7C51C419AB238A00EBFDE9 /* 首页cetui_26@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页cetui_26@2x.png"; sourceTree = "<group>"; };
 		3A7C51CE19AB276800EBFDE9 /* 我的订单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的订单@2x.png"; sourceTree = "<group>"; };
+		3AAC873319DE44F300AE97F2 /* CJGiftIntrgralPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftIntrgralPayController.h; sourceTree = "<group>"; };
+		3AAC873419DE44F300AE97F2 /* CJGiftIntrgralPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGiftIntrgralPayController.m; sourceTree = "<group>"; };
 		3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		3ACC7B0719D7A9C00093690E /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		3ACC7B0819D7A9C00093690E /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -587,6 +596,8 @@
 				3A1B847719BC23D000BF6F21 /* CJGiftModel.m */,
 				3ACC7B1319D7CF810093690E /* CJAddressModel.h */,
 				3ACC7B1419D7CF810093690E /* CJAddressModel.m */,
+				3A3D7B3019E4F12E00D72A15 /* CJOrderModel.h */,
+				3A3D7B3119E4F12E00D72A15 /* CJOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -622,6 +633,10 @@
 				3A1B848319BC39BB00BF6F21 /* CJHotGoodController.m */,
 				3A1B848519BC3AEF00BF6F21 /* CJServiceController.h */,
 				3A1B848619BC3AEF00BF6F21 /* CJServiceController.m */,
+				3AAC873319DE44F300AE97F2 /* CJGiftIntrgralPayController.h */,
+				3AAC873419DE44F300AE97F2 /* CJGiftIntrgralPayController.m */,
+				3A2A225E19DFACE00085C3EE /* CJGiftTicketPayController.h */,
+				3A2A225F19DFACE00085C3EE /* CJGiftTicketPayController.m */,
 			);
 			path = "礼品";
 			sourceTree = "<group>";
@@ -1404,6 +1419,7 @@
 				3AFE669B19B6C4A4004009E0 /* UIImage+GIF.m in Sources */,
 				77A6389A19AF20FF00584C97 /* GDataXMLNode.m in Sources */,
 				3A7C514A19AAFD3E00EBFDE9 /* CJNameController.m in Sources */,
+				3AAC873519DE44F300AE97F2 /* CJGiftIntrgralPayController.m in Sources */,
 				3A7C511F19AAFCC800EBFDE9 /* CJLoginViewController.m in Sources */,
 				3A20589E19B95F4E00EBDF5F /* CJTransportAddressController.m in Sources */,
 				3AFE669F19B6C4A4004009E0 /* UIImageView+WebCache.m in Sources */,
@@ -1437,6 +1453,7 @@
 				3A6B8DDB19B06C5500CF7E9E /* CJTermsofserviceController.m in Sources */,
 				77DAF04E19C296410045E2B4 /* NSObject+SBJSON.m in Sources */,
 				3A7C514519AAFD3E00EBFDE9 /* CJForgotPasswordController.m in Sources */,
+				3A2A226019DFACE00085C3EE /* CJGiftTicketPayController.m in Sources */,
 				771C0E8419AB07370065D46F /* Reachability.m in Sources */,
 				771C0E8B19AB088E0065D46F /* CJRequestFormat.m in Sources */,
 				3A7C514B19AAFD3E00EBFDE9 /* CJRegisterController.m in Sources */,
@@ -1471,6 +1488,7 @@
 				771AA7F119A2E4C0005B9AAE /* MMDrawerVisualState.m in Sources */,
 				3AFE669419B6C4A4004009E0 /* SDWebImageCompat.m in Sources */,
 				3AFE669819B6C4A4004009E0 /* SDWebImageManager.m in Sources */,
+				3A3D7B3219E4F12E00D72A15 /* CJOrderModel.m in Sources */,
 				77DAF05019C296410045E2B4 /* SBJSON.m in Sources */,
 				3AFE669119B6C4A4004009E0 /* MKAnnotationView+WebCache.m in Sources */,
 				77DAF05919C2E2830045E2B4 /* NSDataAdditions.m in Sources */,

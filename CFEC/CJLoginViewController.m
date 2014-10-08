@@ -261,7 +261,7 @@
                         
                         [activity stopAnimating];
                         [backView removeFromSuperview];
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                         [alert show];
                     }else {
                         [activity stopAnimating];

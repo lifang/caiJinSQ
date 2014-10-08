@@ -14,14 +14,14 @@
 @implementation CJCreatePayOrder
 
 + (NSString *)createGiftOrderWithGift:(CJGiftModel *)gift
-                          countNumber:(int)count {
+                          countNumber:(int)count andReducePrice:(int)reducePrice{
     AlixPayOrder *order = [[AlixPayOrder alloc] init];
     order.partner = PartnerID;
     order.seller = SellerID;
     order.tradeNO = [[self class] createTradeNo];
     order.productName = gift.name;
     order.productDescription = gift.describe;
-    order.amount = [NSString stringWithFormat:@"%.2f",[gift.price floatValue] * count];
+    order.amount = [NSString stringWithFormat:@"%.2f",[gift.price floatValue] * count - reducePrice];
     order.notifyURL = @"http%3A%2F%2Fwww.xxx.com";
     
     NSString *orderInfo = [order description];

@@ -13,8 +13,17 @@
 #import "CJCreatePayOrder.h"
 #import "PartnerConfig.h"
 #import "DataVerifier.h"
+#import "CJUserModel.h"
+#import "CJAppDelegate.h"
+#import "CJGiftIntrgralPayController.h"
+#import "CJGiftTicketPayController.h"
+#import "CJRequestFormat.h"
 
 @interface CJOrderController ()<UITableViewDataSource,UITableViewDelegate,sendTansportDelegate>
+{
+    NSString *addressStr;
+    CJUserModel *user;
+}
 @property (nonatomic, strong) UITableView *orderTable;
 @property (nonatomic, strong) UISwitch *integralSwitch;
 @property (nonatomic, strong) UISwitch *giftCardSwitch;
@@ -44,6 +53,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    user = [CJAppDelegate shareCJAppDelegate].user;
     self.number = 1;
     [self initUI];
     // Do any additional setup after loading the view.
@@ -75,7 +85,8 @@
 -(void)sendAddress:(NSString *)addressid
 {
     //传过来的地址
-    NSLog(@"地址:%@",addressid);
+    addressStr = addressid;
+//    NSLog(@"地址:%@",addressid);
 }
 
 -(void)initUI {
@@ -168,7 +179,7 @@
     
     _integral = [[UILabel alloc] initWithFrame:CGRectMake(100, 140, 30, 30)];
     _integral.font = [UIFont systemFontOfSize:14.0f];
-    _integral.text = @"50";
+    _integral.text = [NSString stringWithFormat:@"%@",user.integral];
     [headview addSubview:_integral];
 
     return headview;
@@ -262,16 +273,37 @@
     if (_number >= 1) {
         _number --;
     }
+    if (_number < 1) {
+        _number = 1;
+    }
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
     _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_giftModel.price floatValue]];
 }
 -(void)confirm:(id)sender {
-    NSString *orderString = [CJCreatePayOrder createGiftOrderWithGift:_giftModel
-                                                          countNumber:_number];
-    [AlixLibService payOrder:orderString
-                   AndScheme:kAlipayScheme
-                     seletor:@selector(payResult:)
-                      target:self];
+    if (addressStr == nil) {
+        [self showAlert:@"请输入收货地址"];
+        return;
+    }
+    if (_integralSwitch.isOn) {
+        //
+        CJGiftIntrgralPayController *giftPay = [[CJGiftIntrgralPayController alloc] init];
+        giftPay.count = _number;
+        giftPay.giftModel = _giftModel;
+        giftPay.addressStr = addressStr;
+        [self.navigationController pushViewController:giftPay animated:YES];
+    }else if (_giftCardSwitch.isOn) {
+        //
+        CJGiftTicketPayController *giftTicketPayC = [[CJGiftTicketPayController alloc] init];
+        giftTicketPayC.gift = _giftModel;
+        giftTicketPayC.addressStr = addressStr;
+        giftTicketPayC.count = _number;
+        [self.navigationController pushViewController:giftTicketPayC animated:YES];
+    }else if (_zhiFuBaoSwitch.isOn) {
+        //
+        [self payWithZhiFuBao];
+    }else {
+        [self showAlert:@"请选择支付方式"];
+    }
 }
 
 
@@ -283,24 +315,96 @@
         if (result.statusCode == 9000) {
             id<DataVerifier> verifier;
             verifier = CreateRSADataVerifier(AlipayPubKey);
-			if ([verifier verifyString:result.resultString withSign:result.signString]) {
+            if ([verifier verifyString:result.resultString withSign:result.signString]) {
                 //验证签名成功，交易结果无篡改
                 NSLog(@"success");
-			}
+                [self returnAlert:@"交易成功"];
+            }
         }
         else if (result.statusCode == 8000) {
             NSLog(@"正在处理");
+            [self returnAlert:@"正在处理"];
         }
         else if (result.statusCode == 4000) {
             NSLog(@"支付失败");
+            [self returnAlert:@"支付失败"];
         }
         else if (result.statusCode == 6001) {
             NSLog(@"中途取消");
+            [self returnAlert:@"中途取消"];
         }
         else if (result.statusCode == 6002) {
             NSLog(@"网络出错");
+            [self returnAlert:@"网络出错"];
         }
     }
+}
+-(void)showAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
+-(void)payWithZhiFuBao {
+    NSString *giftPrice = [NSString stringWithFormat:@"%@",_giftModel.price];
+    int giftPriceInt = [giftPrice intValue];
+    NSString *sumPrice = [NSString stringWithFormat:@"%d", giftPriceInt * _number];
+    NSString *numberStr = [NSString stringWithFormat:@"%d",_number];
+    NSString *orderNoStr = [self getOrderNumber];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:addressStr forKey:@"p_delivery_address"];
+    [dic setObject:_giftModel.ID forKey:@"p_goodId"];
+    [dic setObject:numberStr forKey:@"p_quantity"];
+    [dic setObject:@"0" forKey:@"p_flag"];
+    [dic setObject:@"0" forKey:@"p_integral"];
+    [dic setObject:@"0" forKey:@"p_giftTicket"];
+    [dic setObject:@"0" forKey:@"p_coupon"];
+    [dic setObject:giftPrice forKey:@"p_orderAmount"];
+    [dic setObject:sumPrice forKey:@"p_total"];
+    [dic setObject:orderNoStr forKey:@"order_no"];
+    
+    NSError *error;
+    NSData *dicData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *dicStr = [[NSString alloc] initWithData:dicData encoding:NSUTF8StringEncoding];
+    
+    [CJRequestFormat payInfomationWithUserID:user.email payJson:dicStr finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSLog(@"请求成功");
+
+                NSError *error;
+                NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                id responseObj = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&error];
+                if ([responseObj isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *responseDic = (NSDictionary *)responseObj;
+                    if ([[responseDic objectForKey:@"msg"] isEqualToString:@"ok"]) {
+                        NSString *orderString = [CJCreatePayOrder createGiftOrderWithGift:_giftModel
+                                                                              countNumber:_number andReducePrice:0];
+                        [AlixLibService payOrder:orderString
+                                       AndScheme:kAlipayScheme
+                                         seletor:@selector(payResult:)
+                                          target:self];
+                        
+                    }
+                }
+        }else if (status == 1) {
+            NSLog(@"请检查网络");
+            [self returnAlert:@"请检查网络"];
+        }else if (status == 2) {
+            NSLog(@"请求成功，返回失败");
+            [self returnAlert:@"请求成功，返回失败"];
+        }
+        
+    }];
+}
+//订单号
+-(NSString *)getOrderNumber {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *currentDate = [dateFormatter stringFromDate:[NSDate date ]];
+    NSString *orderNumber = [NSString stringWithFormat:@"M%@",currentDate];
+    return orderNumber;
+}
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end

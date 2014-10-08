@@ -86,7 +86,7 @@
 -(void)sendInfo:(id)sender {
     NSLog(@"获取新密码");
     if ([_telAndemailTextfield.text isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱或号码不能为空" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱或号码不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     }
     [CJRequestFormat findPasswordWithEmail:_telAndemailTextfield.text finished:^(ResponseStatus status, NSString *response) {
@@ -98,7 +98,7 @@
                 NSDictionary *dic = (NSDictionary *)jsonObject;
                 NSString *s = [dic objectForKey:@"msg"];
                 if ([s isEqualToString:@"error"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱错误" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
                 }else {
                     NSLog(@"密码找回成功,请去邮箱重新填写密码");
