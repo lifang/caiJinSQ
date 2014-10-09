@@ -14,4 +14,5 @@
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *quantity;
 @property (nonatomic, strong) NSString *tradeStatus;
+@property (nonatomic, strong) NSString *orderNo;
 @end

@@ -90,6 +90,7 @@
     _deleteButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     _deleteButton.layer.borderWidth = 1;
     _deleteButton.layer.cornerRadius = 5;
+    [_deleteButton addTarget:self action:@selector(deleteOrder:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_deleteButton];
     
     _payButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -97,6 +98,7 @@
     [_payButton setTitle:@"立即支付" forState:UIControlStateNormal];
     [_payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [_payButton addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
     _payButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     _payButton.layer.borderWidth = 1;
     _payButton.layer.cornerRadius = 5;
@@ -108,6 +110,7 @@
     [_cancelButton setTitle:@"取消订单" forState:UIControlStateNormal];
     [_cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [_cancelButton addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     _cancelButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     _cancelButton.layer.borderWidth = 1;
     _cancelButton.layer.cornerRadius = 5;
@@ -119,5 +122,20 @@
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0,124, self.contentView.frame.size.width, 6)];
     line.backgroundColor = kColor(208, 208, 208, 1);
     [self.contentView addSubview:line];
+}
+-(void)deleteOrder:(UIButton *)bt {
+    if ([self.delegateDelete respondsToSelector:@selector(deleteAction:)]) {
+        [self.delegateDelete deleteAction:bt];
+    }
+}
+-(void)pay:(UIButton *)bt {
+    if ([self.delegatePay respondsToSelector:@selector(payAction:)]) {
+        [self.delegatePay payAction:bt];
+    }
+}
+-(void)cancel:(UIButton *)bt {
+    if ([self.delegateCancel respondsToSelector:@selector(cancelAction:)]) {
+        [self.delegateCancel cancelAction:bt];
+    }
 }
 @end

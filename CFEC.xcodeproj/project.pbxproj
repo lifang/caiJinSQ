@@ -19,6 +19,7 @@
 		3A2058A219B9948000EBDF5F /* 礼品箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A2058A119B9948000EBDF5F /* 礼品箭头@2x.png */; };
 		3A2A0A4919B5B41100F669E6 /* CJUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A0A4819B5B41100F669E6 /* CJUserModel.m */; };
 		3A2A226019DFACE00085C3EE /* CJGiftTicketPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A225F19DFACE00085C3EE /* CJGiftTicketPayController.m */; };
+		3A2D41D219E629A6003473F7 /* CJSendToFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D41D119E629A6003473F7 /* CJSendToFriendController.m */; };
 		3A2E03D619D841CB00E0BB39 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */; };
 		3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */; };
 		3A34EA1319BEA7450083773C /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A34EA1219BEA7450083773C /* save@2x.png */; };
@@ -243,6 +244,8 @@
 		3A2A0A4819B5B41100F669E6 /* CJUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUserModel.m; sourceTree = "<group>"; };
 		3A2A225E19DFACE00085C3EE /* CJGiftTicketPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftTicketPayController.h; sourceTree = "<group>"; };
 		3A2A225F19DFACE00085C3EE /* CJGiftTicketPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGiftTicketPayController.m; sourceTree = "<group>"; };
+		3A2D41D019E629A6003473F7 /* CJSendToFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSendToFriendController.h; sourceTree = "<group>"; };
+		3A2D41D119E629A6003473F7 /* CJSendToFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSendToFriendController.m; sourceTree = "<group>"; };
 		3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		3A2E03D419D841CB00E0BB39 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -619,8 +622,8 @@
 				3A49C3F819AF453100FFA307 /* CJAllgiftController.m */,
 				3A63634F19B84CAC00D818FB /* CJGiftDetailController.h */,
 				3A63635019B84CAC00D818FB /* CJGiftDetailController.m */,
-				3A63635219B858CE00D818FB /* CJOrderController.h */,
 				3A63635319B858CE00D818FB /* CJOrderController.m */,
+				3A63635219B858CE00D818FB /* CJOrderController.h */,
 				3A20589C19B95F4E00EBDF5F /* CJTransportAddressController.h */,
 				3A20589D19B95F4E00EBDF5F /* CJTransportAddressController.m */,
 				3A1B847919BC328A00BF6F21 /* CJHouseholdController.h */,
@@ -684,6 +687,8 @@
 				3A66EECE19AED388007A1558 /* CJAddressController.m */,
 				3A66EED319AF2040007A1558 /* CJEmailshareController.h */,
 				3A66EED419AF2040007A1558 /* CJEmailshareController.m */,
+				3A2D41D019E629A6003473F7 /* CJSendToFriendController.h */,
+				3A2D41D119E629A6003473F7 /* CJSendToFriendController.m */,
 			);
 			path = "分享";
 			sourceTree = "<group>";
@@ -1450,6 +1455,7 @@
 				3AFE669219B6C4A4004009E0 /* NSData+ImageContentType.m in Sources */,
 				3A54F6D819B4377200819DE8 /* CJInterestingWhyViewController.m in Sources */,
 				3A6B8DD219B0582600CF7E9E /* CJIntegralController.m in Sources */,
+				3A2D41D219E629A6003473F7 /* CJSendToFriendController.m in Sources */,
 				3A6B8DDB19B06C5500CF7E9E /* CJTermsofserviceController.m in Sources */,
 				77DAF04E19C296410045E2B4 /* NSObject+SBJSON.m in Sources */,
 				3A7C514519AAFD3E00EBFDE9 /* CJForgotPasswordController.m in Sources */,

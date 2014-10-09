@@ -59,8 +59,8 @@
 }
 -(void)initUI {
     
-    _scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kScreenHeight - 40)];
-    _scroll.contentSize = CGSizeMake(self.view.frame.size.width, 134 + 382 - 84);
+    _scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -12, self.view.frame.size.width, kScreenHeight - 40)];
+    _scroll.contentSize = CGSizeMake(self.view.frame.size.width, 134 + 382 - 84 );
     _scroll.showsHorizontalScrollIndicator = NO;
     _scroll.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_scroll];

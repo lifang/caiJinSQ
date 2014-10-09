@@ -71,3 +71,7 @@
 #define kBeforePay @"mobilePaymentBefore"
 //添加地址
 #define kAddress @"addMobileAddress"
+//删除或取消订单
+#define kDelete @"deleteMobileOrder"
+//邀请通讯录好友
+#define kInvite @"insertAddressBook"

@@ -333,6 +333,26 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
     }];
 
 }
+//删除或取消订单
++(void)deleteMobileOrder:(NSString *)orderNo
+                finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:orderNo forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kDelete, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
 
+}
+//邀请通讯录好友
++(void)inviteFriend:(NSString *)address
+           finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:address forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kInvite, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
 
+}
 @end

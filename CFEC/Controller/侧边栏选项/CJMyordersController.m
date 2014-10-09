@@ -15,7 +15,7 @@
 #import "CJOrderModel.h"
 #import "UIImageView+WebCache.h"
 
-@interface CJMyordersController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CJMyordersController ()<UITableViewDataSource,UITableViewDelegate,deleteDelegate,cancelDelegate,payDelegate>
 {
     CJUserModel *user;
     NSMutableArray *noPayArray;
@@ -106,6 +106,9 @@
     if (cell == nil) {
         cell = [[CJPayedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:first];
     }
+    cell.delegateCancel = self;
+    cell.delegateDelete = self;
+    cell.delegatePay = self;
     if (_segControl.selectedSegmentIndex == 1) {
         cell.cancelButton.hidden = NO;
         cell.payButton.hidden = NO;
@@ -138,6 +141,10 @@
 {
     return 10;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 -(void)segmentAction:(UISegmentedControl*)segment {
     if (segment.selectedSegmentIndex == 0) {
         tableViewArray = payedArray;
@@ -164,6 +171,7 @@
                     order.price = [dic objectForKey:@"price"];
                     order.quantity = [dic objectForKey:@"quantity"];
                     order.tradeStatus = [dic objectForKey:@"tradeStatus"];
+                    order.orderNo = [dic objectForKey:@"orderNo"];
                     if ([order.tradeStatus isEqualToString:@"TRADE_NOSUCCESS"]) {
                         [noPayArray addObject:order];
                     }else {
@@ -179,5 +187,59 @@
             NSLog(@"请求成功，返回出错");
         }
     }];
+}
+-(void)deleteAction:(UIButton *)bt {
+    for (UIView* next = [bt superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[CJPayedCell class]]) {
+            CJPayedCell *cell = (CJPayedCell *)nextResponder;
+            NSIndexPath *index = [_giftTable indexPathForCell:cell];
+            NSLog(@"%ld",(long)index.row);
+            CJOrderModel *orderModel = [[CJOrderModel alloc] init];
+            orderModel = payedArray[index.row];
+            [CJRequestFormat deleteMobileOrder:orderModel.orderNo finished:^(ResponseStatus status, NSString *response) {
+                if (status == 0) {
+                    NSLog(@"请求成功");
+                }else if (status == 1) {
+                    NSLog(@"网络故障");
+                    [self returnAlert:@"网络故障"];
+                }else if (status == 2) {
+                    NSLog(@"请求成功返回失败");
+                    [self returnAlert:@"请求成功返回失败"];
+                }
+            }];
+        }
+    }
+}
+-(void)cancelAction:(UIButton *)bt {
+    NSLog(@"cancel");
+    for (UIView* next = [bt superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[CJPayedCell class]]) {
+            CJPayedCell *cell = (CJPayedCell *)nextResponder;
+            NSIndexPath *index = [_giftTable indexPathForCell:cell];
+            CJOrderModel *orderModel = [[CJOrderModel alloc] init];
+            orderModel = noPayArray[index.row];
+            [CJRequestFormat deleteMobileOrder:orderModel.orderNo finished:^(ResponseStatus status, NSString *response) {
+                if (status == 0) {
+                    [noPayArray removeObjectAtIndex:index.row];
+                    [_giftTable reloadData];
+                }else if (status == 1) {
+                    NSLog(@"网络故障");
+                    [self returnAlert:@"网络故障"];
+                }else if (status == 2) {
+                    NSLog(@"请求成功返回失败");
+                    [self returnAlert:@"请求成功返回失败"];
+                }
+            }];
+        }
+    }
+}
+-(void)payAction:(UIButton *)bt {
+    NSLog(@"pay");
+}
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 @end

@@ -279,4 +279,16 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
  */
 + (void)addAddressBefor:(NSString *)addressInfo
                        finished:(Result)result;
+/*
+ @abstract 删除或取消订单
+ @param orderNo 订单号
+ */
++(void)deleteMobileOrder:(NSString *)orderNo
+                         finished:(Result)result;
+/*
+ @abstract 邀请通讯录好友
+ @param address 好友号码
+ */
++(void)inviteFriend:(NSString *)address
+                    finished:(Result)result;
 @end

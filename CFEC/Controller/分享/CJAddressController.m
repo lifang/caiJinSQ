@@ -11,6 +11,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "CJAddressModel.h"
 #import "ChineseToPinyin.h"
+#import "CJSendToFriendController.h"
 @interface CJAddressController ()<UISearchBarDelegate,UISearchDisplayDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *sumArray;
@@ -181,6 +182,16 @@
     CJAddressModel *model = [arr objectAtIndex:indexPath.row];
     cell.textLabel.text = model.addressChinese;
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSMutableArray *arr = tableViewArray[indexPath.section];
+    CJAddressModel *model = [arr objectAtIndex:indexPath.row];
+    CJSendToFriendController *sendC = [[CJSendToFriendController alloc] init];
+    sendC.addressModel = model;
+    [self.navigationController pushViewController:sendC animated:YES];
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
