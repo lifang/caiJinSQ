@@ -245,6 +245,14 @@
             }
             [self getLastArr];
             [_mainTable reloadData];
+        }else if (status == 1) {
+            [activityView stopAnimating];
+            [backView removeFromSuperview];
+            [self returnAlert:@"网络故障"];
+        }else if (status == 2) {
+            [activityView stopAnimating];
+            [backView removeFromSuperview];
+            [self returnAlert:@"返回成功请求出错"];
         }
     }];
 }
@@ -299,4 +307,9 @@
     }
 //    NSLog(@"--------%d",_newsArray.count);
 }
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
+
 @end

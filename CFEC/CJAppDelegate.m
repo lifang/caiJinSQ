@@ -29,7 +29,40 @@
     //向新浪微博注册id
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:@"1652382296"];
+    //注册通知
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    //判断程序是不是由推送服务完成
+    if (launchOptions) {
+        NSDictionary *pushNotificationKey = [launchOptions objectForKeyedSubscript:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (pushNotificationKey) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"推送通知"
+                                                           message:@"这是通过推送窗口启动的程序，你可以在这里处理推送内容"
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"知道了"
+                                                 otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
     return YES;
+}
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *token = [NSString stringWithFormat:@"%@",deviceToken];
+    token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //把deviceToken发送到我们的服务器
+
+    
+}
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"apns -> 注册推送功能时发生错误， 错误信息:\n %@", error);
+
+}
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    application.applicationIconBadgeNumber = 0;
+    NSLog(@"%@",userInfo);
+    
 }
 //设置导航栏颜色
 +(void)setNavigationBarTinColor:(UINavigationController *)nav {
