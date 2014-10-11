@@ -75,3 +75,7 @@
 #define kDelete @"deleteMobileOrder"
 //邀请通讯录好友
 #define kInvite @"insertAddressBook"
+//手机注册获取验证码
+#define kMobileRegisterWithCode @"telRegister"
+//手机注册信息
+#define kMobileRegister @"registerByMobilephone"

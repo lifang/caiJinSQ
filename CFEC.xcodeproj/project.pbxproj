@@ -23,11 +23,13 @@
 		3A2E03D619D841CB00E0BB39 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E03D319D841CB00E0BB39 /* SVProgressHUD.bundle */; };
 		3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */; };
 		3A34EA1319BEA7450083773C /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A34EA1219BEA7450083773C /* save@2x.png */; };
+		3A36718C19E8CA0800C1F78F /* CJMobileRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A36718B19E8CA0800C1F78F /* CJMobileRegisterController.m */; };
 		3A3A194319B18A0E0021F6F5 /* CJCampController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A194219B18A0E0021F6F5 /* CJCampController.m */; };
 		3A3D7B3219E4F12E00D72A15 /* CJOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3D7B3119E4F12E00D72A15 /* CJOrderModel.m */; };
 		3A4040B719D8F71E009E5202 /* serviceContent.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A4040B619D8F71E009E5202 /* serviceContent.txt */; };
 		3A4040BD19D9052C009E5202 /* CJRegisterServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */; };
 		3A4040BF19D930B8009E5202 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4040BE19D930B8009E5202 /* MessageUI.framework */; };
+		3A478F1619E8D1890096F303 /* CJMobileRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A478F1519E8D1890096F303 /* CJMobileRegisterController.xib */; };
 		3A49C3F919AF453100FFA307 /* CJAllgiftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3F819AF453100FFA307 /* CJAllgiftController.m */; };
 		3A49C3FC19AF46DF00FFA307 /* CJGiftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49C3FB19AF46DF00FFA307 /* CJGiftCell.m */; };
 		3A4BCE4919AC2B2C0027C023 /* CJActivityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4BCE4819AC2B2C0027C023 /* CJActivityDetailController.m */; };
@@ -250,6 +252,8 @@
 		3A2E03D419D841CB00E0BB39 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		3A2E03D519D841CB00E0BB39 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		3A34EA1219BEA7450083773C /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
+		3A36718A19E8CA0800C1F78F /* CJMobileRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMobileRegisterController.h; sourceTree = "<group>"; };
+		3A36718B19E8CA0800C1F78F /* CJMobileRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMobileRegisterController.m; sourceTree = "<group>"; };
 		3A3A194119B18A0E0021F6F5 /* CJCampController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCampController.h; sourceTree = "<group>"; };
 		3A3A194219B18A0E0021F6F5 /* CJCampController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCampController.m; sourceTree = "<group>"; };
 		3A3D7B3019E4F12E00D72A15 /* CJOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJOrderModel.h; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 		3A4040BB19D9052C009E5202 /* CJRegisterServiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJRegisterServiceController.h; sourceTree = "<group>"; };
 		3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJRegisterServiceController.m; sourceTree = "<group>"; };
 		3A4040BE19D930B8009E5202 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		3A478F1519E8D1890096F303 /* CJMobileRegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJMobileRegisterController.xib; sourceTree = "<group>"; };
 		3A49C3F719AF453100FFA307 /* CJAllgiftController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAllgiftController.h; sourceTree = "<group>"; };
 		3A49C3F819AF453100FFA307 /* CJAllgiftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAllgiftController.m; sourceTree = "<group>"; };
 		3A49C3FA19AF46DF00FFA307 /* CJGiftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftCell.h; sourceTree = "<group>"; };
@@ -777,6 +782,9 @@
 				3A54F6E019B43FB500819DE8 /* CJGraduationViewController.m */,
 				3A4040BB19D9052C009E5202 /* CJRegisterServiceController.h */,
 				3A4040BC19D9052C009E5202 /* CJRegisterServiceController.m */,
+				3A36718A19E8CA0800C1F78F /* CJMobileRegisterController.h */,
+				3A36718B19E8CA0800C1F78F /* CJMobileRegisterController.m */,
+				3A478F1519E8D1890096F303 /* CJMobileRegisterController.xib */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1361,6 +1369,7 @@
 				3A7C519019AAFE1100EBFDE9 /* 首页-个人资料_03@2x.png in Resources */,
 				3A7C518519AAFE1100EBFDE9 /* 分享_03-09@2x.png in Resources */,
 				77DAF02F19C295B80045E2B4 /* Alixpay.bundle in Resources */,
+				3A478F1619E8D1890096F303 /* CJMobileRegisterController.xib in Resources */,
 				771AA7C219A2E22A005B9AAE /* Images.xcassets in Resources */,
 				3A7C519A19AAFE1100EBFDE9 /* 登录_03-07@2x.png in Resources */,
 				3A7C51C619AB238A00EBFDE9 /* 首页cetui_07@2x.png in Resources */,
@@ -1435,6 +1444,7 @@
 				771C0E8319AB07370065D46F /* ASINetworkQueue.m in Sources */,
 				771C0E7C19AB07370065D46F /* ASIAuthenticationDialog.m in Sources */,
 				3A54F6DE19B43EAC00819DE8 /* CJProfessionViewController.m in Sources */,
+				3A36718C19E8CA0800C1F78F /* CJMobileRegisterController.m in Sources */,
 				3A7C512419AAFD0300EBFDE9 /* CJLeftViewController.m in Sources */,
 				771AA7E019A2E2B9005B9AAE /* CJRootViewController.m in Sources */,
 				3A54F6E119B43FB500819DE8 /* CJGraduationViewController.m in Sources */,
@@ -1654,7 +1664,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f6d70825-53ba-41d0-a184-ed89d2d8c5e4";
+				PROVISIONING_PROFILE = "ed56d7e6-fa81-4a3f-b3ac-481c8d2586ac";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1685,7 +1695,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f6d70825-53ba-41d0-a184-ed89d2d8c5e4";
+				PROVISIONING_PROFILE = "ed56d7e6-fa81-4a3f-b3ac-481c8d2586ac";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -291,4 +291,26 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
  */
 +(void)inviteFriend:(NSString *)address
                     finished:(Result)result;
+/*
+ @abstract 手机注册获取验证码
+ @param phoneNumber 手机号码
+ */
++(void)getCodeWithPhoneNumber:(NSString *)phoneNumber
+                     finished:(Result)result;
+
+/*
+ @abstract 手机注册最后一步
+ @param phoneNumber 注册的手机号码
+ @param password 密码
+ @param email 邮箱地址
+ @param userInfo 用户信息json
+                 user_name:用户名
+                 position:职位
+                 companyName:公司名称
+ */
++(void)registerByMobilephoneLast:(NSString *)phoneNumber
+                     andPassword:(NSString *)password
+                        andEmail:(NSString *)email
+                     andUserInfo:(NSString *)userInfoJson
+                        finished:(Result)result;
 @end

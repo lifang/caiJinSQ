@@ -355,4 +355,33 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
     }];
 
 }
+//手机注册获取验证码
++(void)getCodeWithPhoneNumber:(NSString *)phoneNumber
+                     finished:(Result)result
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:phoneNumber forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kMobileRegisterWithCode, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+//手机注册最后一步
++(void)registerByMobilephoneLast:(NSString *)phoneNumber
+                     andPassword:(NSString *)password
+                        andEmail:(NSString *)email
+                     andUserInfo:(NSString *)userInfoJson
+                        finished:(Result)result
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:phoneNumber forKey:@"arg0"];
+    [params setObject:password forKey:@"arg1"];
+    [params setObject:email forKey:@"arg2"];
+    [params setObject:userInfoJson forKey:@"arg3"];
+    NSString *soapMessage = setPostBody(kMobileRegister, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+
+}
 @end

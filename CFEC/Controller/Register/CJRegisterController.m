@@ -10,10 +10,12 @@
 #import "CJCampController.h"
 #import "CJRequestFormat.h"
 #import "CJRegisterServiceController.h"
+#import "CJMobileRegisterController.h"
 @interface CJRegisterController ()
 
 {
     BOOL isAgree;
+    NSString *codeStr;
 }
 
 @property (strong, nonatomic) UITableView *showTable;
@@ -263,7 +265,7 @@
     _judgeSegment.selectedSegmentIndex = 1;
     [_judgeSegment addTarget:self action:@selector(segAction:) forControlEvents:UIControlEventValueChanged];
     [headView addSubview:_judgeSegment];
-    _judgeSegment.hidden = YES;
+//    _judgeSegment.hidden = YES;
     return headView;
 }
 -(UIView *)setTableViewFoot{
@@ -314,9 +316,6 @@
 }
 -(void)complete:(id)sender {
     NSLog(@"完成");
-//    CJCampController *campControl = [[CJCampController alloc] init];
-//    [self.navigationController pushViewController:campControl animated:YES];
-    
     if (_judgeSegment.selectedSegmentIndex == 1) {
         BOOL isEmail = NO;
         isEmail = [self isValidateEmail:_emailAddressTextfield.text];
@@ -378,10 +377,57 @@
     }else {
         NSLog(@"功能不明确");
     }
-     
+    if (_judgeSegment.selectedSegmentIndex == 0) {
+        NSLog(@"手机注册");
+        if (![_identiyTextfield.text isEqualToString:@""]) {
+            int intcode = [_identiyTextfield.text intValue];
+            int intcodestr = [codeStr intValue];
+            if (intcode == intcodestr) {
+                if (_passwordTextfield.text.length > 5&&_passwordTextfield.text.length < 13) {
+                    if ([_passwordTextfield.text isEqualToString:_confirmPasswordTextfield.text]) {
+                        if (isAgree) {
+                            //
+                            CJMobileRegisterController *mobileC = [[CJMobileRegisterController alloc] init];
+                            mobileC.phoneNumber = _telTextfield.text;
+                            mobileC.password = _passwordTextfield.text;
+                            [self.navigationController pushViewController:mobileC animated:YES];
+                        }else {
+                            [self returnAlert:@"未同意协议"];
+                        }
+                    }else {
+                        [self returnAlert:@"密码不一致"];
+                    }
+                }else {
+                    [self returnAlert:@"密码位数不对"];
+                }
+            }else {
+                [self returnAlert:@"请输入正确的验证码"];
+            }
+        }else {
+            [self returnAlert:@"请输入验证码"];
+        }
+    }
+    
 }
 -(void)senderIdentiy:(id)sender {
-    NSLog(@"发送验证码");
+    if ([self isValidateTel:_telTextfield.text]) {
+        [CJRequestFormat getCodeWithPhoneNumber:_telTextfield.text finished:^(ResponseStatus status, NSString *response) {
+            if (status == 0) {
+                NSError *error;
+                NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                id responseObj = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&error];
+                NSDictionary *dic = (NSDictionary *)responseObj;
+                codeStr = [NSString string];
+                codeStr = [dic objectForKey:@"mobile_code"];
+            }else if (status == 1) {
+                [self returnAlert:@"网络故障"];
+            }else if (status == 2) {
+                NSLog(@"网络请求成功,返回失败");
+            }
+        }];
+    }else {
+        [self returnAlert:@"请输入正确的手机号"];
+    }
 }
 -(void)remember:(id)sender {
     //读取用户信息
@@ -413,5 +459,20 @@
         NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
         NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
         return [emailTest evaluateWithObject:email];
+}
+//验证电话号码
+-(BOOL)isValidateTel:(NSString *)tel
+{
+    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    BOOL isMatch = [pred evaluateWithObject:tel];
+    
+    return isMatch;
+}
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 @end
