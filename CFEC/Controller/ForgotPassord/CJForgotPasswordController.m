@@ -101,7 +101,7 @@
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
                 }else {
-                    NSLog(@"密码找回成功,请去邮箱重新填写密码");
+                    [self returnAlert:@"密码找回成功,请去邮箱重新填写密码"];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
             }
@@ -132,4 +132,9 @@
 -(void)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
+
 @end

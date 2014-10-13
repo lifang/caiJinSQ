@@ -15,4 +15,5 @@
 @property (nonatomic, strong) NSString *quantity;
 @property (nonatomic, strong) NSString *tradeStatus;
 @property (nonatomic, strong) NSString *orderNo;
+@property (nonatomic, strong) NSString *goodId;
 @end

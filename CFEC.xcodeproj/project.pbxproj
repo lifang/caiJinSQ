@@ -57,6 +57,26 @@
 		3A66EECB19AEC19E007A1558 /* CJPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66EECA19AEC19E007A1558 /* CJPayController.m */; };
 		3A66EECF19AED388007A1558 /* CJAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66EECE19AED388007A1558 /* CJAddressController.m */; };
 		3A66EED519AF2040007A1558 /* CJEmailshareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66EED419AF2040007A1558 /* CJEmailshareController.m */; };
+		3A69B12D19EBA6FF000DC4FA /* AMapNaviKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B12B19EBA6FF000DC4FA /* AMapNaviKit.framework */; };
+		3A69B12E19EBA6FF000DC4FA /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B12C19EBA6FF000DC4FA /* iflyMSC.framework */; };
+		3A69B13019EBA728000DC4FA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B12F19EBA728000DC4FA /* AudioToolbox.framework */; };
+		3A69B13219EBA735000DC4FA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B13119EBA735000DC4FA /* AVFoundation.framework */; };
+		3A69B13419EBA744000DC4FA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B13319EBA744000DC4FA /* libz.dylib */; };
+		3A69B13619EBA75F000DC4FA /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B13519EBA75F000DC4FA /* libstdc++.6.0.9.dylib */; };
+		3A69B13919EBA79E000DC4FA /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A69B13719EBA79E000DC4FA /* AMap.bundle */; };
+		3A69B13A19EBA79E000DC4FA /* AMapNavi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A69B13819EBA79E000DC4FA /* AMapNavi.bundle */; };
+		3A69B13F19EBA881000DC4FA /* CJBaseNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B13C19EBA881000DC4FA /* CJBaseNaviViewController.m */; };
+		3A69B14019EBA881000DC4FA /* CJGPSNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B13E19EBA881000DC4FA /* CJGPSNaviViewController.m */; };
+		3A69B15219EBA8D5000DC4FA /* UIView+Geometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B14319EBA8D5000DC4FA /* UIView+Geometry.m */; };
+		3A69B15319EBA8D5000DC4FA /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A69B14519EBA8D5000DC4FA /* dropdown.png */; };
+		3A69B15419EBA8D5000DC4FA /* dropup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A69B14619EBA8D5000DC4FA /* dropup.png */; };
+		3A69B15519EBA8D5000DC4FA /* MACombox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B14819EBA8D5000DC4FA /* MACombox.m */; };
+		3A69B15619EBA8D5000DC4FA /* TableViewWithBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B14A19EBA8D5000DC4FA /* TableViewWithBlock.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A69B15719EBA8D5000DC4FA /* UITableView+DataSourceBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B14C19EBA8D5000DC4FA /* UITableView+DataSourceBlocks.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A69B15819EBA8D5000DC4FA /* UITableView+DelegateBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B14E19EBA8D5000DC4FA /* UITableView+DelegateBlocks.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A69B15919EBA8D5000DC4FA /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69B15119EBA8D5000DC4FA /* Toast+UIView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A69B15D19EBABDD000DC4FA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B15C19EBABDD000DC4FA /* AMapSearchKit.framework */; };
+		3A69B15F19EBAC4E000DC4FA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A69B15E19EBAC4E000DC4FA /* CoreTelephony.framework */; };
 		3A6B8DC919B0114F00CF7E9E /* CJPersonaldataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DC819B0114F00CF7E9E /* CJPersonaldataController.m */; };
 		3A6B8DCC19B01F3800CF7E9E /* CJMyordersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DCB19B01F3800CF7E9E /* CJMyordersController.m */; };
 		3A6B8DCF19B0272F00CF7E9E /* CJPayedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B8DCE19B0272F00CF7E9E /* CJPayedCell.m */; };
@@ -305,6 +325,35 @@
 		3A66EECE19AED388007A1558 /* CJAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAddressController.m; sourceTree = "<group>"; };
 		3A66EED319AF2040007A1558 /* CJEmailshareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJEmailshareController.h; sourceTree = "<group>"; };
 		3A66EED419AF2040007A1558 /* CJEmailshareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJEmailshareController.m; sourceTree = "<group>"; };
+		3A69B12B19EBA6FF000DC4FA /* AMapNaviKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapNaviKit.framework; path = CFEC/Library/AMap_iOS_Navi_Lib_V1.0.0/AMapNaviKit.framework; sourceTree = "<group>"; };
+		3A69B12C19EBA6FF000DC4FA /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = CFEC/Library/AMap_iOS_Navi_Lib_V1.0.0/iflyMSC.framework; sourceTree = "<group>"; };
+		3A69B12F19EBA728000DC4FA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3A69B13119EBA735000DC4FA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3A69B13319EBA744000DC4FA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3A69B13519EBA75F000DC4FA /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		3A69B13719EBA79E000DC4FA /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = CFEC/Library/AMap_iOS_Navi_Lib_V1.0.0/AMapNaviKit.framework/Versions/1.0.0.d03e68d/Resources/AMap.bundle; sourceTree = "<group>"; };
+		3A69B13819EBA79E000DC4FA /* AMapNavi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMapNavi.bundle; path = CFEC/Library/AMap_iOS_Navi_Lib_V1.0.0/AMapNaviKit.framework/Versions/1.0.0.d03e68d/Resources/AMapNavi.bundle; sourceTree = "<group>"; };
+		3A69B13B19EBA881000DC4FA /* CJBaseNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJBaseNaviViewController.h; sourceTree = "<group>"; };
+		3A69B13C19EBA881000DC4FA /* CJBaseNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJBaseNaviViewController.m; sourceTree = "<group>"; };
+		3A69B13D19EBA881000DC4FA /* CJGPSNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGPSNaviViewController.h; sourceTree = "<group>"; };
+		3A69B13E19EBA881000DC4FA /* CJGPSNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGPSNaviViewController.m; sourceTree = "<group>"; };
+		3A69B14219EBA8D5000DC4FA /* UIView+Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Geometry.h"; sourceTree = "<group>"; };
+		3A69B14319EBA8D5000DC4FA /* UIView+Geometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Geometry.m"; sourceTree = "<group>"; };
+		3A69B14519EBA8D5000DC4FA /* dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdown.png; sourceTree = "<group>"; };
+		3A69B14619EBA8D5000DC4FA /* dropup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropup.png; sourceTree = "<group>"; };
+		3A69B14719EBA8D5000DC4FA /* MACombox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACombox.h; sourceTree = "<group>"; };
+		3A69B14819EBA8D5000DC4FA /* MACombox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACombox.m; sourceTree = "<group>"; };
+		3A69B14919EBA8D5000DC4FA /* TableViewWithBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewWithBlock.h; sourceTree = "<group>"; };
+		3A69B14A19EBA8D5000DC4FA /* TableViewWithBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewWithBlock.m; sourceTree = "<group>"; };
+		3A69B14B19EBA8D5000DC4FA /* UITableView+DataSourceBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DataSourceBlocks.h"; sourceTree = "<group>"; };
+		3A69B14C19EBA8D5000DC4FA /* UITableView+DataSourceBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DataSourceBlocks.m"; sourceTree = "<group>"; };
+		3A69B14D19EBA8D5000DC4FA /* UITableView+DelegateBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+DelegateBlocks.h"; sourceTree = "<group>"; };
+		3A69B14E19EBA8D5000DC4FA /* UITableView+DelegateBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+DelegateBlocks.m"; sourceTree = "<group>"; };
+		3A69B15019EBA8D5000DC4FA /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
+		3A69B15119EBA8D5000DC4FA /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
+		3A69B15A19EBAAD2000DC4FA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../MAMapKit.framework; sourceTree = "<group>"; };
+		3A69B15C19EBABDD000DC4FA /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = ../../AMapSearchKit.framework; sourceTree = "<group>"; };
+		3A69B15E19EBAC4E000DC4FA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3A6B8DC719B0114F00CF7E9E /* CJPersonaldataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJPersonaldataController.h; sourceTree = "<group>"; };
 		3A6B8DC819B0114F00CF7E9E /* CJPersonaldataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJPersonaldataController.m; sourceTree = "<group>"; };
 		3A6B8DCA19B01F3800CF7E9E /* CJMyordersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMyordersController.h; sourceTree = "<group>"; };
@@ -560,6 +609,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A69B15F19EBAC4E000DC4FA /* CoreTelephony.framework in Frameworks */,
+				771C0E9119AB12F10065D46F /* SystemConfiguration.framework in Frameworks */,
+				3A69B15D19EBABDD000DC4FA /* AMapSearchKit.framework in Frameworks */,
+				3A69B13619EBA75F000DC4FA /* libstdc++.6.0.9.dylib in Frameworks */,
+				3A69B13419EBA744000DC4FA /* libz.dylib in Frameworks */,
+				3A69B13219EBA735000DC4FA /* AVFoundation.framework in Frameworks */,
+				3A69B13019EBA728000DC4FA /* AudioToolbox.framework in Frameworks */,
+				3A69B12D19EBA6FF000DC4FA /* AMapNaviKit.framework in Frameworks */,
+				3A69B12E19EBA6FF000DC4FA /* iflyMSC.framework in Frameworks */,
 				3A4040BF19D930B8009E5202 /* MessageUI.framework in Frameworks */,
 				3ACC7B0E19D7B6F80093690E /* AddressBookUI.framework in Frameworks */,
 				3ACC7B0C19D7B6F10093690E /* AddressBook.framework in Frameworks */,
@@ -569,7 +627,6 @@
 				3ACC7B0919D7A9C00093690E /* libWeiboSDK.a in Frameworks */,
 				3A63634119B8044300D818FB /* libWeChatSDK.a in Frameworks */,
 				771C0E9319AB13080065D46F /* libz.1.2.5.dylib in Frameworks */,
-				771C0E9119AB12F10065D46F /* SystemConfiguration.framework in Frameworks */,
 				771C0E8F19AB12D30065D46F /* CFNetwork.framework in Frameworks */,
 				771AA7B219A2E22A005B9AAE /* CoreGraphics.framework in Frameworks */,
 				77DAF03719C2960C0045E2B4 /* libssl.a in Frameworks */,
@@ -627,8 +684,8 @@
 				3A49C3F819AF453100FFA307 /* CJAllgiftController.m */,
 				3A63634F19B84CAC00D818FB /* CJGiftDetailController.h */,
 				3A63635019B84CAC00D818FB /* CJGiftDetailController.m */,
-				3A63635319B858CE00D818FB /* CJOrderController.m */,
 				3A63635219B858CE00D818FB /* CJOrderController.h */,
+				3A63635319B858CE00D818FB /* CJOrderController.m */,
 				3A20589C19B95F4E00EBDF5F /* CJTransportAddressController.h */,
 				3A20589D19B95F4E00EBDF5F /* CJTransportAddressController.m */,
 				3A1B847919BC328A00BF6F21 /* CJHouseholdController.h */,
@@ -652,6 +709,10 @@
 		3A4BCE4619AC2AFB0027C023 /* 主页 */ = {
 			isa = PBXGroup;
 			children = (
+				3A69B13B19EBA881000DC4FA /* CJBaseNaviViewController.h */,
+				3A69B13C19EBA881000DC4FA /* CJBaseNaviViewController.m */,
+				3A69B13D19EBA881000DC4FA /* CJGPSNaviViewController.h */,
+				3A69B13E19EBA881000DC4FA /* CJGPSNaviViewController.m */,
 				3A4BCE4719AC2B2C0027C023 /* CJActivityDetailController.h */,
 				3A4BCE4819AC2B2C0027C023 /* CJActivityDetailController.m */,
 				3A73E09A19AD89BD00DD8A15 /* CJSupplyController.h */,
@@ -696,6 +757,41 @@
 				3A2D41D119E629A6003473F7 /* CJSendToFriendController.m */,
 			);
 			path = "分享";
+			sourceTree = "<group>";
+		};
+		3A69B14119EBA8D5000DC4FA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3A69B14219EBA8D5000DC4FA /* UIView+Geometry.h */,
+				3A69B14319EBA8D5000DC4FA /* UIView+Geometry.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		3A69B14419EBA8D5000DC4FA /* Combox */ = {
+			isa = PBXGroup;
+			children = (
+				3A69B14519EBA8D5000DC4FA /* dropdown.png */,
+				3A69B14619EBA8D5000DC4FA /* dropup.png */,
+				3A69B14719EBA8D5000DC4FA /* MACombox.h */,
+				3A69B14819EBA8D5000DC4FA /* MACombox.m */,
+				3A69B14919EBA8D5000DC4FA /* TableViewWithBlock.h */,
+				3A69B14A19EBA8D5000DC4FA /* TableViewWithBlock.m */,
+				3A69B14B19EBA8D5000DC4FA /* UITableView+DataSourceBlocks.h */,
+				3A69B14C19EBA8D5000DC4FA /* UITableView+DataSourceBlocks.m */,
+				3A69B14D19EBA8D5000DC4FA /* UITableView+DelegateBlocks.h */,
+				3A69B14E19EBA8D5000DC4FA /* UITableView+DelegateBlocks.m */,
+			);
+			path = Combox;
+			sourceTree = "<group>";
+		};
+		3A69B14F19EBA8D5000DC4FA /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				3A69B15019EBA8D5000DC4FA /* Toast+UIView.h */,
+				3A69B15119EBA8D5000DC4FA /* Toast+UIView.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		3A6B8DC619B0111900CF7E9E /* 侧边栏选项 */ = {
@@ -1015,6 +1111,8 @@
 		771AA7A319A2E22A005B9AAE = {
 			isa = PBXGroup;
 			children = (
+				3A69B13719EBA79E000DC4FA /* AMap.bundle */,
+				3A69B13819EBA79E000DC4FA /* AMapNavi.bundle */,
 				771AA7B519A2E22A005B9AAE /* CFEC */,
 				771AA7CE19A2E22A005B9AAE /* CFECTests */,
 				771AA7AE19A2E22A005B9AAE /* Frameworks */,
@@ -1034,6 +1132,15 @@
 		771AA7AE19A2E22A005B9AAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A69B15E19EBAC4E000DC4FA /* CoreTelephony.framework */,
+				3A69B15C19EBABDD000DC4FA /* AMapSearchKit.framework */,
+				3A69B15A19EBAAD2000DC4FA /* MAMapKit.framework */,
+				3A69B13519EBA75F000DC4FA /* libstdc++.6.0.9.dylib */,
+				3A69B13319EBA744000DC4FA /* libz.dylib */,
+				3A69B13119EBA735000DC4FA /* AVFoundation.framework */,
+				3A69B12F19EBA728000DC4FA /* AudioToolbox.framework */,
+				3A69B12B19EBA6FF000DC4FA /* AMapNaviKit.framework */,
+				3A69B12C19EBA6FF000DC4FA /* iflyMSC.framework */,
 				3A4040BE19D930B8009E5202 /* MessageUI.framework */,
 				3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */,
 				3ACC7B0B19D7B6F10093690E /* AddressBook.framework */,
@@ -1239,6 +1346,9 @@
 		77DAF05419C2983C0045E2B4 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3A69B14119EBA8D5000DC4FA /* Category */,
+				3A69B14419EBA8D5000DC4FA /* Combox */,
+				3A69B14F19EBA8D5000DC4FA /* Toast */,
 				3A2E03D219D841CB00E0BB39 /* SVProgressHUD */,
 				3ACC7B0F19D7CF0B0093690E /* ChineseToPinyin */,
 				77DAF05519C299A80045E2B4 /* CJCreatePayOrder.h */,
@@ -1324,6 +1434,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A69B13919EBA79E000DC4FA /* AMap.bundle in Resources */,
+				3A69B13A19EBA79E000DC4FA /* AMapNavi.bundle in Resources */,
 				3A54F6D219B41B1900819DE8 /* 专业@2x.png in Resources */,
 				3A7C518719AAFE1100EBFDE9 /* 分享_03@2x.png in Resources */,
 				3A7C519319AAFE1100EBFDE9 /* 所在地.png in Resources */,
@@ -1336,6 +1448,7 @@
 				3A7C51AF19AB10EC00EBFDE9 /* 礼品_03-06@2x.png in Resources */,
 				3A54F6D019B41B1900819DE8 /* 学校@2x.png in Resources */,
 				3A7C51CD19AB238A00EBFDE9 /* 首页cetui_26@2x.png in Resources */,
+				3A69B15419EBA8D5000DC4FA /* dropup.png in Resources */,
 				3A4040B719D8F71E009E5202 /* serviceContent.txt in Resources */,
 				3A34EA1319BEA7450083773C /* save@2x.png in Resources */,
 				3A7C51B019AB10EC00EBFDE9 /* 礼品_03-11@2x.png in Resources */,
@@ -1382,6 +1495,7 @@
 				3A7C518F19AAFE1100EBFDE9 /* 首页-个人资料_03-18@2x.png in Resources */,
 				3A7C51B119AB10EC00EBFDE9 /* 礼品_03-13@2x.png in Resources */,
 				3A7C51A319AAFE1100EBFDE9 /* 首页_22.png in Resources */,
+				3A69B15319EBA8D5000DC4FA /* dropdown.png in Resources */,
 				3A7C518619AAFE1100EBFDE9 /* 分享_03-10@2x.png in Resources */,
 				3A63634E19B8157600D818FB /* 财智学苑-透明_03@2x.png in Resources */,
 				3A7C51C519AB238A00EBFDE9 /* 首页cetui_03@2x.png in Resources */,
@@ -1447,6 +1561,9 @@
 				3A36718C19E8CA0800C1F78F /* CJMobileRegisterController.m in Sources */,
 				3A7C512419AAFD0300EBFDE9 /* CJLeftViewController.m in Sources */,
 				771AA7E019A2E2B9005B9AAE /* CJRootViewController.m in Sources */,
+				3A69B15619EBA8D5000DC4FA /* TableViewWithBlock.m in Sources */,
+				3A69B14019EBA881000DC4FA /* CJGPSNaviViewController.m in Sources */,
+				3A69B15719EBA8D5000DC4FA /* UITableView+DataSourceBlocks.m in Sources */,
 				3A54F6E119B43FB500819DE8 /* CJGraduationViewController.m in Sources */,
 				77DAF05319C296410045E2B4 /* SBJsonWriter.m in Sources */,
 				3A54F6D519B435F700819DE8 /* CJBusinessRangeViewController.m in Sources */,
@@ -1459,17 +1576,20 @@
 				3A4BCE4919AC2B2C0027C023 /* CJActivityDetailController.m in Sources */,
 				3A6B8DDE19B06DA900CF7E9E /* CJAboutUsController.m in Sources */,
 				771AA7EF19A2E4C0005B9AAE /* MMDrawerBarButtonItem.m in Sources */,
+				3A69B15519EBA8D5000DC4FA /* MACombox.m in Sources */,
 				3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */,
 				3A7C514319AAFD3E00EBFDE9 /* CJHomeViewController.m in Sources */,
 				3A7C514619AAFD3E00EBFDE9 /* CJCompanyController.m in Sources */,
 				3AFE669219B6C4A4004009E0 /* NSData+ImageContentType.m in Sources */,
 				3A54F6D819B4377200819DE8 /* CJInterestingWhyViewController.m in Sources */,
 				3A6B8DD219B0582600CF7E9E /* CJIntegralController.m in Sources */,
+				3A69B15819EBA8D5000DC4FA /* UITableView+DelegateBlocks.m in Sources */,
 				3A2D41D219E629A6003473F7 /* CJSendToFriendController.m in Sources */,
 				3A6B8DDB19B06C5500CF7E9E /* CJTermsofserviceController.m in Sources */,
 				77DAF04E19C296410045E2B4 /* NSObject+SBJSON.m in Sources */,
 				3A7C514519AAFD3E00EBFDE9 /* CJForgotPasswordController.m in Sources */,
 				3A2A226019DFACE00085C3EE /* CJGiftTicketPayController.m in Sources */,
+				3A69B15219EBA8D5000DC4FA /* UIView+Geometry.m in Sources */,
 				771C0E8419AB07370065D46F /* Reachability.m in Sources */,
 				771C0E8B19AB088E0065D46F /* CJRequestFormat.m in Sources */,
 				3A7C514B19AAFD3E00EBFDE9 /* CJRegisterController.m in Sources */,
@@ -1515,6 +1635,7 @@
 				771C0E7E19AB07370065D46F /* ASIDataDecompressor.m in Sources */,
 				771C0E7F19AB07370065D46F /* ASIDownloadCache.m in Sources */,
 				3A7C515219AAFD7C00EBFDE9 /* CJActivityCell.m in Sources */,
+				3A69B15919EBA8D5000DC4FA /* Toast+UIView.m in Sources */,
 				3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */,
 				3AFE669519B6C4A4004009E0 /* SDWebImageDecoder.m in Sources */,
 				3AFE669719B6C4A4004009E0 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -1525,6 +1646,7 @@
 				3A2A0A4919B5B41100F669E6 /* CJUserModel.m in Sources */,
 				771C0E8119AB07370065D46F /* ASIHTTPRequest.m in Sources */,
 				77DAF03F19C296360045E2B4 /* AlixPayResult.m in Sources */,
+				3A69B13F19EBA881000DC4FA /* CJBaseNaviViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1646,6 +1768,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xinfeng Tu (WH3TUXU42D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinfeng Tu (WH3TUXU42D)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CFEC/Library/AMap_iOS_Navi_Lib_V1.0.0",
+					/Users/sumflower/Desktop,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CFEC/CFEC-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1677,6 +1804,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xinfeng Tu (WH3TUXU42D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinfeng Tu (WH3TUXU42D)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CFEC/Library/AMap_iOS_Navi_Lib_V1.0.0",
+					/Users/sumflower/Desktop,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CFEC/CFEC-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

@@ -10,4 +10,5 @@
 #import "CJGiftModel.h"
 @interface CJOrderController : UIViewController
 @property (nonatomic, strong) CJGiftModel *giftModel;
+@property (nonatomic, assign) int giftNumber;
 @end

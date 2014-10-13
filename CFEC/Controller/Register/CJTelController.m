@@ -122,22 +122,26 @@
     
 }
 -(void)save:(id)sender {
+    if (_telTextfield.text.length > 16) {
+        [self returnAlert:@"字符太长"];
+        return;
+    }
     CJUserModel *user = [CJAppDelegate shareCJAppDelegate].user;
     NSData *jsonData;
     NSError *error;
     NSString *jsonStr;
     if ([self isValidateTel:_telTextfield.text]) {
         NSMutableDictionary *_commitDic = [NSMutableDictionary dictionary];
-        int camp = [user.camp intValue];
+//        int camp = [user.camp intValue];
         [CJAppDelegate shareCJAppDelegate].user.mobilephone = _telTextfield.text;
-        if ((camp == 1||camp == 4)) {
-            [_commitDic setObject:user.name forKey:@"name"];
-            [_commitDic setObject:user.companyName forKey:@"companyName"];
-            [_commitDic setObject:user.position forKey:@"position"];
-            [_commitDic setObject:user.companyEmail forKey:@"companyEmail"];
+//        if ((camp == 1||camp == 4)) {
+//            [_commitDic setObject:user.name forKey:@"name"];
+//            [_commitDic setObject:user.companyName forKey:@"companyName"];
+//            [_commitDic setObject:user.position forKey:@"position"];
+//            [_commitDic setObject:user.companyEmail forKey:@"companyEmail"];
             [_commitDic setObject:_telTextfield.text forKey:@"mobilephone"];
-            [_commitDic setObject:user.email forKey:@"email"];
-            
+//            [_commitDic setObject:user.email forKey:@"email"];
+        
             jsonData = [NSJSONSerialization dataWithJSONObject:_commitDic options:NSJSONWritingPrettyPrinted error:&error];
             jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             
@@ -152,11 +156,16 @@
                     NSLog(@"返回失败");
                 }
             }];
-        }
+//        }
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"手机号码格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
 
     }
 }
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
+
 @end

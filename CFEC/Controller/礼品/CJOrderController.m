@@ -54,7 +54,11 @@
 {
     [super viewDidLoad];
     user = [CJAppDelegate shareCJAppDelegate].user;
-    self.number = 1;
+    if (self.giftNumber&&self.giftNumber != 0) {
+        self.number = self.giftNumber;
+    }else{
+        self.number = 1;
+    }
     [self initUI];
     // Do any additional setup after loading the view.
 }

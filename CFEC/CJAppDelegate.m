@@ -7,7 +7,51 @@
 //
 
 #import "CJAppDelegate.h"
+#import "iflyMSC/IFlySpeechSynthesizer.h"
+#import "iflyMSC/IFlySpeechSynthesizerDelegate.h"
+#import "iflyMSC/IFlySpeechConstant.h"
+#import "iflyMSC/IFlySpeechUtility.h"
+#import "iflyMSC/IFlySetting.h"
+#import <AMapNaviKit/AMapNaviKit.h>
+
 @implementation CJAppDelegate
+- (void)configureAPIKey
+{
+    if ([APIKey length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"apiKey为空，请检查key是否正确设置" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+    
+    [AMapNaviServices sharedServices].apiKey = (NSString *)APIKey;
+    [MAMapServices sharedServices].apiKey = (NSString *)APIKey;
+    
+}
+
+
+- (void)configIFlySpeech
+{
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@,timeout=%@",@"53c35b10",@"20000"];
+    
+    [IFlySpeechUtility createUtility:initString];
+    
+    [IFlySetting setLogFile:LVL_NONE];
+    [IFlySetting showLogcat:NO];
+    
+    // 设置语音合成的参数
+    [[IFlySpeechSynthesizer sharedInstance] setParameter:@"50" forKey:[IFlySpeechConstant SPEED]];//合成的语速,取值范围 0~100
+    [[IFlySpeechSynthesizer sharedInstance] setParameter:@"50" forKey:[IFlySpeechConstant VOLUME]];//合成的音量;取值范围 0~100
+    
+    // 发音人,默认为”xiaoyan”;可以设置的参数列表可参考个 性化发音人列表;
+    [[IFlySpeechSynthesizer sharedInstance] setParameter:@"xiaoyan" forKey:[IFlySpeechConstant VOICE_NAME]];
+    
+    // 音频采样率,目前支持的采样率有 16000 和 8000;
+    [[IFlySpeechSynthesizer sharedInstance] setParameter:@"8000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
+    
+    // 当你再不需要保存音频时，请在必要的地方加上这行。
+    [[IFlySpeechSynthesizer sharedInstance] setParameter:nil forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
+}
 
 + (CJAppDelegate *)shareCJAppDelegate {
     return (CJAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -16,6 +60,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self configureAPIKey];
+    
+    [self configIFlySpeech];
+    
+
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -220,6 +220,8 @@
     if (![self isValidateEmail:_usernameField.text]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
+        [activity stopAnimating];
+        [backView removeFromSuperview];
         return;
     }
 //    NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);

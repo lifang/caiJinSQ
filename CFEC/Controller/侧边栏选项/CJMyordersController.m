@@ -14,6 +14,8 @@
 #import "CJUserModel.h"
 #import "CJOrderModel.h"
 #import "UIImageView+WebCache.h"
+#import "CJGiftModel.h"
+#import "CJOrderController.h"
 
 @interface CJMyordersController ()<UITableViewDataSource,UITableViewDelegate,deleteDelegate,cancelDelegate,payDelegate>
 {
@@ -21,6 +23,7 @@
     NSMutableArray *noPayArray;
     NSMutableArray *payedArray;
     NSMutableArray *tableViewArray;
+    NSMutableArray *giftArray;
 }
 @property (nonatomic ,strong) UISegmentedControl *segControl;
 @property (nonatomic, strong) UITableView *giftTable;
@@ -44,6 +47,7 @@
     [self initUI];
     noPayArray = [NSMutableArray array];
     payedArray = [NSMutableArray array];
+    giftArray = [NSMutableArray array];
     tableViewArray = [NSMutableArray array];
     [self getDateFromNet];
 
@@ -166,14 +170,23 @@
                 for (int i = 0; i < jsonArray.count; i++) {
                     NSMutableDictionary *dic = jsonArray[i];
                     CJOrderModel *order = [[CJOrderModel alloc] init];
+                    CJGiftModel *gift = [[CJGiftModel alloc] init];
+                    
+                    gift.name = [dic objectForKey:@"goodName"];
+                    gift.picture = [dic objectForKey:@"picture"];
+                    gift.price = [dic objectForKey:@"price"];
+                    gift.ID = [dic objectForKey:@"goodId"];
+                    
                     order.goodName = [dic objectForKey:@"goodName"];
                     order.image = [dic objectForKey:@"picture"];
                     order.price = [dic objectForKey:@"price"];
                     order.quantity = [dic objectForKey:@"quantity"];
                     order.tradeStatus = [dic objectForKey:@"tradeStatus"];
                     order.orderNo = [dic objectForKey:@"orderNo"];
+                    order.goodId = [dic objectForKey:@"goodId"];
                     if ([order.tradeStatus isEqualToString:@"TRADE_NOSUCCESS"]) {
                         [noPayArray addObject:order];
+                        [giftArray addObject:gift];
                     }else {
                         [payedArray addObject:order];
                     }
@@ -223,6 +236,7 @@
             [CJRequestFormat deleteMobileOrder:orderModel.orderNo finished:^(ResponseStatus status, NSString *response) {
                 if (status == 0) {
                     [noPayArray removeObjectAtIndex:index.row];
+                    [giftArray removeObjectAtIndex:index.row];
                     [_giftTable reloadData];
                 }else if (status == 1) {
                     NSLog(@"网络故障");
@@ -237,6 +251,24 @@
 }
 -(void)payAction:(UIButton *)bt {
     NSLog(@"pay");
+    for (UIView* next = [bt superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[CJPayedCell class]]) {
+            CJPayedCell *cell = (CJPayedCell *)nextResponder;
+            NSIndexPath *index = [_giftTable indexPathForCell:cell];
+            CJOrderModel *orderModel = [[CJOrderModel alloc] init];
+            orderModel = noPayArray[index.row];
+            CJGiftModel *giftModel;
+            giftModel = giftArray[index.row];
+            
+            CJOrderController *orderC = [[CJOrderController alloc] init];
+            orderC.giftModel = giftModel;
+            orderC.giftNumber = [orderModel.quantity intValue];
+            
+            [self.navigationController pushViewController:orderC animated:YES];
+        }
+    }
+
 }
 -(void)returnAlert:(NSString *)str {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];

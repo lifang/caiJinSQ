@@ -11,6 +11,8 @@
 //当前系统
 #define kDevice [[[UIDevice currentDevice] systemVersion] floatValue]
 
+#define APIKey @"0f52f1cee9578772947358be0277b5c5"
+
 //url scheme
 #define kAlipayScheme @"AlipayCallBack"
 

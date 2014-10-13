@@ -111,20 +111,24 @@
     
 }
 -(void)save:(id)sender {
+    if (_emailTextfield.text.length > 16) {
+        [self returnAlert:@"字符太长"];
+        return ;
+    }
     CJUserModel *user = [CJAppDelegate shareCJAppDelegate].user;
     NSData *jsonData;
     NSError *error;
     NSString *jsonStr;
     if ([self isValidateEmail:_emailTextfield.text]) {
         NSMutableDictionary *_commitDic = [NSMutableDictionary dictionary];
-        int camp = [user.camp intValue];
+//        int camp = [user.camp intValue];
         [CJAppDelegate shareCJAppDelegate].user.companyEmail = _emailTextfield.text;
-        if ((camp == 1||camp == 4)) {
-            [_commitDic setObject:user.name forKey:@"name"];
-            [_commitDic setObject:user.companyName forKey:@"companyName"];
-            [_commitDic setObject:user.position forKey:@"position"];
-            [_commitDic setObject:_emailTextfield.text forKey:@"companyEmail"];
-            [_commitDic setObject:user.mobilephone forKey:@"mobilephone"];
+//        if ((camp == 1||camp == 4)) {
+//            [_commitDic setObject:user.name forKey:@"name"];
+//            [_commitDic setObject:user.companyName forKey:@"companyName"];
+//            [_commitDic setObject:user.position forKey:@"position"];
+//            [_commitDic setObject:_emailTextfield.text forKey:@"companyEmail"];
+//            [_commitDic setObject:user.mobilephone forKey:@"mobilephone"];
             [_commitDic setObject:user.email forKey:@"email"];
             
             jsonData = [NSJSONSerialization dataWithJSONObject:_commitDic options:NSJSONWritingPrettyPrinted error:&error];
@@ -141,12 +145,16 @@
                     NSLog(@"返回失败");
                 }
             }];
-        }
+//        }
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式错误" message:@"请重新填写" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }
 
+}
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end

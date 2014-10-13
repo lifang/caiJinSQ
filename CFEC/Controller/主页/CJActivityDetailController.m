@@ -11,6 +11,7 @@
 #import "WXApiObject.h"
 #import "WXApi.h"
 #import "CJContactusController.h"
+#import "CJGPSNaviViewController.h"
 
 #define startHeight 10
 @interface CJActivityDetailController ()<UIActionSheetDelegate>
@@ -116,9 +117,11 @@
     _placeLabel.font = [UIFont systemFontOfSize:11.0f];
     [_mainScrooll addSubview:_placeLabel];
     
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15)];
-    image.image= [UIImage imageNamed:@"活动2_03@2x.png"];
-    [_mainScrooll addSubview:image];
+    UIButton *daoHangBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    daoHangBt.frame = CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15);
+    [daoHangBt setImage:[UIImage imageNamed:@"活动2_03@2x.png"] forState:UIControlStateNormal];
+    [daoHangBt addTarget:self action:@selector(daohang:) forControlEvents:UIControlEventTouchUpInside];
+    [_mainScrooll addSubview:daoHangBt];
     
     _activityPlaceLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, _timeLabel.frame.origin.y + _timeLabel.frame.size.height, self.view.frame.size.width - 85, 20)];
     _activityPlaceLabel.text = _activityModel.meetingAddress;
@@ -190,7 +193,11 @@
     _contactBt.layer.masksToBounds = YES;
     [bottomView addSubview:_contactBt];
 }
-
+-(void)daohang:(UIButton *)bt {
+    CJGPSNaviViewController *gpsC = [[CJGPSNaviViewController alloc] init];
+    gpsC.activityModel = self.activityModel;
+    [self.navigationController pushViewController:gpsC animated:YES];
+}
 - (void)downloadDetailImageWithURL:(NSString *)urlstring {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url = [NSURL URLWithString:urlstring];
