@@ -391,7 +391,7 @@
                             //
                             CJMobileRegisterController *mobileC = [[CJMobileRegisterController alloc] init];
                             mobileC.phoneNumber = _telTextfield.text;
-                            mobileC.password = _passwordTextfield.text;
+                            mobileC.password = [NSString stringWithFormat:@"%@",_passwordTextfield.text];
                             [self.navigationController pushViewController:mobileC animated:YES];
                         }else {
                             [self returnAlert:@"未同意协议"];

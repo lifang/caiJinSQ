@@ -239,7 +239,7 @@
             NSError *error;
             id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
             CJUserModel *loginUser = [[CJUserModel alloc] init];
-            
+            NSLog(@"%@",jsonObject);
             if ([jsonObject isKindOfClass:[NSDictionary class]]) {
                 self.userInfoDic = (NSMutableDictionary *)jsonObject;
                     //记住用户信息
