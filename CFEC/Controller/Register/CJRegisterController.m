@@ -312,6 +312,8 @@
     }else {
         NSLog(@"1");
     }
+    _passwordTextfield.text = nil;
+    _confirmPasswordTextfield.text = nil;
     [_showTable reloadData];
 }
 -(void)complete:(id)sender {

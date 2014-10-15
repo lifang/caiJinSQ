@@ -16,7 +16,8 @@
 #import "PartnerConfig.h"
 #import "DataVerifier.h"
 
-@interface CJSupplyController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CJSupplyController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
 @property (nonatomic, strong) UITableView *supplyTable;
 @property (nonatomic, strong) UILabel *activityNameLable;
 @property (nonatomic, strong) UILabel *priceLabel;
@@ -24,6 +25,10 @@
 @property (nonatomic, strong) UIButton *maxBt;//增加
 @property (nonatomic, strong) UIButton *minBt;//减少
 @property (nonatomic, strong) UIButton *payBt;//支付
+@property (nonatomic ,strong) UITextField *infoTextField;
+@property (nonatomic ,strong) UITextField *infoTelTextField;
+@property (nonatomic ,strong) UITextField *infoEmailTextField;
+@property (nonatomic ,strong) UITextField *infoCompanyTextField;
 @property (nonatomic) int number;//数量
 @end
 
@@ -80,6 +85,7 @@
     _supplyTable.dataSource = self;
     _supplyTable.backgroundColor = kColor(234, 234, 234, 1);
     [self.view addSubview:_supplyTable];
+    
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -93,19 +99,54 @@
 {
     static NSString *first = @"first";
     CJSupplyCell *cell = [[CJSupplyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:first];
+    
+    _infoTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
+    _infoTextField.textAlignment = NSTextAlignmentRight;
+    _infoTextField.font = [UIFont systemFontOfSize:13.0f];
+    [cell.contentView addSubview:_infoTextField];
+    _infoTextField.hidden = YES;
+    _infoTextField.delegate = self;
+
+    _infoTelTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
+    _infoTelTextField.textAlignment = NSTextAlignmentRight;
+    _infoTelTextField.font = [UIFont systemFontOfSize:13.0f];
+    [cell.contentView addSubview:_infoTelTextField];
+    _infoTelTextField.hidden = YES;
+    _infoTelTextField.delegate = self;
+    
+    _infoEmailTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
+    _infoEmailTextField.textAlignment = NSTextAlignmentRight;
+    _infoEmailTextField.font = [UIFont systemFontOfSize:13.0f];
+    [cell.contentView addSubview:_infoEmailTextField];
+    _infoEmailTextField.hidden = YES;
+    _infoEmailTextField.delegate = self;
+
+    _infoCompanyTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
+    _infoCompanyTextField.textAlignment = NSTextAlignmentRight;
+    _infoCompanyTextField.font = [UIFont systemFontOfSize:13.0f];
+    [cell.contentView addSubview:_infoCompanyTextField];
+    _infoCompanyTextField.hidden = YES;
+    _infoCompanyTextField.delegate = self;
+
+    
     if (indexPath.row == 0) {
         cell.infoName.text = @"姓名";
-        cell.info.text = self.user.username;
+        _infoTextField.hidden = NO;
+        _infoTextField.text = self.user.name;
     }else if (indexPath.row == 1) {
         cell.infoName.text = @"联系电话";
-        cell.info.text = self.user.mobilephone;
+        _infoTelTextField.hidden = NO;
+        _infoTelTextField.text = self.user.mobilephone;
     }else if (indexPath.row == 2) {
         cell.infoName.text = @"电子邮箱";
-        cell.info.text = self.user.email;
+        _infoEmailTextField.hidden = NO;
+        _infoEmailTextField.text = self.user.email;
     }else if (indexPath.row == 3) {
         cell.infoName.text = @"公司名称";
-        cell.info.text = self.user.companyName;
+        _infoCompanyTextField.hidden = NO;
+        _infoCompanyTextField.text = self.user.companyName;
     }
+    
     return cell;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -194,6 +235,11 @@
 {
     return  300.0f;
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 -(void)add:(id)sender {
     _number ++;
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
@@ -210,6 +256,31 @@
     CJPayController *payControl = [[CJPayController alloc] init];
     payControl.activityModel = self.activity;
     payControl.count = _number;
+    if ([_infoTextField.text isEqualToString:@""]) {
+        [self returnAlert:@"姓名不能为空"];
+        return;
+    }else {
+        payControl.name = _infoTextField.text;
+    }
+    if (![self isValidateTel:_infoTelTextField.text]) {
+        [self returnAlert:@"电话号码不正确"];
+        return;
+    }else {
+        payControl.phone = _infoTelTextField.text;
+    }
+    if (![self isValidateEmail:_infoEmailTextField.text]) {
+        [self returnAlert:@"邮箱不正确"];
+        return;
+    }else {
+        payControl.email = _infoEmailTextField.text;
+    }
+    if ([_infoCompanyTextField.text isEqualToString:@""]) {
+        [self returnAlert:@"公司名称不能为空"];
+        return;
+    }else {
+        payControl.companyName = _infoCompanyTextField.text;
+    }
+    
     [self.navigationController pushViewController:payControl animated:YES];
 //    NSString *orderString = [CJCreatePayOrder createActivityOrderWithActivity:_activity
 //                                                                  countNumber:_number];
@@ -252,5 +323,25 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
+//判断邮箱格式是否正确
+- (BOOL)isValidateEmail:(NSString *)email{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+//验证电话号码
+-(BOOL)isValidateTel:(NSString *)tel
+{
+    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    BOOL isMatch = [pred evaluateWithObject:tel];
+    
+    return isMatch;
+}
 @end

@@ -181,7 +181,7 @@
     integralLabel.text = @"可用积分";
     [headview addSubview:integralLabel];
     
-    _integral = [[UILabel alloc] initWithFrame:CGRectMake(100, 140, 30, 30)];
+    _integral = [[UILabel alloc] initWithFrame:CGRectMake(100, 140, 100, 30)];
     _integral.font = [UIFont systemFontOfSize:14.0f];
     _integral.text = [NSString stringWithFormat:@"%@",user.integral];
     [headview addSubview:_integral];

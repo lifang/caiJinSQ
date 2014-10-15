@@ -281,7 +281,7 @@
         req.message = message;
         req.scene = WXSceneSession;
         [WXApi sendReq:req];
-    }else {
+    }else if (buttonIndex == 1){
         WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:[self messageToShare]];
         [WeiboSDK sendRequest:request];
 
@@ -311,5 +311,4 @@
     return message;
     
 }
-
 @end

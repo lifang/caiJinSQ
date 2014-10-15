@@ -9,7 +9,7 @@
 #import "CJForgotPasswordController.h"
 #import "CJRootViewController.h"
 #import "CJRequestFormat.h"
-@interface CJForgotPasswordController ()
+@interface CJForgotPasswordController ()<UIAlertViewDelegate>
 
 @end
 
@@ -102,7 +102,6 @@
                     [alert show];
                 }else {
                     [self returnAlert:@"密码找回成功,请去邮箱重新填写密码"];
-                    [self.navigationController popViewControllerAnimated:YES];
                 }
             }
         }else if (status == 1){
@@ -118,7 +117,17 @@
         NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
         return [emailTest evaluateWithObject:email];
 }
-
+//验证电话号码
+-(BOOL)isValidateTel:(NSString *)tel
+{
+    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    BOOL isMatch = [pred evaluateWithObject:tel];
+    
+    return isMatch;
+}
 /*
 #pragma mark - Navigation
 
@@ -134,7 +143,11 @@
 }
 -(void)returnAlert:(NSString *)str {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    alert.delegate = self;
     [alert show];
 }
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

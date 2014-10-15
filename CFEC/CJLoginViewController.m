@@ -217,8 +217,8 @@
     
     [_passwordField resignFirstResponder];
     [_usernameField resignFirstResponder];
-    if (![self isValidateEmail:_usernameField.text]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    if (!([self isValidateEmail:_usernameField.text]||[self isValidateTel:_usernameField.text])) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式或电话号码不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
         [activity stopAnimating];
         [backView removeFromSuperview];
@@ -373,6 +373,17 @@
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",emailRegex];
     return [emailTest evaluateWithObject:email];
+}
+//验证电话号码
+-(BOOL)isValidateTel:(NSString *)tel
+{
+    NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    BOOL isMatch = [pred evaluateWithObject:tel];
+    
+    return isMatch;
 }
 -(void)directLogin {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

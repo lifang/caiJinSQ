@@ -10,5 +10,5 @@
 
 @interface CJSupplyCell : UITableViewCell
 @property (nonatomic, strong) UILabel *infoName;
-@property (nonatomic, strong) UILabel *info;
+@property (nonatomic, strong) UITextField *info;
 @end

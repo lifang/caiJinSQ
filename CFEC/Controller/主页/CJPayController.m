@@ -183,18 +183,18 @@
     int shouldPay = sumPrice - userPrintIntegral;
     NSString *numberStr = [NSString stringWithFormat:@"%d",_count];
     NSString *shouldPayStr = [NSString stringWithFormat:@"%d",shouldPay];
-    NSString *name = [NSString stringWithFormat:@"%@",user.name];
-    NSString *companyStr = [NSString stringWithFormat:@"%@",user.companyName];
+//    NSString *name = [NSString stringWithFormat:@"%@",user.name];
+//    NSString *companyStr = [NSString stringWithFormat:@"%@",user.companyName];
     
     [dic setObject:user.userId forKey:@"userId"];
     [dic setObject:orderNumber forKey:@"orderNo"];
     [dic setObject:_activityModel.ID forKey:@"activityId"];
     [dic setObject:_activityModel.title forKey:@"activityDescribe"];
     [dic setObject:_activityModel.title forKey:@"activityName"];
-    [dic setObject:name forKey:@"name"];
-    [dic setObject:user.email forKey:@"email"];
-    [dic setObject:user.mobilephone forKey:@"telephone"];
-    [dic setObject:companyStr forKey:@"companyName"];
+    [dic setObject:_name forKey:@"name"];
+    [dic setObject:_email forKey:@"email"];
+    [dic setObject:_phone forKey:@"telephone"];
+    [dic setObject:_companyName forKey:@"companyName"];
     [dic setObject:_activityModel.meetingCost forKey:@"price"];
     [dic setObject:shouldPayStr forKey:@"orderAmount"];
     [dic setObject:numberStr forKey:@"quantity"];

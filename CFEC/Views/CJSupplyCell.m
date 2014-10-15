@@ -37,9 +37,9 @@
     _infoName.font = [UIFont systemFontOfSize:13.0f];
     [self.contentView addSubview:_infoName];
     
-    _info = [[UILabel alloc] initWithFrame:CGRectMake(70, 5, self.contentView.frame.size.width - 80, 30)];
+    _info = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, self.contentView.frame.size.width - 80, 30)];
     _info.textAlignment = NSTextAlignmentRight;
     _info.font = [UIFont systemFontOfSize:13.0f];
-    [self.contentView addSubview:_info];
+//    [self.contentView addSubview:_info];
 }
 @end
