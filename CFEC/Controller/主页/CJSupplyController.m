@@ -17,7 +17,6 @@
 #import "DataVerifier.h"
 
 @interface CJSupplyController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
-
 @property (nonatomic, strong) UITableView *supplyTable;
 @property (nonatomic, strong) UILabel *activityNameLable;
 @property (nonatomic, strong) UILabel *priceLabel;
@@ -85,7 +84,26 @@
     _supplyTable.dataSource = self;
     _supplyTable.backgroundColor = kColor(234, 234, 234, 1);
     [self.view addSubview:_supplyTable];
-    
+    _infoTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, self.view.frame.size.width - 80, 30)];
+    _infoTextField.textAlignment = NSTextAlignmentRight;
+    _infoTextField.font = [UIFont systemFontOfSize:13.0f];
+    _infoTextField.delegate = self;
+
+    _infoTelTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, self.view.frame.size.width - 80, 30)];
+    _infoTelTextField.textAlignment = NSTextAlignmentRight;
+    _infoTelTextField.font = [UIFont systemFontOfSize:13.0f];
+    _infoTelTextField.delegate = self;
+
+    _infoCompanyTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, self.view.frame.size.width - 80, 30)];
+    _infoCompanyTextField.textAlignment = NSTextAlignmentRight;
+    _infoCompanyTextField.font = [UIFont systemFontOfSize:13.0f];
+    _infoCompanyTextField.delegate = self;
+
+    _infoEmailTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, self.view.frame.size.width - 80, 30)];
+    _infoEmailTextField.textAlignment = NSTextAlignmentRight;
+    _infoEmailTextField.font = [UIFont systemFontOfSize:13.0f];
+    _infoEmailTextField.delegate = self;
+
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -100,51 +118,26 @@
     static NSString *first = @"first";
     CJSupplyCell *cell = [[CJSupplyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:first];
     
-    _infoTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
-    _infoTextField.textAlignment = NSTextAlignmentRight;
-    _infoTextField.font = [UIFont systemFontOfSize:13.0f];
-    [cell.contentView addSubview:_infoTextField];
-    _infoTextField.hidden = YES;
-    _infoTextField.delegate = self;
-
-    _infoTelTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
-    _infoTelTextField.textAlignment = NSTextAlignmentRight;
-    _infoTelTextField.font = [UIFont systemFontOfSize:13.0f];
-    [cell.contentView addSubview:_infoTelTextField];
-    _infoTelTextField.hidden = YES;
-    _infoTelTextField.delegate = self;
-    
-    _infoEmailTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
-    _infoEmailTextField.textAlignment = NSTextAlignmentRight;
-    _infoEmailTextField.font = [UIFont systemFontOfSize:13.0f];
-    [cell.contentView addSubview:_infoEmailTextField];
-    _infoEmailTextField.hidden = YES;
-    _infoEmailTextField.delegate = self;
-
-    _infoCompanyTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 5, cell.contentView.frame.size.width - 80, 30)];
-    _infoCompanyTextField.textAlignment = NSTextAlignmentRight;
-    _infoCompanyTextField.font = [UIFont systemFontOfSize:13.0f];
-    [cell.contentView addSubview:_infoCompanyTextField];
-    _infoCompanyTextField.hidden = YES;
-    _infoCompanyTextField.delegate = self;
-
-    
     if (indexPath.row == 0) {
+        [cell.contentView addSubview:_infoTextField];
         cell.infoName.text = @"姓名";
-        _infoTextField.hidden = NO;
-        _infoTextField.text = self.user.name;
+        _infoTextField.text = [NSString stringWithFormat:@"%@",self.user.name];
+        NSLog(@"%@",_infoTextField.text);
     }else if (indexPath.row == 1) {
+        [cell.contentView addSubview:_infoTelTextField];
         cell.infoName.text = @"联系电话";
-        _infoTelTextField.hidden = NO;
         _infoTelTextField.text = self.user.mobilephone;
+        NSLog(@"%@",_infoTelTextField.text);
     }else if (indexPath.row == 2) {
+        [cell.contentView addSubview:_infoCompanyTextField];
         cell.infoName.text = @"电子邮箱";
-        _infoEmailTextField.hidden = NO;
         _infoEmailTextField.text = self.user.email;
+        NSLog(@"%@",_infoEmailTextField.text);
     }else if (indexPath.row == 3) {
+        [cell.contentView addSubview:_infoEmailTextField];
         cell.infoName.text = @"公司名称";
-        _infoCompanyTextField.hidden = NO;
         _infoCompanyTextField.text = self.user.companyName;
+        NSLog(@"%@",_infoCompanyTextField.text);
     }
     
     return cell;
@@ -231,6 +224,10 @@
     [footview addSubview:_payBt];
     return footview;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return  300.0f;
@@ -253,9 +250,15 @@
     _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * [_activity.meetingCost floatValue]];
 }
 -(void)pay:(id)sender {
+
+    NSLog(@"%@",self.infoTextField.text);
+    NSLog(@"%@",self.infoTelTextField.text);
+    NSLog(@"%@",self.infoEmailTextField.text);
+    NSLog(@"%@",self.infoCompanyTextField.text);
     CJPayController *payControl = [[CJPayController alloc] init];
     payControl.activityModel = self.activity;
     payControl.count = _number;
+ 
     if ([_infoTextField.text isEqualToString:@""]) {
         [self returnAlert:@"姓名不能为空"];
         return;

@@ -384,4 +384,17 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
     }];
 
 }
+//手机登陆
++(void)loginwithPhone:(NSString *)phoneNumber
+          andPassword:(NSString *)password
+             finished:(Result)result
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:phoneNumber forKey:@"arg0"];
+    [params setObject:password forKey:@"arg1"];
+    NSString *soapMessage = setPostBody(kMobileLogin, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
 @end

@@ -204,6 +204,7 @@
     _text2.delegate = self;
     _text2.font = [UIFont systemFontOfSize:13.0f];
     _text2.placeholder = @"邮政编码";
+    _text2.keyboardType = UIKeyboardTypeNumberPad;
     _text2.returnKeyType = UIReturnKeyDone;
     _text2.borderStyle = UITextBorderStyleNone;
     _text2.clearButtonMode = UITextFieldViewModeWhileEditing;

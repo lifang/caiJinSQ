@@ -217,6 +217,7 @@
     
     [_passwordField resignFirstResponder];
     [_usernameField resignFirstResponder];
+    NSLog(@"%@--%@",_usernameField.text,_passwordField.text);
     if (!([self isValidateEmail:_usernameField.text]||[self isValidateTel:_usernameField.text])) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱格式或电话号码不正确" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
@@ -224,24 +225,22 @@
         [backView removeFromSuperview];
         return;
     }
-//    NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
-    [CJRequestFormat loginWithEmail:_usernameField.text password:_passwordField.text finished:^(ResponseStatus status,NSString *response) {
-        if (status == 0) {
-            //登陆成功记住密码,根据bool值判断是否要记住密码
-            //记住状态
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[NSNumber numberWithBool:rememberBool] forKey:@"savePWD"];
-            [defaults synchronize];
-            
-//            NSLog(@"------%@,%@",_usernameField.text,_passwordField.text);
-            //检查是否是字典
-            NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
-            NSError *error;
-            id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
-            CJUserModel *loginUser = [[CJUserModel alloc] init];
-            NSLog(@"%@",jsonObject);
-            if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-                self.userInfoDic = (NSMutableDictionary *)jsonObject;
+    if ([self isValidateEmail:_usernameField.text]) {
+        [CJRequestFormat loginWithEmail:_usernameField.text password:_passwordField.text finished:^(ResponseStatus status,NSString *response) {
+            if (status == 0) {
+                //登陆成功记住密码,根据bool值判断是否要记住密码
+                //记住状态
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:[NSNumber numberWithBool:rememberBool] forKey:@"savePWD"];
+                [defaults synchronize];
+                
+                //检查是否是字典
+                NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
+                NSError *error;
+                id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
+                CJUserModel *loginUser = [[CJUserModel alloc] init];
+                if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                    self.userInfoDic = (NSMutableDictionary *)jsonObject;
                     //记住用户信息
                     loginUser.username = _usernameField.text;
                     loginUser.password = _passwordField.text;
@@ -276,7 +275,7 @@
                             [NSKeyedArchiver archiveRootObject:loginUser toFile:savefile];
                         }
                         NSString *imageStr = [NSString stringWithFormat:@"%@",loginUser.headPhotoUrl];
-//                        NSData *data = [[NSData alloc] initWithBase64EncodedString:imageStr options:0];
+                        
                         NSURL *url = [[NSURL alloc] initWithString:imageStr];
                         NSData *data = [[NSData alloc] initWithContentsOfURL:url];
                         loginUser.headImage = data;
@@ -285,22 +284,100 @@
                         CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
                         [rootC showMainController];
                     }
-            }else
-            {
-                NSLog(@"返回的不是字典");
+                }else
+                {
+                    NSLog(@"返回的不是字典");
+                }
+            }else if (status == 1) {
+                [activity stopAnimating];
+                [backView removeFromSuperview];
+                [self returnAlert:@"网络请求出错"];
+                NSLog(@"网络请求出错");
+            }else {
+                [activity stopAnimating];
+                [backView removeFromSuperview];
+                [self returnAlert:@"网络请求成功，返回出错"];
+                NSLog(@"网络请求成功，返回出错");
             }
-        }else if (status == 1) {
-            [activity stopAnimating];
-            [backView removeFromSuperview];
-            [self returnAlert:@"网络请求出错"];
-            NSLog(@"网络请求出错");
-        }else {
-            [activity stopAnimating];
-            [backView removeFromSuperview];
-            [self returnAlert:@"网络请求成功，返回出错"];
-            NSLog(@"网络请求成功，返回出错");
-        }
-    }];
+        }];
+    }else if ([self isValidateTel:_usernameField.text]) {
+        [CJRequestFormat loginwithPhone:_usernameField.text andPassword:_passwordField.text finished:^(ResponseStatus status,NSString *response) {
+            if (status == 0) {
+                //登陆成功记住密码,根据bool值判断是否要记住密码
+                //记住状态
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:[NSNumber numberWithBool:rememberBool] forKey:@"savePWD"];
+                [defaults synchronize];
+                
+                //检查是否是字典
+                NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
+                NSError *error;
+                id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
+                CJUserModel *loginUser = [[CJUserModel alloc] init];
+                if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                    self.userInfoDic = (NSMutableDictionary *)jsonObject;
+                    //记住用户信息
+                    loginUser.username = _usernameField.text;
+                    loginUser.password = _passwordField.text;
+                    loginUser.name =[_userInfoDic objectForKey:@"name"];
+                    loginUser.camp = [_userInfoDic objectForKey:@"camp"];
+                    loginUser.companyEmail = [_userInfoDic objectForKey:@"companyEmail"];
+                    loginUser.companyName = [_userInfoDic objectForKey:@"companyName"];
+                    loginUser.email = [_userInfoDic objectForKey:@"email"];
+                    loginUser.giftTicet = [_userInfoDic objectForKey:@"giftTicet"];
+                    loginUser.headPhotoUrl = [_userInfoDic objectForKey:@"headPhotoUrl"];
+                    loginUser.integral = [_userInfoDic objectForKey:@"integral"];
+                    loginUser.memberType = [_userInfoDic objectForKey:@"memberType"];
+                    loginUser.mobilephone = [_userInfoDic objectForKey:@"mobilephone"];
+                    loginUser.msg = [_userInfoDic objectForKey:@"msg"];
+                    loginUser.position = [_userInfoDic objectForKey:@"position"];
+                    loginUser.specialty = [_userInfoDic objectForKey:@"specialty"];
+                    loginUser.userId = [_userInfoDic objectForKey:@"userId"];
+                    if ([loginUser.msg isEqualToString:@"error"]) {
+                        
+                        [activity stopAnimating];
+                        [backView removeFromSuperview];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                        [alert show];
+                    }else {
+                        [activity stopAnimating];
+                        [backView removeFromSuperview];
+                        if (rememberBool) {
+                            //判断是否需要记住密码
+                            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                            NSString *documentDirectory = paths[0];
+                            NSString *savefile = [documentDirectory stringByAppendingPathComponent:@"userFile.plist"];
+                            [NSKeyedArchiver archiveRootObject:loginUser toFile:savefile];
+                        }
+                        NSString *imageStr = [NSString stringWithFormat:@"%@",loginUser.headPhotoUrl];
+                        
+                        NSURL *url = [[NSURL alloc] initWithString:imageStr];
+                        NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+                        loginUser.headImage = data;
+                        [CJAppDelegate shareCJAppDelegate].user = loginUser;
+                        [CJAppDelegate shareCJAppDelegate].userDic = self.userInfoDic;
+                        CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
+                        [rootC showMainController];
+                    }
+                }else
+                {
+                    NSLog(@"返回的不是字典");
+                }
+            }else if (status == 1) {
+                [activity stopAnimating];
+                [backView removeFromSuperview];
+                [self returnAlert:@"网络请求出错"];
+                NSLog(@"网络请求出错");
+            }else {
+                [activity stopAnimating];
+                [backView removeFromSuperview];
+                [self returnAlert:@"网络请求成功，返回出错"];
+                NSLog(@"网络请求成功，返回出错");
+            }
+        }];
+
+    }
+
 }
 
 #pragma mark - 找回密码

@@ -9,6 +9,8 @@
 #import "CJMobileRegisterController.h"
 #import "CJRequestFormat.h"
 @interface CJMobileRegisterController ()<UITextFieldDelegate,UIAlertViewDelegate>
+@property (nonatomic, assign) CGRect focusRect;
+
 @end
 
 @implementation CJMobileRegisterController
@@ -19,7 +21,7 @@
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     self.title = @"手机注册";
     [self initUI];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHeightChanged:) name:UIKeyboardWillChangeFrameNotification object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -60,6 +62,8 @@
     getinBt.backgroundColor = kColor(93, 201, 16, 1);
     [self.view addSubview:getinBt];
     
+    _focusRect = _emailField.frame;
+    
     _nameField.delegate = self;
     _positionField.delegate = self;
     _companyField.delegate = self;
@@ -84,11 +88,6 @@
     }else {
         [self returnAlert:@"姓名不能为空"];
     }
-}
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
 }
 -(void)returnAlert:(NSString *)str {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -136,5 +135,63 @@
     if (alertView.tag == 1) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
+}
+- (void)keyboardHeightChanged:(NSNotification *)notification {
+    if (!([_nameField isFirstResponder] || [_positionField isFirstResponder]||[_companyField isFirstResponder] || [_emailField isFirstResponder])) {
+        return;
+    }
+    NSDictionary *info = [notification userInfo];
+    CGRect startFrame = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect endFrame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat bottomHeight = screenHeight - _focusRect.origin.y - _focusRect.size.height;
+//    CGFloat bottomHeight = screenHeight - 100;
+    CGFloat offset = 0;
+    NSLog(@"%@,%@",NSStringFromCGRect(startFrame),NSStringFromCGRect(endFrame));
+    if (startFrame.origin.y >= screenHeight) {
+        //键盘弹出
+        NSLog(@"弹出");
+        offset = bottomHeight - endFrame.size.height > 0 ? 0 : bottomHeight - endFrame.size.height;
+    }
+    else {
+        if (startFrame.size.height != endFrame.size.height) {
+            //键盘高度改变
+            NSLog(@"改变");
+            offset = startFrame.size.height - endFrame.size.height;
+            
+            if (fmaxf(startFrame.size.height, endFrame.size.height) < bottomHeight) {
+                offset = 0;
+            }
+        }
+        else {
+            if (CGRectEqualToRect(startFrame, endFrame)) {
+                //键盘切换
+                offset = bottomHeight - endFrame.size.height > 0 ?
+                -self.view.frame.origin.y :
+                bottomHeight - endFrame.size.height - self.view.frame.origin.y;
+                
+            }
+            else {
+                NSLog(@"收回");
+            }
+        }
+    }
+    CGRect newRect = self.view.frame;
+    newRect.origin.y += offset;
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.frame = newRect;
+    }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }];
+    return YES;
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

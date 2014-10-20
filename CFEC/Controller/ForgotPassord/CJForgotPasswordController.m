@@ -88,6 +88,7 @@
     if ([_telAndemailTextfield.text isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱或号码不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
+        return;
     }
     [CJRequestFormat findPasswordWithEmail:_telAndemailTextfield.text finished:^(ResponseStatus status, NSString *response) {
         if (status == 0) {

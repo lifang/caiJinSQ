@@ -271,7 +271,7 @@
 -(void)add:(id)sender {
     _number ++;
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
-    _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_giftModel.price floatValue]];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * [_giftModel.price floatValue]];
 }
 -(void)reduce:(id)sender {
     if (_number >= 1) {
@@ -281,7 +281,7 @@
         _number = 1;
     }
     _numberLabel.text = [NSString stringWithFormat:@"%d",_number];
-    _priceLabel.text = [NSString stringWithFormat:@"%.2f",_number * [_giftModel.price floatValue]];
+    _priceLabel.text = [NSString stringWithFormat:@"%.2f ￥",_number * [_giftModel.price floatValue]];
 }
 -(void)confirm:(id)sender {
     if (addressStr == nil) {

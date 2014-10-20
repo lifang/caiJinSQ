@@ -313,4 +313,14 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
                         andEmail:(NSString *)email
                      andUserInfo:(NSString *)userInfoJson
                         finished:(Result)result;
+
+/*
+ @abstract 手机登陆
+ @param phoneNumber 手机号
+ @param password 密码
+ @param result 请求结果
+ */
++(void)loginwithPhone:(NSString *)phoneNumber
+          andPassword:(NSString *)password
+             finished:(Result)result;
 @end
