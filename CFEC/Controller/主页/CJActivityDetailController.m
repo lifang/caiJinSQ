@@ -117,16 +117,29 @@
     _placeLabel.font = [UIFont systemFontOfSize:11.0f];
     [_mainScrooll addSubview:_placeLabel];
     
-    UIButton *daoHangBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    daoHangBt.frame = CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15);
-    [daoHangBt setImage:[UIImage imageNamed:@"活动2_03@2x.png"] forState:UIControlStateNormal];
-    [daoHangBt addTarget:self action:@selector(daohang:) forControlEvents:UIControlEventTouchUpInside];
-    [_mainScrooll addSubview:daoHangBt];
+//    UIButton *daoHangBt = [UIButton buttonWithType:UIButtonTypeCustom];
+//    daoHangBt.frame = CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15);
+//    [daoHangBt setImage:[UIImage imageNamed:@"活动2_03@2x.png"] forState:UIControlStateNormal];
+//    [daoHangBt addTarget:self action:@selector(daohang:) forControlEvents:UIControlEventTouchUpInside];
+//    [_mainScrooll addSubview:daoHangBt];
+//    
+//    _activityPlaceLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, _timeLabel.frame.origin.y + _timeLabel.frame.size.height, self.view.frame.size.width - 85, 20)];
+//    _activityPlaceLabel.text = _activityModel.meetingAddress;
+//    _activityPlaceLabel.font = [UIFont systemFontOfSize:11.0f];
+//    [_mainScrooll addSubview:_activityPlaceLabel];
     
-    _activityPlaceLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, _timeLabel.frame.origin.y + _timeLabel.frame.size.height, self.view.frame.size.width - 85, 20)];
-    _activityPlaceLabel.text = _activityModel.meetingAddress;
-    _activityPlaceLabel.font = [UIFont systemFontOfSize:11.0f];
-    [_mainScrooll addSubview:_activityPlaceLabel];
+    UIImageView *imagePlace = [[UIImageView alloc] initWithFrame:CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15)];
+    imagePlace.image = [UIImage imageNamed:@"活动2_03@2x.png"];
+    [_mainScrooll addSubview:imagePlace];
+    
+    UIButton *daohangBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    daohangBt.frame = CGRectMake(85, _timeLabel.frame.origin.y + _timeLabel.frame.size.height, self.view.frame.size.width - 85, 20);
+    [daohangBt setTitle:_activityModel.meetingAddress forState:UIControlStateNormal];
+    daohangBt.titleLabel.font = [UIFont systemFontOfSize:11.0f];
+    [daohangBt addTarget:self action:@selector(daohang:) forControlEvents:UIControlEventTouchUpInside];
+    [daohangBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    daohangBt.backgroundColor = [UIColor redColor];
+    [_mainScrooll addSubview:daohangBt];
     
     
     _inviteLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, _placeLabel.frame.origin.y + _placeLabel.frame.size.height, 50, 20)];
@@ -171,12 +184,12 @@
     _supplyBt = [UIButton buttonWithType:UIButtonTypeCustom];
     _supplyBt.frame = CGRectMake(35, 5, 120, 30);
     [_supplyBt setTitle:@"立即报名" forState:UIControlStateNormal];
-    [_supplyBt setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [_supplyBt setTitleColor:kColor(118, 180, 60, 1) forState:UIControlStateNormal];
     [_supplyBt setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [_supplyBt addTarget:self action:@selector(supply:) forControlEvents:UIControlEventTouchUpInside];
     _supplyBt.layer.borderWidth = 1.0f;
     _supplyBt.layer.cornerRadius = 8.0f;
-    _supplyBt.layer.borderColor = [UIColor greenColor].CGColor;
+    _supplyBt.layer.borderColor = kColor(118, 180, 60, 1).CGColor;
     _supplyBt.layer.masksToBounds = YES;
     [bottomView addSubview:_supplyBt];
     
@@ -184,12 +197,12 @@
     _contactBt = [UIButton buttonWithType:UIButtonTypeCustom];
     _contactBt.frame = CGRectMake(170, 5, 120, 30);
     [_contactBt setTitle:@"联系我们" forState:UIControlStateNormal];
-    [_contactBt setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [_contactBt setTitleColor:kColor(118, 180, 60, 1) forState:UIControlStateNormal];
     [_contactBt setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [_contactBt addTarget:self action:@selector(contactUs:) forControlEvents:UIControlEventTouchUpInside];
     _contactBt.layer.borderWidth = 1.0f;
     _contactBt.layer.cornerRadius = 8.0f;
-    _contactBt.layer.borderColor = [UIColor greenColor].CGColor;
+    _contactBt.layer.borderColor = kColor(118, 180, 60, 1).CGColor;
     _contactBt.layer.masksToBounds = YES;
     [bottomView addSubview:_contactBt];
 }

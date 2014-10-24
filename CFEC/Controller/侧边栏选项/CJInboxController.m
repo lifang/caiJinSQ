@@ -9,11 +9,18 @@
 #import "CJInboxController.h"
 #import "CJAppDelegate.h"
 #import "CJMainViewController.h"
+#import "CJUserModel.h"
+#import "CJRequestFormat.h"
+#import "CJMessageModel.h"
+#import "CJMessageDetail.h"
 @interface CJInboxController ()<UITableViewDataSource,UITableViewDelegate>
 {
+    CJUserModel *user;
     NSMutableArray *arr;
+    NSMutableArray *dataArray;
 }
 @property (nonatomic, strong) UITableView *emailTable;
+@property (nonatomic, assign)  BOOL change;
 @end
 
 @implementation CJInboxController
@@ -30,8 +37,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initUI];
+    user = [CJAppDelegate shareCJAppDelegate].user;
+    _change = YES;
+    dataArray = [NSMutableArray array];
     arr = [[NSMutableArray alloc] initWithObjects:@"您刚刚报名参加了一项活动",@"您刚刚报名参加了一项活动",@"您刚刚报名参加了一项活动", nil];
+    [self getInterMessage];
+    [self initUI];
     // Do any additional setup after loading the view.
 }
 
@@ -81,9 +92,8 @@
     self.navigationItem.rightBarButtonItem = rightbutton;
 }
 -(void)edit:(id)sender {
-     static BOOL change = NO;
-    _emailTable.editing = change;
-    change = !change;
+    _emailTable.editing = _change;
+    _change = !_change;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -91,18 +101,30 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return arr.count;
+    return dataArray.count;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CJMessageDetail *messageC = [[CJMessageDetail alloc] initWithNibName:@"CJMessageDetail" bundle:nil];
+    messageC.message = dataArray[indexPath.row];
+    [self.navigationController pushViewController:messageC animated:YES];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *first = @"first";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:first];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:first];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:first];
     }
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, cell.contentView.frame.size.width - 40, 40)];
+    CJMessageModel *model = dataArray[indexPath.row];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(150, cell.textLabel.frame.origin.y, cell.contentView.frame.size.width - 40, 40)];
+    label.font = [UIFont systemFontOfSize:13.0];
     [cell.contentView addSubview:label];
-    label.text = arr[indexPath.row];
+    label.text = model.content;
+    cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+    cell.textLabel.text = model.title;
+    cell.detailTextLabel.text = model.time;
     return cell;
 }
 - (void)hiddenExtraCellLine {
@@ -124,7 +146,33 @@
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [arr removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [dataArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
+-(void)getInterMessage {
+    [CJRequestFormat getWebMessages:user.userId finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+            id objc = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+            if ([objc isKindOfClass:[NSArray class]]) {
+                NSArray *objcArray = (NSArray *)objc;
+                NSLog(@"%d",objcArray.count);
+                for (int i = 0; i < objcArray.count; i++) {
+                    CJMessageModel *model = [[CJMessageModel alloc] init];
+                    NSDictionary *dic = [NSDictionary dictionary];
+                    dic = objcArray[i];
+                    model.content = [dic objectForKey:@"content"];
+                    model.time = [dic objectForKey:@"createTime"];
+                    model.title = [dic objectForKey:@"title"];
+                    [dataArray addObject:model];
+                }
+                NSLog(@"%d",dataArray.count);
+                [_emailTable reloadData];
+            }
+        }
+    }];
+}
+
 @end

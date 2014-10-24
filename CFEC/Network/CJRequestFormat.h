@@ -323,4 +323,12 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
 +(void)loginwithPhone:(NSString *)phoneNumber
           andPassword:(NSString *)password
              finished:(Result)result;
+
+/*
+ @abstract 站内信
+ @param userid 用户id
+ @param result 请求结果
+ */
++(void)getWebMessages:(NSString *)userid
+             finished:(Result)result;
 @end

@@ -87,3 +87,6 @@
 
 //手机登陆
 #define kMobileLogin @"getMobilephoneByEmail"
+
+//站内信
+#define kWebMessage @"getAllUserMessage"

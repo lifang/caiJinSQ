@@ -167,6 +167,9 @@
 		3ACC7B0E19D7B6F80093690E /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */; };
 		3ACC7B1219D7CF0B0093690E /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */; };
 		3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC7B1419D7CF810093690E /* CJAddressModel.m */; };
+		3AFA0CC319FA7CB700F1CDB8 /* CJMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */; };
+		3AFA0CC719FA866900F1CDB8 /* CJMessageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC519FA866900F1CDB8 /* CJMessageDetail.m */; };
+		3AFA0CC819FA866900F1CDB8 /* CJMessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC619FA866900F1CDB8 /* CJMessageDetail.xib */; };
 		3AFE666E19B6C02E004009E0 /* CJActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE666D19B6C02E004009E0 /* CJActivityModel.m */; };
 		3AFE669119B6C4A4004009E0 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE667119B6C4A4004009E0 /* MKAnnotationView+WebCache.m */; };
 		3AFE669219B6C4A4004009E0 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE667319B6C4A4004009E0 /* NSData+ImageContentType.m */; };
@@ -478,6 +481,11 @@
 		3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
 		3ACC7B1319D7CF810093690E /* CJAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAddressModel.h; sourceTree = "<group>"; };
 		3ACC7B1419D7CF810093690E /* CJAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAddressModel.m; sourceTree = "<group>"; };
+		3AFA0CC119FA7CB700F1CDB8 /* CJMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMessageModel.h; sourceTree = "<group>"; };
+		3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMessageModel.m; sourceTree = "<group>"; };
+		3AFA0CC419FA866900F1CDB8 /* CJMessageDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMessageDetail.h; sourceTree = "<group>"; };
+		3AFA0CC519FA866900F1CDB8 /* CJMessageDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMessageDetail.m; sourceTree = "<group>"; };
+		3AFA0CC619FA866900F1CDB8 /* CJMessageDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJMessageDetail.xib; sourceTree = "<group>"; };
 		3AFE666C19B6C02E004009E0 /* CJActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJActivityModel.h; sourceTree = "<group>"; };
 		3AFE666D19B6C02E004009E0 /* CJActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJActivityModel.m; sourceTree = "<group>"; };
 		3AFE667019B6C4A4004009E0 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -663,6 +671,8 @@
 				3ACC7B1419D7CF810093690E /* CJAddressModel.m */,
 				3A3D7B3019E4F12E00D72A15 /* CJOrderModel.h */,
 				3A3D7B3119E4F12E00D72A15 /* CJOrderModel.m */,
+				3AFA0CC119FA7CB700F1CDB8 /* CJMessageModel.h */,
+				3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -813,6 +823,9 @@
 				3A6B8DDD19B06DA900CF7E9E /* CJAboutUsController.m */,
 				3A6B8DDF19B06F0600CF7E9E /* CJInboxController.h */,
 				3A6B8DE019B06F0600CF7E9E /* CJInboxController.m */,
+				3AFA0CC419FA866900F1CDB8 /* CJMessageDetail.h */,
+				3AFA0CC519FA866900F1CDB8 /* CJMessageDetail.m */,
+				3AFA0CC619FA866900F1CDB8 /* CJMessageDetail.xib */,
 			);
 			path = "侧边栏选项";
 			sourceTree = "<group>";
@@ -1503,6 +1516,7 @@
 				3A7C51B319AB10EC00EBFDE9 /* 礼品_03-19@2x.png in Resources */,
 				3A7C51CC19AB238A00EBFDE9 /* 首页cetui_24@2x.png in Resources */,
 				3A7C518B19AAFE1100EBFDE9 /* 首页-个人资料_03-07@2x.png in Resources */,
+				3AFA0CC819FA866900F1CDB8 /* CJMessageDetail.xib in Resources */,
 				3A54F6CE19B41B1900819DE8 /* 毕业时间@2x.png in Resources */,
 				3A7C51CA19AB238A00EBFDE9 /* 首页cetui_20@2x.png in Resources */,
 				3A7C519719AAFE1100EBFDE9 /* 活动1_03.png in Resources */,
@@ -1602,6 +1616,7 @@
 				3A73E09C19AD89BD00DD8A15 /* CJSupplyController.m in Sources */,
 				3AFE666E19B6C02E004009E0 /* CJActivityModel.m in Sources */,
 				3A7C514119AAFD3E00EBFDE9 /* CJActivityController.m in Sources */,
+				3AFA0CC719FA866900F1CDB8 /* CJMessageDetail.m in Sources */,
 				771AA7C019A2E22A005B9AAE /* CJAppDelegate.m in Sources */,
 				3A1B847E19BC370B00BF6F21 /* CJLifeController.m in Sources */,
 				3A73E09F19ADA89600DD8A15 /* CJSupplyCell.m in Sources */,
@@ -1638,6 +1653,7 @@
 				3A69B15919EBA8D5000DC4FA /* Toast+UIView.m in Sources */,
 				3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */,
 				3AFE669519B6C4A4004009E0 /* SDWebImageDecoder.m in Sources */,
+				3AFA0CC319FA7CB700F1CDB8 /* CJMessageModel.m in Sources */,
 				3AFE669719B6C4A4004009E0 /* SDWebImageDownloaderOperation.m in Sources */,
 				3A7C512519AAFD0300EBFDE9 /* CJMainViewController.m in Sources */,
 				3A66EED519AF2040007A1558 /* CJEmailshareController.m in Sources */,

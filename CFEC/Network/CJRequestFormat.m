@@ -397,4 +397,14 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
         result(status,response);
     }];
 }
+//站内消息
++(void)getWebMessages:(NSString *)userid
+             finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:userid forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kWebMessage, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
 @end
