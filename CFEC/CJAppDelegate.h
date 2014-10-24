@@ -12,12 +12,14 @@
 #import "CJUserModel.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
+#import "CJHomeViewController.h"
 
 @interface CJAppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,WeiboSDKDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, strong) CJRootViewController *rootController;
+@property (nonatomic, strong) CJHomeViewController *homeController;
 //登录用户信息 初始时从本地读取
 @property (nonatomic, strong) CJUserModel *user;
 @property (nonatomic, strong) NSMutableDictionary *userDic;

@@ -71,6 +71,7 @@
     [self.window makeKeyAndVisible];
     
     _rootController = [[CJRootViewController alloc] init];
+    _homeController = [[CJHomeViewController alloc] init];
     self.window.rootViewController = _rootController;
     
     _allActivityArray = [NSArray array];

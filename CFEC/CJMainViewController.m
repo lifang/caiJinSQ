@@ -46,7 +46,7 @@
 #pragma mark - Controllers 
 
 - (void)initControllers {
-    CJHomeViewController *vc1 = [[CJHomeViewController alloc] init];
+    CJHomeViewController *vc1 = [[CJAppDelegate shareCJAppDelegate] homeController];
     vc1.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
                                                    image:[UIImage imageNamed:@"首页_09.png"]
                                                      tag:1];
