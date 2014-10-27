@@ -17,6 +17,7 @@
 #import "CJEmailController.h"
 #import "CJUserModel.h"
 #import "CJRequestFormat.h"
+#import "CJAlterPassWordController.h"
 @interface CJPersonaldataController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     CJUserModel *user;
@@ -46,6 +47,7 @@
     self.navigationItem.title = @"个人资料";
     self.view.backgroundColor = [UIColor whiteColor];
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
+    [self setRightNavBarItemWithImageName:@"钥匙@2x.png"];
     [self initUI];
     // Do any additional setup after loading the view.
 }
@@ -76,6 +78,18 @@
     [leftButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = left;
+}
+-(void)setRightNavBarItemWithImageName:(NSString *)name {
+    UIButton *rightBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBt.frame = CGRectMake(0, 0, 25, 25);
+    [rightBt setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+    [rightBt addTarget:self action:@selector(changePassWord:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:rightBt];
+    self.navigationItem.rightBarButtonItem = right;
+}
+-(void)changePassWord:(UIButton *)bt {
+    CJAlterPassWordController *alterC = [[CJAlterPassWordController alloc] initWithNibName:@"CJAlterPassWordController" bundle:nil];
+    [self.navigationController pushViewController:alterC animated:YES];
 }
 -(void)back:(id)sender {
     CJMainViewController *mainC = [[CJMainViewController alloc] init];

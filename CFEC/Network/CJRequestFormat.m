@@ -419,4 +419,18 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
         result(status,response);
     }];
 }
+//修改密码
++(void)ChangeOldPassWord:(NSString *)userEmail
+                  andOld:(NSString *)oldPassWord
+                  andNew:(NSString *)newPassWord
+                finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:userEmail forKey:@"arg0"];
+    [params setObject:oldPassWord forKey:@"arg1"];
+    [params setObject:newPassWord forKey:@"arg2"];
+    NSString *soapMessage = setPostBody(kChangePassWord, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
 @end

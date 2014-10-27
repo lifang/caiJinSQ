@@ -339,4 +339,14 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
 +(void)deleteMObileMessage:(NSString *)textid
                  andUserId:(NSString *)userid
                   finished:(Result)result;
+/*
+ @abstract 修改密码
+ @param useremail 用户邮箱
+ @param oldPassWord 旧密码
+ @param newPassWord 新密码
+ */
++(void)ChangeOldPassWord:(NSString *)userEmail
+                  andOld:(NSString *)oldPassWord
+                  andNew:(NSString *)newPassWord
+                finished:(Result)result;
 @end

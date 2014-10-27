@@ -93,3 +93,5 @@
 
 //删除站内信
 #define kDeleteMessage @"deleteMobileMessage"
+//修改密码
+#define kChangePassWord @"editPassword"

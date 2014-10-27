@@ -167,6 +167,10 @@
 		3ACC7B0E19D7B6F80093690E /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0D19D7B6F80093690E /* AddressBookUI.framework */; };
 		3ACC7B1219D7CF0B0093690E /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */; };
 		3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC7B1419D7CF810093690E /* CJAddressModel.m */; };
+		3ACF31BD19FE4C6B00A10969 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF31BF19FE4C6B00A10969 /* Localizable.strings */; };
+		3ACF31C219FE4E6300A10969 /* 钥匙@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF31C119FE4E6300A10969 /* 钥匙@2x.png */; };
+		3ACF31C619FE4F5500A10969 /* CJAlterPassWordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF31C419FE4F5500A10969 /* CJAlterPassWordController.m */; };
+		3ACF31C719FE4F5500A10969 /* CJAlterPassWordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF31C519FE4F5500A10969 /* CJAlterPassWordController.xib */; };
 		3AFA0CC319FA7CB700F1CDB8 /* CJMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */; };
 		3AFA0CC719FA866900F1CDB8 /* CJMessageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC519FA866900F1CDB8 /* CJMessageDetail.m */; };
 		3AFA0CC819FA866900F1CDB8 /* CJMessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC619FA866900F1CDB8 /* CJMessageDetail.xib */; };
@@ -481,6 +485,12 @@
 		3ACC7B1119D7CF0B0093690E /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
 		3ACC7B1319D7CF810093690E /* CJAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAddressModel.h; sourceTree = "<group>"; };
 		3ACC7B1419D7CF810093690E /* CJAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAddressModel.m; sourceTree = "<group>"; };
+		3ACF31BE19FE4C6B00A10969 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3ACF31C019FE4CA900A10969 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3ACF31C119FE4E6300A10969 /* 钥匙@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "钥匙@2x.png"; sourceTree = "<group>"; };
+		3ACF31C319FE4F5500A10969 /* CJAlterPassWordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAlterPassWordController.h; sourceTree = "<group>"; };
+		3ACF31C419FE4F5500A10969 /* CJAlterPassWordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAlterPassWordController.m; sourceTree = "<group>"; };
+		3ACF31C519FE4F5500A10969 /* CJAlterPassWordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJAlterPassWordController.xib; sourceTree = "<group>"; };
 		3AFA0CC119FA7CB700F1CDB8 /* CJMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMessageModel.h; sourceTree = "<group>"; };
 		3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMessageModel.m; sourceTree = "<group>"; };
 		3AFA0CC419FA866900F1CDB8 /* CJMessageDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMessageDetail.h; sourceTree = "<group>"; };
@@ -826,6 +836,9 @@
 				3AFA0CC419FA866900F1CDB8 /* CJMessageDetail.h */,
 				3AFA0CC519FA866900F1CDB8 /* CJMessageDetail.m */,
 				3AFA0CC619FA866900F1CDB8 /* CJMessageDetail.xib */,
+				3ACF31C319FE4F5500A10969 /* CJAlterPassWordController.h */,
+				3ACF31C419FE4F5500A10969 /* CJAlterPassWordController.m */,
+				3ACF31C519FE4F5500A10969 /* CJAlterPassWordController.xib */,
 			);
 			path = "侧边栏选项";
 			sourceTree = "<group>";
@@ -968,6 +981,7 @@
 		3A7C516319AAFE1100EBFDE9 /* 完善-个人资料部分 */ = {
 			isa = PBXGroup;
 			children = (
+				3ACF31C119FE4E6300A10969 /* 钥匙@2x.png */,
 				3A54F6E219B442DA00819DE8 /* 首页-个人资料2_03@2x.png */,
 				3A54F6C919B41B1900819DE8 /* 毕业时间@2x.png */,
 				3A54F6CA19B41B1900819DE8 /* 兴趣原因@2x.png */,
@@ -1205,6 +1219,7 @@
 				771AA7B819A2E22A005B9AAE /* InfoPlist.strings */,
 				771AA7BB19A2E22A005B9AAE /* main.m */,
 				771AA7BD19A2E22A005B9AAE /* CFEC-Prefix.pch */,
+				3ACF31BF19FE4C6B00A10969 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1433,6 +1448,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 771AA7A319A2E22A005B9AAE;
 			productRefGroup = 771AA7AD19A2E22A005B9AAE /* Products */;
@@ -1468,11 +1484,13 @@
 				3A4040B719D8F71E009E5202 /* serviceContent.txt in Resources */,
 				3A34EA1319BEA7450083773C /* save@2x.png in Resources */,
 				3A7C51B019AB10EC00EBFDE9 /* 礼品_03-11@2x.png in Resources */,
+				3ACF31BD19FE4C6B00A10969 /* Localizable.strings in Resources */,
 				3A7C51A619AAFE1100EBFDE9 /* 首页_25.png in Resources */,
 				3A7C518919AAFE1100EBFDE9 /* 订单_03-05@2x.png in Resources */,
 				3A7C51B219AB10EC00EBFDE9 /* 礼品_03-17@2x.png in Resources */,
 				3A7C51A419AAFE1100EBFDE9 /* 首页_23@2x.png in Resources */,
 				3A7C519519AAFE1100EBFDE9 /* 时间.png in Resources */,
+				3ACF31C219FE4E6300A10969 /* 钥匙@2x.png in Resources */,
 				3A7C51B519AB10EC00EBFDE9 /* 礼品资料_03@2x.png in Resources */,
 				3A7C518819AAFE1100EBFDE9 /* 分享_103.png in Resources */,
 				3A63634B19B8157600D818FB /* 税务学苑-透明_03@2x.png in Resources */,
@@ -1492,6 +1510,7 @@
 				3A63634919B8157600D818FB /* 乐活节-透明_03@2x.png in Resources */,
 				3A7C519D19AAFE1100EBFDE9 /* 首页_03@2x.png in Resources */,
 				771AA7BA19A2E22A005B9AAE /* InfoPlist.strings in Resources */,
+				3ACF31C719FE4F5500A10969 /* CJAlterPassWordController.xib in Resources */,
 				3A7C519819AAFE1100EBFDE9 /* 活动1_06@2x.png in Resources */,
 				3A4BCE4B19AC7A090027C023 /* 活动2@2x.png in Resources */,
 				3A2058A019B98EAA00EBDF5F /* area.plist in Resources */,
@@ -1656,6 +1675,7 @@
 				3A69B15919EBA8D5000DC4FA /* Toast+UIView.m in Sources */,
 				3ACC7B1519D7CF810093690E /* CJAddressModel.m in Sources */,
 				3AFE669519B6C4A4004009E0 /* SDWebImageDecoder.m in Sources */,
+				3ACF31C619FE4F5500A10969 /* CJAlterPassWordController.m in Sources */,
 				3AFA0CC319FA7CB700F1CDB8 /* CJMessageModel.m in Sources */,
 				3AFE669719B6C4A4004009E0 /* SDWebImageDownloaderOperation.m in Sources */,
 				3A7C512519AAFD0300EBFDE9 /* CJMainViewController.m in Sources */,
@@ -1688,6 +1708,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3ACF31BF19FE4C6B00A10969 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3ACF31BE19FE4C6B00A10969 /* en */,
+				3ACF31C019FE4CA900A10969 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		771AA7B819A2E22A005B9AAE /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
