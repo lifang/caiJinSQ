@@ -90,3 +90,6 @@
 
 //站内信
 #define kWebMessage @"getAllUserMessage"
+
+//删除站内信
+#define kDeleteMessage @"deleteMobileMessage"

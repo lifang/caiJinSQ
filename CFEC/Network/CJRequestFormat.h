@@ -331,4 +331,12 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
  */
 +(void)getWebMessages:(NSString *)userid
              finished:(Result)result;
+/*
+ @abstract 删除站内信
+ @param textid 站内信id
+ @param userid 用户id
+ */
++(void)deleteMObileMessage:(NSString *)textid
+                 andUserId:(NSString *)userid
+                  finished:(Result)result;
 @end

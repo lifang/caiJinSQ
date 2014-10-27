@@ -147,8 +147,11 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        CJMessageModel *model = [[CJMessageModel alloc] init];
+        model = dataArray[indexPath.row];
         [dataArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self deleteMessageWithid:model.messageid andUserid:user.userId];
     }
 }
 -(void)getInterMessage {
@@ -166,6 +169,7 @@
                     model.content = [dic objectForKey:@"content"];
                     model.time = [dic objectForKey:@"createTime"];
                     model.title = [dic objectForKey:@"title"];
+                    model.messageid = [dic objectForKey:@"id"];
                     [dataArray addObject:model];
                 }
                 NSLog(@"%d",dataArray.count);
@@ -173,6 +177,30 @@
             }
         }
     }];
+}
+-(void)deleteMessageWithid:(NSString *)messageid andUserid:(NSString *)userid
+{
+    [CJRequestFormat deleteMObileMessage:messageid andUserId:userid finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            if ([response isEqualToString:@"true"]) {
+                NSLog(@"修改成功");
+                [self returnAlert:@"修改成功"];
+            }else {
+                NSLog(@"修改失败");
+                [self returnAlert:@"修改失败"];
+            }
+        }else if (status == 1) {
+            NSLog(@"网络出错");
+            [self returnAlert:@"网络出错"];
+        }else if (status == 2) {
+            NSLog(@"请求成功,返回失败");
+            [self returnAlert:@"服务器故障"];
+        }
+    }];
+}
+-(void)returnAlert:(NSString *)str {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
 }
 
 @end

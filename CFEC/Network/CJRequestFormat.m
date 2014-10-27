@@ -407,4 +407,16 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
         result(status,response);
     }];
 }
+//删除站内信
++(void)deleteMObileMessage:(NSString *)textid
+                 andUserId:(NSString *)userid
+                  finished:(Result)result {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:textid forKey:@"arg0"];
+    [params setObject:userid forKey:@"arg1"];
+    NSString *soapMessage = setPostBody(kDeleteMessage, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
 @end
