@@ -24,5 +24,5 @@
 - (void)showMainController;
 
 - (void)showLoginController;
-
+- (void)setLoginController;
 @end

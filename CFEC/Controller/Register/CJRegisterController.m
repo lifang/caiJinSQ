@@ -16,6 +16,8 @@
 {
     BOOL isAgree;
     NSString *codeStr;
+    NSTimer *timer;
+    int i;
 }
 
 @property (strong, nonatomic) UITableView *showTable;
@@ -26,6 +28,7 @@
 @property (strong, nonatomic) UITextField *confirmPasswordTextfield;
 @property (strong, nonatomic) UITextField *emailAddressTextfield;
 @property (strong, nonatomic) UIButton *sendBt;
+@property (strong, nonatomic) UILabel *timeLabel;
 @end
 
 @implementation CJRegisterController
@@ -52,6 +55,7 @@
 {
     [super viewDidLoad];
     isAgree = NO;//不同意协议
+    i = 0;
     self.view.backgroundColor = kColor(234, 234, 234, 1);
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     self.title = @"注册";
@@ -89,7 +93,7 @@
     //TextField
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
     _telTextfield = [[UITextField alloc] init];
-    _telTextfield.frame = CGRectMake(0, 0, 240, 52);
+    _telTextfield.frame = CGRectMake(0, 0, 200, 52);
     _telTextfield.returnKeyType = UIReturnKeyDone;
     _telTextfield.borderStyle = UITextBorderStyleNone;
     _telTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -105,12 +109,18 @@
     _sendBt.frame = CGRectMake(240, 13, 60, 25);
     [_sendBt setTitle:@"发送验证" forState:UIControlStateNormal];
     _sendBt.titleLabel.font = [UIFont systemFontOfSize:11.0f];
-    [_sendBt setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [_sendBt setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [_sendBt setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [_sendBt setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [_sendBt addTarget:self action:@selector(senderIdentiy:) forControlEvents:UIControlEventTouchUpInside];
     _sendBt.layer.cornerRadius = 5.0f;
     _sendBt.layer.borderWidth = 0.5f;
     _sendBt.layer.borderColor = [[UIColor blackColor]CGColor];
+    
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 12, 60, 25)];
+    _timeLabel.text = [NSString stringWithFormat:@"%d",i];
+    _timeLabel.hidden = YES;
+//    _timeLabel.textColor = [UIColor redColor];
     
     UIView *backView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
     _identiyTextfield = [[UITextField alloc] init];
@@ -194,6 +204,7 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
             }
             [cell.contentView addSubview:_telTextfield];
+            [cell.contentView addSubview:_timeLabel];
             [cell.contentView addSubview:_sendBt];
             return cell;
         }else if (indexPath.row == 1) {
@@ -412,6 +423,7 @@
     
 }
 -(void)senderIdentiy:(id)sender {
+    _sendBt.enabled = NO;
     if ([self isValidateTel:_telTextfield.text]) {
         [CJRequestFormat getCodeWithPhoneNumber:_telTextfield.text finished:^(ResponseStatus status, NSString *response) {
             if (status == 0) {
@@ -421,6 +433,7 @@
                 NSDictionary *dic = (NSDictionary *)responseObj;
                 codeStr = [NSString string];
                 codeStr = [dic objectForKey:@"mobile_code"];
+                [self countTime];
             }else if (status == 1) {
                 [self returnAlert:@"网络故障"];
             }else if (status == 2) {
@@ -476,5 +489,25 @@
 -(void)returnAlert:(NSString *)str {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
+}
+-(void)countTime
+{
+    _timeLabel.hidden = NO;
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(start) userInfo:nil repeats:YES];
+    
+}
+-(void)start
+{
+    if (i == 100) {
+        _timeLabel.hidden = YES;
+        [timer invalidate];
+        _sendBt.enabled = YES;
+        i = 0;
+        _timeLabel.text = @"0";
+        return;
+    }
+    NSLog(@"i:%d",i);
+    i++;
+    _timeLabel.text = [NSString stringWithFormat:@"%d",i];
 }
 @end

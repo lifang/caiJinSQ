@@ -245,7 +245,7 @@
 }
 -(void)logout:(id)sender {
     
-    [[[CJAppDelegate shareCJAppDelegate] rootController] showLoginController];
+    [[[CJAppDelegate shareCJAppDelegate] rootController] setLoginController];
 }
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet
 {

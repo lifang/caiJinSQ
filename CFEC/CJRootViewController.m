@@ -13,7 +13,7 @@
 #import "CJAppDelegate.h"
 
 @interface CJRootViewController ()
-
+@property (strong, nonatomic) CJMainViewController *mainC;
 @end
 
 @implementation CJRootViewController
@@ -43,6 +43,7 @@
 #pragma mark - Login View Controller
 
 - (void)setLoginController {
+
     CJLoginViewController *loginC = [[CJLoginViewController alloc] init];
     _loginNav = [[UINavigationController alloc] initWithRootViewController:loginC];
     [CJAppDelegate setNavigationBarTinColor:_loginNav];
@@ -55,9 +56,9 @@
     CJLeftViewController *leftC = [[CJLeftViewController alloc] init];
     UINavigationController *navL = [[UINavigationController alloc] initWithRootViewController:leftC];
     
-    CJMainViewController *mainC = [[CJMainViewController alloc] init];
+    _mainC = [[CJMainViewController alloc] init];
     
-    _navController = [[MMDrawerController alloc] initWithCenterViewController:mainC
+    _navController = [[MMDrawerController alloc] initWithCenterViewController:_mainC
                                                      leftDrawerViewController:navL];
     [_navController setMaximumLeftDrawerWidth:220];
     [_navController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
@@ -67,6 +68,7 @@
 }
 
 - (void)showLoginController {
+    
     if (_navController) {
         [UIView beginAnimations:@"disappear" context:nil];
         [UIView setAnimationDuration:0.3f];

@@ -47,7 +47,7 @@
     [self setUserNameAndPasswordUI];
     [self setLoginButtonUI];
     self.isShow = YES;
-    [self directLogin];
+//    [self directLogin];
 }
 
 - (void)didReceiveMemoryWarning
