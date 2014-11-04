@@ -11,13 +11,18 @@
 #import "WXApiObject.h"
 #import "WXApi.h"
 #import "CJContactusController.h"
+//#import "CJMapViewController.h"
 #import "CJGPSNaviViewController.h"
+#import <AMapSearchKit/AMapSearchAPI.h>
+
 
 #define startHeight 10
-@interface CJActivityDetailController ()<UIActionSheetDelegate>
+
+@interface CJActivityDetailController ()<UIActionSheetDelegate,AMapSearchDelegate>
 {
     UIImage *headImage;
 }
+
 @property (nonatomic, strong) UIScrollView *mainScrooll;
 @property (nonatomic, strong) UIImageView *titleImage;
 @property (nonatomic, strong) UILabel *themeLabel;
@@ -31,6 +36,12 @@
 @property (nonatomic, strong) UILabel *detailContentText;//具体内容
 @property (nonatomic, strong) UIButton *supplyBt;//立即报名
 @property (nonatomic, strong) UIButton *contactBt;//联系我们
+
+@property (nonatomic, strong) AMapGeocode *endGeoCode;
+
+@property (strong, nonatomic) AMapSearchAPI *search;
+
+
 
 @end
 
@@ -65,6 +76,13 @@
     [self setLeftNavBarItemWithImageName:@"订单_03@2x.png"];
     [self setRightNavBarItemWithImageName:@"订单_03-05@2x"];
     [self initUI];
+    
+    self.search = [[AMapSearchAPI alloc] initWithSearchKey: APIKey Delegate:self];
+    AMapGeocodeSearchRequest *geoRequest = [[AMapGeocodeSearchRequest alloc] init];
+    geoRequest.searchType = AMapSearchType_Geocode;
+    geoRequest.address = [NSString stringWithFormat:@"%@",_activityModel.meetingAddress];
+    [self.search AMapGeocodeSearch: geoRequest];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -117,16 +135,6 @@
     _placeLabel.font = [UIFont systemFontOfSize:11.0f];
     [_mainScrooll addSubview:_placeLabel];
     
-//    UIButton *daoHangBt = [UIButton buttonWithType:UIButtonTypeCustom];
-//    daoHangBt.frame = CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15);
-//    [daoHangBt setImage:[UIImage imageNamed:@"活动2_03@2x.png"] forState:UIControlStateNormal];
-//    [daoHangBt addTarget:self action:@selector(daohang:) forControlEvents:UIControlEventTouchUpInside];
-//    [_mainScrooll addSubview:daoHangBt];
-//    
-//    _activityPlaceLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, _timeLabel.frame.origin.y + _timeLabel.frame.size.height, self.view.frame.size.width - 85, 20)];
-//    _activityPlaceLabel.text = _activityModel.meetingAddress;
-//    _activityPlaceLabel.font = [UIFont systemFontOfSize:11.0f];
-//    [_mainScrooll addSubview:_activityPlaceLabel];
     
     UIImageView *imagePlace = [[UIImageView alloc] initWithFrame:CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15)];
     imagePlace.image = [UIImage imageNamed:@"活动2_03@2x.png"];
@@ -209,6 +217,7 @@
 -(void)daohang:(UIButton *)bt {
     CJGPSNaviViewController *gpsC = [[CJGPSNaviViewController alloc] init];
     gpsC.activityModel = self.activityModel;
+    gpsC.endGeoCode = self.endGeoCode;
     [self.navigationController pushViewController:gpsC animated:YES];
 }
 - (void)downloadDetailImageWithURL:(NSString *)urlstring {
@@ -323,5 +332,19 @@
     
     return message;
     
+}
+
+- (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response
+{
+    [response.geocodes enumerateObjectsUsingBlock:^(AMapGeocode *obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@"%f,%f",obj.location.latitude,obj.location.longitude);
+        _endGeoCode = obj;
+    }];
+    
+    
+}
+-(void)dealloc
+{
+    self.search.delegate = nil;
 }
 @end

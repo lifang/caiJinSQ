@@ -9,6 +9,7 @@
 #import "CJForgotPasswordController.h"
 #import "CJRootViewController.h"
 #import "CJRequestFormat.h"
+#import "CJFindWithPhoneController.h"
 @interface CJForgotPasswordController ()<UIAlertViewDelegate>
 
 @end
@@ -84,33 +85,26 @@
 }
 
 -(void)sendInfo:(id)sender {
-    NSLog(@"获取新密码");
-    if ([_telAndemailTextfield.text isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱或号码不能为空" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
-        return;
+    int i = 0;
+    if ([self isValidateEmail:_telAndemailTextfield.text]) {
+        //邮箱
+        i = 100;
+    }else if ([self isValidateTel:_telAndemailTextfield.text]) {
+        //电话号码
+        i = 101;
     }
-    [CJRequestFormat findPasswordWithEmail:_telAndemailTextfield.text finished:^(ResponseStatus status, NSString *response) {
-        if (status == 0) {
-            NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
-            NSError *error;
-            id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
-            if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *dic = (NSDictionary *)jsonObject;
-                NSString *s = [dic objectForKey:@"msg"];
-                if ([s isEqualToString:@"error"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                    [alert show];
-                }else {
-                    [self returnAlert:@"密码找回成功,请去邮箱重新填写密码"];
-                }
-            }
-        }else if (status == 1){
-            NSLog(@"请求失败");
-        }else {
-            NSLog(@"请求成功，服务端返回错误");
+    if ([self isValidateEmail:_telAndemailTextfield.text]||[self isValidateTel:_telAndemailTextfield.text]) {
+        if (i == 100) {
+            [self sendEmailNetWork];
+        }else if (i == 101) {
+            [self sendTelNetWork];
         }
-    }];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱或手机格式错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    
 }
 //判断邮箱格式是否正确
 - (BOOL)isValidateEmail:(NSString *)email{
@@ -149,6 +143,76 @@
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (alertView.tag == 100) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+-(void)sendEmailNetWork
+{
+    [CJRequestFormat findPasswordWithEmail:_telAndemailTextfield.text finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSData *userdate = [response dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:userdate options:NSJSONReadingAllowFragments error:&error];
+            if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dic = (NSDictionary *)jsonObject;
+                NSString *s = [dic objectForKey:@"msg"];
+                if ([s isEqualToString:@"error"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"邮箱错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码找回成功,请去邮箱重新填写密码" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    alert.tag = 100;
+                    [alert show];
+                }
+            }
+        }else if (status == 1){
+            NSLog(@"请求失败");
+        }else {
+            NSLog(@"请求成功，服务端返回错误");
+        }
+    }];
+
+}
+-(void)sendTelNetWork
+{
+
+    [_telAndemailTextfield resignFirstResponder];
+    [CJRequestFormat findPasswordWithVerity:_telAndemailTextfield.text finished:^(ResponseStatus status, NSString *response) {
+        //
+        if (status == 0) {
+            if ([response isEqualToString:@"false"]) {
+                [self returnAlert:@"手机号无效"];
+            }else {
+                NSLog(@"手机有效");
+                [self senderVerify:_telAndemailTextfield.text];
+            }
+        }else if (status == 1) {
+            NSLog(@"网络错误");
+            [self returnAlert:@"网络错误"];
+        }else {
+            NSLog(@"请求成功，服务器返回错误");
+        }
+    }];
+}
+-(void)senderVerify:(NSString *)phoneStr
+{
+    [CJRequestFormat getCodeWithPhoneNumber:phoneStr finished:^(ResponseStatus status, NSString *response) {
+        if (status == 0) {
+            NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
+            id responseobj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            if ([responseobj isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *obj = (NSDictionary *)responseobj;
+                NSString *code = [obj objectForKey:@"mobile_code"];
+                
+                [_telAndemailTextfield resignFirstResponder];
+                CJFindWithPhoneController *findC = [[CJFindWithPhoneController alloc] init];
+                findC.phone = _telAndemailTextfield.text;
+                findC.code = code;
+                [self.navigationController pushViewController:findC animated:YES];
+            }
+        }
+
+    }];
 }
 @end

@@ -7,7 +7,11 @@
 //
 
 #import "CJBaseNaviViewController.h"
+#import <AMapSearchKit/AMapSearchAPI.h>
+
 #import "CJActivityModel.h"
 @interface CJGPSNaviViewController : CJBaseNaviViewController
 @property (nonatomic, strong) CJActivityModel *activityModel;
+@property (nonatomic, strong) AMapGeocode *endGeoCode;
+
 @end

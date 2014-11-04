@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3A00100B19C1596F00EBA2A4 /* Icon29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A00100A19C1596F00EBA2A4 /* Icon29@2x.png */; };
+		3A07DFD51A08C40A00A1D7B8 /* CJFindWithPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A07DFD31A08C40A00A1D7B8 /* CJFindWithPhoneController.m */; };
+		3A07DFDA1A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A07DFD81A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.m */; };
+		3A07DFDB1A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A07DFD91A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.xib */; };
 		3A1B847819BC23D000BF6F21 /* CJGiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1B847719BC23D000BF6F21 /* CJGiftModel.m */; };
 		3A1B847B19BC328A00BF6F21 /* CJHouseholdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1B847A19BC328A00BF6F21 /* CJHouseholdController.m */; };
 		3A1B847E19BC370B00BF6F21 /* CJLifeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1B847D19BC370A00BF6F21 /* CJLifeController.m */; };
@@ -160,6 +163,9 @@
 		3A7C51CC19AB238A00EBFDE9 /* 首页cetui_24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51C319AB238A00EBFDE9 /* 首页cetui_24@2x.png */; };
 		3A7C51CD19AB238A00EBFDE9 /* 首页cetui_26@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51C419AB238A00EBFDE9 /* 首页cetui_26@2x.png */; };
 		3A7C51CF19AB276800EBFDE9 /* 我的订单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C51CE19AB276800EBFDE9 /* 我的订单@2x.png */; };
+		3AA0BAB11A0216890048E54C /* CJMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0BAB01A0216890048E54C /* CJMapViewController.m */; };
+		3AA0BAB31A026E4B0048E54C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA0BAB21A026E4B0048E54C /* MapKit.framework */; };
+		3AA0BAB61A0271780048E54C /* ASPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0BAB51A0271780048E54C /* ASPin.m */; };
 		3AAC873519DE44F300AE97F2 /* CJGiftIntrgralPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAC873419DE44F300AE97F2 /* CJGiftIntrgralPayController.m */; };
 		3ACC7B0919D7A9C00093690E /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */; };
 		3ACC7B0A19D7A9C00093690E /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3ACC7B0719D7A9C00093690E /* WeiboSDK.bundle */; };
@@ -253,6 +259,11 @@
 
 /* Begin PBXFileReference section */
 		3A00100A19C1596F00EBA2A4 /* Icon29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon29@2x.png"; sourceTree = "<group>"; };
+		3A07DFD21A08C40A00A1D7B8 /* CJFindWithPhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJFindWithPhoneController.h; sourceTree = "<group>"; };
+		3A07DFD31A08C40A00A1D7B8 /* CJFindWithPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJFindWithPhoneController.m; sourceTree = "<group>"; };
+		3A07DFD71A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJInputPassWordControllerViewController.h; sourceTree = "<group>"; };
+		3A07DFD81A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJInputPassWordControllerViewController.m; sourceTree = "<group>"; };
+		3A07DFD91A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJInputPassWordControllerViewController.xib; sourceTree = "<group>"; };
 		3A1B847619BC23D000BF6F21 /* CJGiftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftModel.h; sourceTree = "<group>"; };
 		3A1B847719BC23D000BF6F21 /* CJGiftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGiftModel.m; sourceTree = "<group>"; };
 		3A1B847919BC328A00BF6F21 /* CJHouseholdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJHouseholdController.h; sourceTree = "<group>"; };
@@ -474,6 +485,11 @@
 		3A7C51C319AB238A00EBFDE9 /* 首页cetui_24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页cetui_24@2x.png"; sourceTree = "<group>"; };
 		3A7C51C419AB238A00EBFDE9 /* 首页cetui_26@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页cetui_26@2x.png"; sourceTree = "<group>"; };
 		3A7C51CE19AB276800EBFDE9 /* 我的订单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的订单@2x.png"; sourceTree = "<group>"; };
+		3AA0BAAF1A0216890048E54C /* CJMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMapViewController.h; sourceTree = "<group>"; };
+		3AA0BAB01A0216890048E54C /* CJMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMapViewController.m; sourceTree = "<group>"; };
+		3AA0BAB21A026E4B0048E54C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3AA0BAB41A0271780048E54C /* ASPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPin.h; sourceTree = "<group>"; };
+		3AA0BAB51A0271780048E54C /* ASPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPin.m; sourceTree = "<group>"; };
 		3AAC873319DE44F300AE97F2 /* CJGiftIntrgralPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJGiftIntrgralPayController.h; sourceTree = "<group>"; };
 		3AAC873419DE44F300AE97F2 /* CJGiftIntrgralPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJGiftIntrgralPayController.m; sourceTree = "<group>"; };
 		3ACC7B0619D7A9C00093690E /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
@@ -627,6 +643,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AA0BAB31A026E4B0048E54C /* MapKit.framework in Frameworks */,
 				3A69B15F19EBAC4E000DC4FA /* CoreTelephony.framework in Frameworks */,
 				771C0E9119AB12F10065D46F /* SystemConfiguration.framework in Frameworks */,
 				3A69B15D19EBABDD000DC4FA /* AMapSearchKit.framework in Frameworks */,
@@ -683,6 +700,8 @@
 				3A3D7B3119E4F12E00D72A15 /* CJOrderModel.m */,
 				3AFA0CC119FA7CB700F1CDB8 /* CJMessageModel.h */,
 				3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */,
+				3AA0BAB41A0271780048E54C /* ASPin.h */,
+				3AA0BAB51A0271780048E54C /* ASPin.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -739,6 +758,8 @@
 				3A73E09B19AD89BD00DD8A15 /* CJSupplyController.m */,
 				3A66EEC919AEC19E007A1558 /* CJPayController.h */,
 				3A66EECA19AEC19E007A1558 /* CJPayController.m */,
+				3AA0BAAF1A0216890048E54C /* CJMapViewController.h */,
+				3AA0BAB01A0216890048E54C /* CJMapViewController.m */,
 			);
 			path = "主页";
 			sourceTree = "<group>";
@@ -869,6 +890,11 @@
 			children = (
 				3A7C513019AAFD3E00EBFDE9 /* CJForgotPasswordController.h */,
 				3A7C513119AAFD3E00EBFDE9 /* CJForgotPasswordController.m */,
+				3A07DFD21A08C40A00A1D7B8 /* CJFindWithPhoneController.h */,
+				3A07DFD31A08C40A00A1D7B8 /* CJFindWithPhoneController.m */,
+				3A07DFD71A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.h */,
+				3A07DFD81A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.m */,
+				3A07DFD91A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.xib */,
 			);
 			path = ForgotPassord;
 			sourceTree = "<group>";
@@ -1159,6 +1185,7 @@
 		771AA7AE19A2E22A005B9AAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AA0BAB21A026E4B0048E54C /* MapKit.framework */,
 				3A69B15E19EBAC4E000DC4FA /* CoreTelephony.framework */,
 				3A69B15C19EBABDD000DC4FA /* AMapSearchKit.framework */,
 				3A69B15A19EBAAD2000DC4FA /* MAMapKit.framework */,
@@ -1501,6 +1528,7 @@
 				3A7C51B419AB10EC00EBFDE9 /* 礼品_03@2x.png in Resources */,
 				3A7C519E19AAFE1100EBFDE9 /* 首页_06@2x.png in Resources */,
 				3A7C51B719AB178F00EBFDE9 /* 活动_03@2x.png in Resources */,
+				3A07DFDB1A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.xib in Resources */,
 				3A7C519119AAFE1100EBFDE9 /* 举办方.png in Resources */,
 				3A63634D19B8157600D818FB /* 财务沙龙-透明_03@2x.png in Resources */,
 				3A7C51A219AAFE1100EBFDE9 /* 首页_16@2x.png in Resources */,
@@ -1586,6 +1614,7 @@
 				3AAC873519DE44F300AE97F2 /* CJGiftIntrgralPayController.m in Sources */,
 				3A7C511F19AAFCC800EBFDE9 /* CJLoginViewController.m in Sources */,
 				3A20589E19B95F4E00EBDF5F /* CJTransportAddressController.m in Sources */,
+				3A07DFDA1A08D5E800A1D7B8 /* CJInputPassWordControllerViewController.m in Sources */,
 				3AFE669F19B6C4A4004009E0 /* UIImageView+WebCache.m in Sources */,
 				3A1B847819BC23D000BF6F21 /* CJGiftModel.m in Sources */,
 				3A6B8DD819B0686600CF7E9E /* CJVersionController.m in Sources */,
@@ -1597,6 +1626,7 @@
 				3A36718C19E8CA0800C1F78F /* CJMobileRegisterController.m in Sources */,
 				3A7C512419AAFD0300EBFDE9 /* CJLeftViewController.m in Sources */,
 				771AA7E019A2E2B9005B9AAE /* CJRootViewController.m in Sources */,
+				3AA0BAB61A0271780048E54C /* ASPin.m in Sources */,
 				3A69B15619EBA8D5000DC4FA /* TableViewWithBlock.m in Sources */,
 				3A69B14019EBA881000DC4FA /* CJGPSNaviViewController.m in Sources */,
 				3A69B15719EBA8D5000DC4FA /* UITableView+DataSourceBlocks.m in Sources */,
@@ -1606,6 +1636,7 @@
 				3A6B8DCF19B0272F00CF7E9E /* CJPayedCell.m in Sources */,
 				3A4040BD19D9052C009E5202 /* CJRegisterServiceController.m in Sources */,
 				3A1B848719BC3AEF00BF6F21 /* CJServiceController.m in Sources */,
+				3A07DFD51A08C40A00A1D7B8 /* CJFindWithPhoneController.m in Sources */,
 				3AFE669C19B6C4A4004009E0 /* UIImage+MultiFormat.m in Sources */,
 				77DAF03E19C296360045E2B4 /* AlixPayOrder.m in Sources */,
 				3A6B8DC919B0114F00CF7E9E /* CJPersonaldataController.m in Sources */,
@@ -1613,6 +1644,7 @@
 				3A6B8DDE19B06DA900CF7E9E /* CJAboutUsController.m in Sources */,
 				771AA7EF19A2E4C0005B9AAE /* MMDrawerBarButtonItem.m in Sources */,
 				3A69B15519EBA8D5000DC4FA /* MACombox.m in Sources */,
+				3AA0BAB11A0216890048E54C /* CJMapViewController.m in Sources */,
 				3A2E03D719D841CB00E0BB39 /* SVProgressHUD.m in Sources */,
 				3A7C514319AAFD3E00EBFDE9 /* CJHomeViewController.m in Sources */,
 				3A7C514619AAFD3E00EBFDE9 /* CJCompanyController.m in Sources */,

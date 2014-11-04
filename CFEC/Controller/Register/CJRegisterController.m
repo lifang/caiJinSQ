@@ -400,6 +400,12 @@
                     if ([_passwordTextfield.text isEqualToString:_confirmPasswordTextfield.text]) {
                         if (isAgree) {
                             //
+                            _timeLabel.hidden = YES;
+                            [timer invalidate];
+                            _sendBt.enabled = YES;
+                            i = 0;
+                            _timeLabel.text = @"0";
+                            
                             CJMobileRegisterController *mobileC = [[CJMobileRegisterController alloc] init];
                             mobileC.phoneNumber = _telTextfield.text;
                             mobileC.password = [NSString stringWithFormat:@"%@",_passwordTextfield.text];

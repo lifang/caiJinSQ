@@ -95,3 +95,7 @@
 #define kDeleteMessage @"deleteMobileMessage"
 //修改密码
 #define kChangePassWord @"editPassword"
+//找回密码用手机号修改
+#define kFindWithPhone @"updateUserByPassword"
+//找回密码修改验证码
+#define kFindPassWordWithVerity @"selectByMobilephone"

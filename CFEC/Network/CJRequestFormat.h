@@ -349,4 +349,20 @@ typedef void (^Result)(ResponseStatus status, NSString *response);
                   andOld:(NSString *)oldPassWord
                   andNew:(NSString *)newPassWord
                 finished:(Result)result;
+/*
+ @abstract 找回密码 手机
+ @param phoneNumber 手机号
+ @param newpassword 新密码
+ @param result 请求结果
+ */
++(void)findPasswordWithPhone:(NSString *)phoneStr
+                 newpassword:(NSString *)newpassword
+                    finished:(Result)result;
+/*
+ @abstract 找回密码返回验证码
+ @param phoneNumber 手机号
+ @param result 请求结果
+ */
++(void)findPasswordWithVerity:(NSString *)phoneStr
+                     finished:(Result)result;
 @end

@@ -433,4 +433,28 @@ inline static NSString * setPostBody(NSString *methodName,NSDictionary *params) 
         result(status,response);
     }];
 }
+//找回密码 手机
+
++(void)findPasswordWithPhone:(NSString *)phoneStr newpassword:(NSString *)newpassword finished:(Result)result
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:phoneStr forKey:@"arg0"];
+    [params setObject:newpassword forKey:@"arg1"];
+    NSString *soapMessage = setPostBody(kFindWithPhone, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+}
+//找回密码返回验证码
++(void)findPasswordWithVerity:(NSString *)phoneStr
+                     finished:(Result)result
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:phoneStr forKey:@"arg0"];
+    NSString *soapMessage = setPostBody(kFindPassWordWithVerity, params);
+    [[self class] setHttpRequestWithParams:soapMessage responseResult:^(ResponseStatus status, NSString *response) {
+        result(status,response);
+    }];
+
+}
 @end
