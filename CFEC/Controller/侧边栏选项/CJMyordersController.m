@@ -152,9 +152,15 @@
 -(void)segmentAction:(UISegmentedControl*)segment {
     if (segment.selectedSegmentIndex == 0) {
         tableViewArray = payedArray;
+        if (payedArray.count == 0) {
+            [self returnAlert:@"没有商品"];
+        }
         [_giftTable reloadData];
     }else {
         tableViewArray = noPayArray;
+        if (noPayArray.count == 0) {
+            [self returnAlert:@"没有商品"];
+        }
         [_giftTable reloadData];
     }
 }
@@ -190,6 +196,9 @@
                     }else {
                         [payedArray addObject:order];
                     }
+                }
+                if (payedArray.count == 0) {
+                    [self returnAlert:@"没有商品"];
                 }
                 tableViewArray = payedArray;
                 [_giftTable reloadData];

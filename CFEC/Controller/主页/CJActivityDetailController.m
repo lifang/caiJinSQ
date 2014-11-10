@@ -8,6 +8,8 @@
 
 #import "CJActivityDetailController.h"
 #import "CJSupplyController.h"
+#import "CJMainViewController.h"
+#import "CJAppDelegate.h"
 #import "WXApiObject.h"
 #import "WXApi.h"
 #import "CJContactusController.h"
@@ -269,7 +271,8 @@
     self.navigationItem.leftBarButtonItem = left;
 }
 -(void)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    CJMainViewController *mainC = [[CJMainViewController alloc] init];
+    [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:mainC withCloseAnimation:YES completion:nil];
 }
 -(void)setRightNavBarItemWithImageName:(NSString *)name {
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];

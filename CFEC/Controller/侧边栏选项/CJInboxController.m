@@ -13,7 +13,7 @@
 #import "CJRequestFormat.h"
 #import "CJMessageModel.h"
 #import "CJMessageDetail.h"
-@interface CJInboxController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CJInboxController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     CJUserModel *user;
     NSMutableArray *arr;
@@ -173,6 +173,11 @@
                     [dataArray addObject:model];
                 }
                 NSLog(@"%d",dataArray.count);
+                if (dataArray.count == 0) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"没有邮件" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    alert.tag = 100;
+                    [alert show];
+                }
                 [_emailTable reloadData];
             }
         }
@@ -201,6 +206,14 @@
 -(void)returnAlert:(NSString *)str {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) {
+        CJMainViewController *mainC = [[CJMainViewController alloc] init];
+        [[[[CJAppDelegate shareCJAppDelegate] rootController] navController] setCenterViewController:mainC withCloseAnimation:YES completion:nil];
+    }
 }
 
 @end
