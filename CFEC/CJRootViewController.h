@@ -21,6 +21,9 @@
 
 @property (nonatomic, strong) MMDrawerController *navController;
 
+@property (nonatomic, strong) NSMutableArray *newsArray;//最新的六个活动
+
+
 - (void)showMainController;
 
 - (void)showLoginController;

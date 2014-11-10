@@ -72,11 +72,6 @@
     _rootController = [[CJRootViewController alloc] init];
     _homeController = [[CJHomeViewController alloc] init];
     
-    if ([self getLoginState]) {
-        //直接登录获取用户信息
-        [self getLoginUserInfo];
-        [_rootController showMainController];
-    }
     
     self.window.rootViewController = _rootController;
     
@@ -248,28 +243,5 @@
     }else {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-}
--(BOOL)getLoginState
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *rememberbool = [userDefaults objectForKey:@"savePWD"];
-    return [rememberbool boolValue];
-}
--(void)getLoginUserInfo
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDiectory = paths[0];
-    NSString *savefile = [documentDiectory stringByAppendingPathComponent:@"userFile.plist"];
-    CJUserModel *loginUser = [NSKeyedUnarchiver unarchiveObjectWithFile:savefile];
-    
-    NSString *imageStr = [NSString stringWithFormat:@"%@",loginUser.headPhotoUrl];
-    
-    NSURL *url = [[NSURL alloc] initWithString:imageStr];
-    NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-    loginUser.headImage = data;
-    self.user = loginUser;
-//    [CJAppDelegate shareCJAppDelegate].userDic = self.userInfoDic;
-//    CJRootViewController *rootC = [[CJAppDelegate shareCJAppDelegate] rootController];
-//    [rootC showMainController];
 }
 @end

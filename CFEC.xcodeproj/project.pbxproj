@@ -177,6 +177,8 @@
 		3ACF31C219FE4E6300A10969 /* 钥匙@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF31C119FE4E6300A10969 /* 钥匙@2x.png */; };
 		3ACF31C619FE4F5500A10969 /* CJAlterPassWordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF31C419FE4F5500A10969 /* CJAlterPassWordController.m */; };
 		3ACF31C719FE4F5500A10969 /* CJAlterPassWordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF31C519FE4F5500A10969 /* CJAlterPassWordController.xib */; };
+		3AE6B0E91A106B13001DA80D /* 960.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6B0E71A106B13001DA80D /* 960.png */; };
+		3AE6B0EA1A106B13001DA80D /* 1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6B0E81A106B13001DA80D /* 1136.png */; };
 		3AFA0CC319FA7CB700F1CDB8 /* CJMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */; };
 		3AFA0CC719FA866900F1CDB8 /* CJMessageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC519FA866900F1CDB8 /* CJMessageDetail.m */; };
 		3AFA0CC819FA866900F1CDB8 /* CJMessageDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0CC619FA866900F1CDB8 /* CJMessageDetail.xib */; };
@@ -507,6 +509,8 @@
 		3ACF31C319FE4F5500A10969 /* CJAlterPassWordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJAlterPassWordController.h; sourceTree = "<group>"; };
 		3ACF31C419FE4F5500A10969 /* CJAlterPassWordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJAlterPassWordController.m; sourceTree = "<group>"; };
 		3ACF31C519FE4F5500A10969 /* CJAlterPassWordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJAlterPassWordController.xib; sourceTree = "<group>"; };
+		3AE6B0E71A106B13001DA80D /* 960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 960.png; sourceTree = "<group>"; };
+		3AE6B0E81A106B13001DA80D /* 1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1136.png; sourceTree = "<group>"; };
 		3AFA0CC119FA7CB700F1CDB8 /* CJMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMessageModel.h; sourceTree = "<group>"; };
 		3AFA0CC219FA7CB700F1CDB8 /* CJMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMessageModel.m; sourceTree = "<group>"; };
 		3AFA0CC419FA866900F1CDB8 /* CJMessageDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMessageDetail.h; sourceTree = "<group>"; };
@@ -968,6 +972,8 @@
 		3A7C515819AAFE1100EBFDE9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				3AE6B0E71A106B13001DA80D /* 960.png */,
+				3AE6B0E81A106B13001DA80D /* 1136.png */,
 				3A00100A19C1596F00EBA2A4 /* Icon29@2x.png */,
 				3A63634219B8157600D818FB /* 首页icons */,
 				3A4BCE4A19AC7A090027C023 /* 活动2@2x.png */,
@@ -1502,6 +1508,7 @@
 				3A7C519219AAFE1100EBFDE9 /* 举办方2@2x.png in Resources */,
 				3A7C518D19AAFE1100EBFDE9 /* 首页-个人资料_03-13@2x.png in Resources */,
 				3A7C518E19AAFE1100EBFDE9 /* 首页-个人资料_03-16@2x.png in Resources */,
+				3AE6B0E91A106B13001DA80D /* 960.png in Resources */,
 				3A7C51A119AAFE1100EBFDE9 /* 首页_14@2x.png in Resources */,
 				3A7C51C719AB238A00EBFDE9 /* 首页cetui_11.png in Resources */,
 				3A7C51AF19AB10EC00EBFDE9 /* 礼品_03-06@2x.png in Resources */,
@@ -1578,6 +1585,7 @@
 				3A7C519C19AAFE1100EBFDE9 /* 登录_03@2x.png in Resources */,
 				3A63634C19B8157600D818FB /* 行业峰会-透明_03@2x.png in Resources */,
 				3A00100B19C1596F00EBA2A4 /* Icon29@2x.png in Resources */,
+				3AE6B0EA1A106B13001DA80D /* 1136.png in Resources */,
 				3A2058A219B9948000EBDF5F /* 礼品箭头@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

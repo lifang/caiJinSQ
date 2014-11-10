@@ -16,19 +16,6 @@
 #import "UIImageView+WebCache.h"
 
 @interface CJHomeViewController ()
-{
-    NSMutableArray *activityArr0;//财务沙龙
-    NSMutableArray *activityArr1;//财智学院
-    NSMutableArray *activityArr2;//行业峰会
-    NSMutableArray *activityArr3;//乐活节
-    NSMutableArray *activityArr4;//商务学院
-    NSMutableArray *activityArr5;//税务学院
-    NSMutableArray *activityArr6;
-    NSMutableArray *lastArray;//当前显示的活动数组
-    
-    UIActivityIndicatorView *activityView;
-    UIView *backView;
-}
 @end
 
 @implementation CJHomeViewController
@@ -51,7 +38,6 @@
     [self setLeftNavBarItemWithImageName:@"首页_03@2x"];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initUI];
-    [self GetActivityMessage];//获取活动信息
     // Do any additional setup after loading the view.
 }
 
@@ -83,12 +69,6 @@
     _mainTable.separatorInset = UIEdgeInsetsMake(0, -2, 0, 2);
     [self.view addSubview:_mainTable];
     
-    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center = self.view.center;
-    [activityView setHidesWhenStopped:YES];
-    backView = [[UIView alloc] initWithFrame:self.view.frame];
-    [backView addSubview:activityView];
-
     
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -142,174 +122,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CJActivityDetailController *detailControl = [[CJActivityDetailController alloc] init];
     detailControl.activityModel = _newsArray[indexPath.row];
-    
-//    CJUserModel *user = [CJAppDelegate shareCJAppDelegate].user;
-//    CJActivityModel *model = _newsArray[indexPath.row];
-//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//    [dic setObject:@"2404" forKey:@"userId"];
-//    [dic setObject:@"M20140910140000" forKey:@"orderNo"];
-//    [dic setObject:model.ID forKey:@"activityId"];
-//    [dic setObject:model.title forKey:@"activityName"];
-//    [dic setObject:model.mobileContent forKey:@"activityDescribe"];
-//    [dic setObject:user.name forKey:@"name"];
-//    [dic setObject:user.email forKey:@"email"];
-//    [dic setObject:user.mobilephone forKey:@"telephone"];
-//    [dic setObject:user.companyName forKey:@"companyName"];
-//    [dic setObject:@"2000" forKey:@"price"];
-//    [dic setObject:@"2000" forKey:@"orderAmount"];
-//    [dic setObject:@"1" forKey:@"quantity"];
-//    NSError *error;
-//    NSData *data;
-//    data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
-//    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    [CJRequestFormat createOrderWithOrderJson:jsonStr finished:^(ResponseStatus status, NSString *response) {
-//        if (status == 0) {
-//            NSLog(@"成功");
-//        }else if (status == 1) {
-//            NSLog(@"请求出错");
-//        }else if (status == 2) {
-//            NSLog(@"请求成功，返回出错");
-//        }
-//    }];
-    
     detailControl.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailControl animated:YES];
-}
--(void)GetActivityMessage {
-    [activityView startAnimating];
-    [self.view addSubview:backView];
-    
-    activityArr0 = [NSMutableArray array];
-    activityArr1 = [NSMutableArray array];
-    activityArr2 = [NSMutableArray array];
-    activityArr3 = [NSMutableArray array];
-    activityArr4 = [NSMutableArray array];
-    activityArr5 = [NSMutableArray array];
-    activityArr6 = [NSMutableArray array];
-    lastArray = [NSMutableArray array];
-    [CJRequestFormat getActivityTitleFinished:^(ResponseStatus status, NSString *response) {
-        if (status == 0) {
-            [activityView stopAnimating];
-            [backView removeFromSuperview];
-            
-            NSError *error;
-            NSData *data = [response dataUsingEncoding:NSUTF8StringEncoding];
-            id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-            NSMutableArray *titleActivityArray = [NSMutableArray array];
-            if ([jsonObject isKindOfClass:[NSArray class]]) {
-                NSArray *receiveArray = (NSArray *)jsonObject;
-                for (int i = 0; i<receiveArray.count; i++) {
-                    NSDictionary *dic = [receiveArray objectAtIndex:i];
-                    CJActivityModel *activityModel = [[CJActivityModel alloc] init];
-                    activityModel.activityGenre = [dic objectForKey:@"activityGenre"];
-                    activityModel.activityType = [dic objectForKey:@"activityType"];
-                    activityModel.commonCost = [dic objectForKey:@"commonCost"];
-                    activityModel.diamondCost = [dic objectForKey:@"diamondCost"];
-                    activityModel.endTime = [dic objectForKey:@"endTime"];
-                    activityModel.goldCost = [dic objectForKey:@"goldCost"];
-                    activityModel.ID = [dic objectForKey:@"id"];
-                    activityModel.inviteTarget = [dic objectForKey:@"inviteTarget"];
-                    activityModel.meetingAddress = [dic objectForKey:@"meetingAddress"];
-                    activityModel.meetingCost = [dic objectForKey:@"meetingCost"];
-                    activityModel.meetingNumber = [dic objectForKey:@"meetingNumber"];
-                    activityModel.mobileContent = [dic objectForKey:@"mobileContent"];
-                    activityModel.picture = [dic objectForKey:@"picture"];
-                    activityModel.pictures = [dic objectForKey:@"pictures"];
-                    activityModel.platinumCost = [dic objectForKey:@"platinumCost"];
-                    activityModel.startTime = [dic objectForKey:@"startTime"];
-                    activityModel.title = [dic objectForKey:@"title"];
-                    [titleActivityArray addObject:activityModel];
-//                    NSLog(@"%@",activityModel.activityGenre);
-                }
-                [CJAppDelegate shareCJAppDelegate].allActivityArray = titleActivityArray;
-                NSLog(@"count:%d",titleActivityArray.count);
-                for (int i = 0; i<titleActivityArray.count;i++) {
-                    CJActivityModel *activity = titleActivityArray[i];
-                    if ([activity.activityGenre isEqualToString:@"0"]) {
-                        [activityArr0 addObject:activity];
-                    }else if ([activity.activityGenre isEqualToString:@"1"]) {
-                        [activityArr1 addObject:activity];
-                    }else if ([activity.activityGenre isEqualToString:@"2"]) {
-                        [activityArr2 addObject:activity];
-                    }else if ([activity.activityGenre isEqualToString:@"3"]) {
-                        [activityArr3 addObject:activity];
-                    }else if ([activity.activityGenre isEqualToString:@"4"]) {
-                        [activityArr4 addObject:activity];
-                    }else if ([activity.activityGenre isEqualToString:@"5"]){
-                        [activityArr5 addObject:activity];
-                    }else if ([activity.activityGenre isEqualToString:@"6"]){
-                        [activityArr6 addObject:activity];
-                    }
-                }
-//                NSLog(@"count: %d,%d,%d,%d,%d,%d",activityArr0.count,activityArr1.count,activityArr2.count,activityArr3.count,activityArr4.count,activityArr5.count);                
-            }
-            [self getLastArr];
-            [_mainTable reloadData];
-        }else if (status == 1) {
-            [activityView stopAnimating];
-            [backView removeFromSuperview];
-            [self returnAlert:@"网络故障"];
-        }else if (status == 2) {
-            [activityView stopAnimating];
-            [backView removeFromSuperview];
-            [self returnAlert:@"返回成功请求出错"];
-        }
-    }];
-}
-- (NSArray *)getLastArrWay:(NSArray *)contactList {
-    return [contactList sortedArrayUsingComparator:^NSComparisonResult(CJActivityModel *model1, CJActivityModel *model2) {
-        NSDate *date1 = [self dateWithString:model1.startTime];
-        NSDate *date2 = [self dateWithString:model2.startTime];
-//        if (!date1 && date2) {
-//            return NSOrderedDescending;
-//        }
-//        if (date1 && !date2) {
-//            return NSOrderedAscending;
-//        }
-        NSComparisonResult result = [date1 compare:date2];
-        return result;
-    }];
-}
-- (NSDate *)dateWithString:(NSString *)string {
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    return [format dateFromString:string];
-}
--(void)getLastArr {
-    NSArray *paixuarr0 = [self getLastArrWay:activityArr0];
-    NSArray *paixuarr1 = [self getLastArrWay:activityArr1];
-    NSArray *paixuarr2 = [self getLastArrWay:activityArr2];
-    NSArray *paixuarr3 = [self getLastArrWay:activityArr3];
-    NSArray *paixuarr4 = [self getLastArrWay:activityArr4];
-    NSArray *paixuarr5 = [self getLastArrWay:activityArr5];
-    NSArray *paixuarr6 = [self getLastArrWay:activityArr6];
-    _newsArray = [NSMutableArray array];
-    if ([paixuarr0 count] > 0) {
-        [_newsArray addObject:[paixuarr0 objectAtIndex:0]];
-    }
-    if ([paixuarr1 count] > 0) {
-        [_newsArray addObject:[paixuarr1 objectAtIndex:0]];
-    }
-    if ([paixuarr2 count] > 0) {
-        [_newsArray addObject:[paixuarr2 objectAtIndex:0]];
-    }
-    if ([paixuarr3 count] > 0) {
-        [_newsArray addObject:[paixuarr3 objectAtIndex:0]];
-    }
-    if ([paixuarr4 count] > 0) {
-        [_newsArray addObject:[paixuarr4 objectAtIndex:0]];
-    }
-    if ([paixuarr5 count] > 0) {
-        [_newsArray addObject:[paixuarr5 objectAtIndex:0]];
-    }
-    if([paixuarr6 count] > 0) {
-        [_newsArray addObject:[paixuarr6 objectAtIndex:0]];
-    }
-//    NSLog(@"--------%d",_newsArray.count);
-}
--(void)returnAlert:(NSString *)str {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    [alert show];
 }
 
 @end
