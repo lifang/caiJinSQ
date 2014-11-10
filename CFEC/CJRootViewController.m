@@ -14,7 +14,7 @@
 #import "CJRequestFormat.h"
 #import "CJActivityModel.h"
 
-@interface CJRootViewController ()
+@interface CJRootViewController ()<UIAlertViewDelegate>
 
 {
     NSMutableArray *activityArr0;//财务沙龙
@@ -58,7 +58,8 @@
     
     [self.view addSubview:backImgeView];
     
-    [self GetActivityMessage];//获取活动信息
+    //获取活动信息
+    [self GetActivityMessage];
 
 }
 
@@ -206,10 +207,10 @@
             }else {
                 [self setLoginController];
             }
-
-            
         }else if (status == 1) {
-            [self returnAlert:@"网络故障"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络故障" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            alert.tag = 100;
+            [alert show];
         }else if (status == 2) {
             [self returnAlert:@"服务请求出错"];
         }
@@ -263,5 +264,10 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
 }
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) {
+        [self setLoginController];
+    }
+}
 @end
