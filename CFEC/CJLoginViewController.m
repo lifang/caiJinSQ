@@ -291,12 +291,12 @@
             }else if (status == 1) {
                 [activity stopAnimating];
                 [backView removeFromSuperview];
-                [self returnAlert:@"网络请求出错"];
+                [self returnAlert:@"网络故障"];
                 NSLog(@"网络请求出错");
             }else {
                 [activity stopAnimating];
                 [backView removeFromSuperview];
-                [self returnAlert:@"网络请求成功，返回出错"];
+                [self returnAlert:@"服务出错"];
                 NSLog(@"网络请求成功，返回出错");
             }
         }];
@@ -366,12 +366,12 @@
             }else if (status == 1) {
                 [activity stopAnimating];
                 [backView removeFromSuperview];
-                [self returnAlert:@"网络请求出错"];
+                [self returnAlert:@"网络故障"];
                 NSLog(@"网络请求出错");
             }else {
                 [activity stopAnimating];
                 [backView removeFromSuperview];
-                [self returnAlert:@"网络请求成功，返回出错"];
+                [self returnAlert:@"服务出错"];
                 NSLog(@"网络请求成功，返回出错");
             }
         }];

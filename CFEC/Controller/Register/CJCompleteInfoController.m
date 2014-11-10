@@ -589,7 +589,8 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
         }else {
-            NSLog(@"数据请求成功返回出错");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"服务出错" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
         }
     }];
 }

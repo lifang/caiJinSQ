@@ -205,8 +205,10 @@
             }
         }else if (status == 1) {
             NSLog(@"请求出错");
+            [self returnAlert:@"网络故障"];
         }else if (status == 2) {
-            NSLog(@"请求成功，返回出错");
+            NSLog(@"服务出错");
+            [self returnAlert:@"服务出错"];
         }
     }];
 }
@@ -226,8 +228,8 @@
                     NSLog(@"网络故障");
                     [self returnAlert:@"网络故障"];
                 }else if (status == 2) {
-                    NSLog(@"请求成功返回失败");
-                    [self returnAlert:@"请求成功返回失败"];
+                    NSLog(@"服务出错");
+                    [self returnAlert:@"服务出错"];
                 }
             }];
         }
@@ -252,7 +254,7 @@
                     [self returnAlert:@"网络故障"];
                 }else if (status == 2) {
                     NSLog(@"请求成功返回失败");
-                    [self returnAlert:@"请求成功返回失败"];
+                    [self returnAlert:@"服务出错"];
                 }
             }];
         }

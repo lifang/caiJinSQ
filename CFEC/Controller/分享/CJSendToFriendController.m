@@ -78,7 +78,7 @@
         }else if (status == 1) {
             [self returnAlert:@"网络故障"];
         }else if (status == 2) {
-            [self returnAlert:@"请求成功返回出错"];
+            [self returnAlert:@"服务出错"];
         }
     }];
 }

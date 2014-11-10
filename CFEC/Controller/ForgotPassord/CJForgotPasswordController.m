@@ -168,8 +168,10 @@
             }
         }else if (status == 1){
             NSLog(@"请求失败");
+            [self returnAlert:@"网络故障"];
         }else {
-            NSLog(@"请求成功，服务端返回错误");
+            NSLog(@"服务出错");
+            [self returnAlert:@"服务出错"];
         }
     }];
 
@@ -192,6 +194,7 @@
             [self returnAlert:@"网络错误"];
         }else {
             NSLog(@"请求成功，服务器返回错误");
+            [self returnAlert:@"服务出错"];
         }
     }];
 }
@@ -215,4 +218,5 @@
 
     }];
 }
+
 @end

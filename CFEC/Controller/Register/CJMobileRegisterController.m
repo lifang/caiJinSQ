@@ -127,6 +127,7 @@
             [self returnAlert:@"网络故障"];
         }else if (status == 2) {
             NSLog(@"请求成功,返回失败");
+            [self returnAlert:@"服务出错"];
         }
     }];
 }

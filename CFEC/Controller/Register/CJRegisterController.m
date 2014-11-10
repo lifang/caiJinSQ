@@ -358,11 +358,11 @@
                                 }
                             }else if (status == 1) {
 //                                NSLog(@"请求出错");
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不稳定请重新尝试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络故障" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                 [alert show];
                             }else {
 //                                NSLog(@"请求成功，返回错误");
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络返回错误请重新尝试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"服务错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                 [alert show];
                             }
                         }];
@@ -443,7 +443,7 @@
             }else if (status == 1) {
                 [self returnAlert:@"网络故障"];
             }else if (status == 2) {
-                NSLog(@"网络请求成功,返回失败");
+                NSLog(@"服务错误");
             }
         }];
     }else {

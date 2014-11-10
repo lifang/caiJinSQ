@@ -98,9 +98,10 @@
                     _getButton.enabled = YES;
                 }
             }else if (status == 1) {
-                [self returnAlert:@"网络错误"];
+                [self returnAlert:@"网络故障"];
             }else if (status == 2) {
                 NSLog(@"请求成功返回错误");
+                [self returnAlert:@"服务出错"];
                 _getButton.enabled = YES;
             }
         }];
