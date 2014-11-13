@@ -137,18 +137,23 @@
     _placeLabel.font = [UIFont systemFontOfSize:11.0f];
     [_mainScrooll addSubview:_placeLabel];
     
+    UILabel *maplabel = [[UILabel alloc] initWithFrame:CGRectMake(70, _placeLabel.frame.origin.y, 150, 20)];
+    maplabel.text = _activityModel.meetingAddress;
+    maplabel.font = [UIFont systemFontOfSize:11.0f];
+    [_mainScrooll addSubview:maplabel];
     
-    UIImageView *imagePlace = [[UIImageView alloc] initWithFrame:CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15)];
-    imagePlace.image = [UIImage imageNamed:@"活动2_03@2x.png"];
-    [_mainScrooll addSubview:imagePlace];
+//    UIImageView *imagePlace = [[UIImageView alloc] initWithFrame:CGRectMake(70,_timeLabel.frame.origin.y + _timeLabel.frame.size.height + 2 , 15, 15)];
+//    imagePlace.image = [UIImage imageNamed:@"活动2_03@2x.png"];
+//    [_mainScrooll addSubview:imagePlace];
     
     UIButton *daohangBt = [UIButton buttonWithType:UIButtonTypeCustom];
-    daohangBt.frame = CGRectMake(85, _timeLabel.frame.origin.y + _timeLabel.frame.size.height, self.view.frame.size.width - 85, 20);
-    [daohangBt setTitle:_activityModel.meetingAddress forState:UIControlStateNormal];
+    daohangBt.frame = CGRectMake(70 + maplabel.frame.size.width, _placeLabel.frame.origin.y,80, 20);
+    [daohangBt setTitle:@"查看地图" forState:UIControlStateNormal];
     daohangBt.titleLabel.font = [UIFont systemFontOfSize:11.0f];
+//    daohangBt.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 5);
     [daohangBt addTarget:self action:@selector(daohang:) forControlEvents:UIControlEventTouchUpInside];
-    [daohangBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    daohangBt.backgroundColor = [UIColor redColor];
+    [daohangBt setTitleColor:kColor(118, 180, 60, 1) forState:UIControlStateNormal];
+//    [daohangBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_mainScrooll addSubview:daohangBt];
     
     

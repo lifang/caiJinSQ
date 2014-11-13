@@ -56,11 +56,11 @@
     [super viewDidLoad];
     
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.distanceFilter = 1000.0f;
-    [self.locationManager startUpdatingLocation];
+//    self.locationManager = [[CLLocationManager alloc] init];
+//    self.locationManager.delegate = self;
+//    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//    self.locationManager.distanceFilter = 1000.0f;
+//    [self.locationManager startUpdatingLocation];
     
     [self initNaviViewController];
     
@@ -91,6 +91,13 @@
     
     //默认显示用户当前位置
     _map.showsUserLocation =YES;
+    
+    float zoomLevel = 0.02;
+    
+    MKCoordinateRegion region = MKCoordinateRegionMake(location,MKCoordinateSpanMake(zoomLevel, zoomLevel));
+    [_map setRegion:region animated:YES];
+    
+    
     
     //为地图添加注解：这里只做示例添加一个注解点
     CLLocationCoordinate2D coordinate = {_endGeoCode.location.latitude,_endGeoCode.location.longitude};
