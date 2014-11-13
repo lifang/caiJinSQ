@@ -222,10 +222,18 @@
     [bottomView addSubview:_contactBt];
 }
 -(void)daohang:(UIButton *)bt {
-    CJGPSNaviViewController *gpsC = [[CJGPSNaviViewController alloc] init];
-    gpsC.activityModel = self.activityModel;
-    gpsC.endGeoCode = self.endGeoCode;
-    [self.navigationController pushViewController:gpsC animated:YES];
+    NSURL *url = [NSURL URLWithString:@"iosamap://"];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        //调用高德客户端导航
+        NSString *urlString = [NSString stringWithFormat:@"iosamap://navi?sourceApplication=applicationName&backScheme=applicationScheme&poiname=fangheng&poiid=BGVIS&lat=%f&lon=%f&dev=1&style=2",self.endGeoCode.location.latitude,self.endGeoCode.location.longitude];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    }else {
+        CJGPSNaviViewController *gpsC = [[CJGPSNaviViewController alloc] init];
+        gpsC.activityModel = self.activityModel;
+        gpsC.endGeoCode = self.endGeoCode;
+        [self.navigationController pushViewController:gpsC animated:YES];
+    }
 }
 - (void)downloadDetailImageWithURL:(NSString *)urlstring {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -259,9 +267,15 @@
 }
 #pragma mark - button
 -(void)supply:(id)sender {
-    CJSupplyController *supplyControl = [[CJSupplyController alloc] init];
-    supplyControl.activity = _activityModel;
-    [self.navigationController pushViewController:supplyControl animated:YES];
+    if ([self compareTimeFromNow]) {
+        CJSupplyController *supplyControl = [[CJSupplyController alloc] init];
+        supplyControl.activity = _activityModel;
+        [self.navigationController pushViewController:supplyControl animated:YES];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"报名已经截止" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
+    
 }
 -(void)contactUs:(id)sender {
     CJContactusController *contactC = [[CJContactusController alloc] init];
@@ -289,7 +303,7 @@
 }
 #pragma mark -- 分享
 -(void)share:(id)sender {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"转发给微信好友",@"转发给微博好友", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"转发给微信好友",@"转发到微信朋友圈",@"转发给微博好友", nil];
     sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [sheet showInView:self.view];
 }
@@ -311,17 +325,30 @@
         req.message = message;
         req.scene = WXSceneSession;
         [WXApi sendReq:req];
-    }else if (buttonIndex == 1){
+    }else if (buttonIndex == 2){
         WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:[self messageToShare]];
         [WeiboSDK sendRequest:request];
 
+    }else if (buttonIndex == 1) {
+        WXMediaMessage *message = [WXMediaMessage message];
+        message.title = @"推荐一个财务人爱不释手的应用";
+        message.description = @"财务圈最前沿，随时随地获取第一手财务资讯及行业动态";
+        [message setThumbImage:[UIImage imageNamed:@"Icon29@2x.png"]];
+        WXWebpageObject *ext = [WXWebpageObject object];
+        ext.webpageUrl = @"http://as.baidu.com/a/item?docid=4951602&pre=web_am_se";
+        message.mediaObject = ext;
+        SendMessageToWXReq *req= [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        req.scene = WXSceneTimeline;
+        [WXApi sendReq:req];
     }
 }
 -(void)willPresentActionSheet:(UIActionSheet *)actionSheet {
     for (UIView *subView in actionSheet.subviews) {
         if ([subView isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)subView;
-            if (button.tag == 3) {
+            if (button.tag == 4) {
                 [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             }
         }
@@ -348,11 +375,24 @@
         NSLog(@"%f,%f",obj.location.latitude,obj.location.longitude);
         _endGeoCode = obj;
     }];
-    
-    
 }
 -(void)dealloc
 {
     self.search.delegate = nil;
+}
+-(BOOL)compareTimeFromNow
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZonee = [NSTimeZone localTimeZone];
+    [formatter setTimeZone:timeZonee];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *startTime = [formatter dateFromString:self.activityModel.startTime];
+    NSDate *nowDate = [NSDate date];
+    NSDate *compareDate = [nowDate earlierDate:startTime];
+    if ([compareDate isEqualToDate:nowDate]) {
+        return YES;
+    }else {
+        return NO;
+    }
 }
 @end
