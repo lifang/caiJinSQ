@@ -46,11 +46,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>gaode</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>iosamap</string>
-			</array>
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
